@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Jl
+Bundle-SymbolicName: net.javazoom.jl
+Bundle-Version: 1.0.0
+Bundle-ClassPath: jl.jar,
+ jl1.0.jar
+Export-Package: .,
+ javazoom.jl.converter,
+ javazoom.jl.decoder,
+ javazoom.jl.player,
+ javazoom.jl.player.advanced
+Require-Bundle: org.junit4
