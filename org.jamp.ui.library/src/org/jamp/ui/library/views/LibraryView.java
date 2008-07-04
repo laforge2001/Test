@@ -41,12 +41,12 @@ public class LibraryView extends ViewPart {
 	public static final String ID = "org.jamp.ui.library.views.LibraryView";
 	private TreeViewer _treeViewer;
 	private LibraryParent _library;
-	private IAdapterFactory adapterFactory = new LibraryAdapterFactory();
+	private IAdapterFactory _adapterFactory = new LibraryAdapterFactory();
 
 	@Override
 	public void createPartControl(Composite parent) {
 		initializeLibrary();
-		Platform.getAdapterManager().registerAdapters(adapterFactory,
+		Platform.getAdapterManager().registerAdapters(_adapterFactory,
 				NodeObject.class);
 		_treeViewer = new TreeViewer(parent, SWT.BORDER | SWT.MULTI
 				| SWT.V_SCROLL);
@@ -63,7 +63,7 @@ public class LibraryView extends ViewPart {
 	}
 
 	public void dispose() {
-		Platform.getAdapterManager().unregisterAdapters(adapterFactory);
+		Platform.getAdapterManager().unregisterAdapters(_adapterFactory);
 		super.dispose();
 	}
 
