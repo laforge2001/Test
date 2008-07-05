@@ -8,18 +8,18 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.part.ViewPart;
-import org.jamp.ui.library.model.LibraryParent;
-import org.jamp.ui.library.model.MusicLibraryParent;
-import org.jamp.ui.library.model.NodeObject;
-import org.jamp.ui.library.model.PictureLibraryParent;
-import org.jamp.ui.library.model.VideoLibraryParent;
-import org.jamp.ui.library.model.music.Album;
-import org.jamp.ui.library.model.music.Artist;
-import org.jamp.ui.library.model.music.Genre;
-import org.jamp.ui.library.model.music.Rating;
-import org.jamp.ui.library.model.music.RecentlyAdded;
-import org.jamp.ui.library.model.music.Songs;
-import org.jamp.ui.library.model.music.Year;
+import org.jamp.model.LibraryParent;
+import org.jamp.model.MusicLibraryParent;
+import org.jamp.model.NodeObject;
+import org.jamp.model.PictureLibraryParent;
+import org.jamp.model.VideoLibraryParent;
+import org.jamp.model.music.Album;
+import org.jamp.model.music.Artist;
+import org.jamp.model.music.Genre;
+import org.jamp.model.music.Rating;
+import org.jamp.model.music.RecentlyAdded;
+import org.jamp.model.music.Songs;
+import org.jamp.model.music.Year;
 
 /**
  * This sample class demonstrates how to plug-in a new workbench view. The view

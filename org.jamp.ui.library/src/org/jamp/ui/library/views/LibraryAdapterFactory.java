@@ -4,7 +4,7 @@ import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.model.IWorkbenchAdapter;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.jamp.ui.library.model.NodeObject;
+import org.jamp.model.NodeObject;
 
 public class LibraryAdapterFactory implements IAdapterFactory {
 

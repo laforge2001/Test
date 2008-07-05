@@ -4,11 +4,12 @@ Bundle-Name: Library Plug-in
 Bundle-SymbolicName: org.jamp.ui.library; singleton:=true
 Bundle-Version: 1.0.0
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.ui
+ org.eclipse.ui,
+ org.jamp.model;bundle-version="1.0.0",
+ org.jamp.model.music;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.jamp.ui.library.views;
   uses:="org.eclipse.swt.graphics,
    org.eclipse.jface.viewers,
    org.eclipse.ui.part,
    org.eclipse.swt.widgets"
-Bundle-ActivationPolicy: lazy
