@@ -28,8 +28,7 @@ public class MediaListEditorInput implements IEditorInput {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return _playList;
 	}
 
 	@Override

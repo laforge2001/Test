@@ -1,8 +1,8 @@
 package org.jamp.model.music;
 
-import org.jamp.model.NodeObject;
+import org.jamp.model.MusicLibraryNode;
 
-public class Songs extends NodeObject {
+public class Songs extends MusicLibraryNode {
 
 	public Songs(Object data) {
 		super("Songs", data);

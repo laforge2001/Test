@@ -14,7 +14,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 
 public class MediaListEditor extends EditorPart {
-	
+
 	public final static String ID = "org.jamp.ui.library.editor.MediaList";
 
 	public MediaListEditor() {
@@ -56,31 +56,35 @@ public class MediaListEditor extends EditorPart {
 	@Override
 	public void createPartControl(Composite parent) {
 		GridLayout gridLayout = new GridLayout();
-	    parent.setLayout(gridLayout);
-	    
-	    // Table. 
-	    Table table = new Table(parent, SWT.BORDER | SWT.FULL_SELECTION);
+		parent.setLayout(gridLayout);
 
-	    //table.setLinesVisible(true);
-	    table.setHeaderVisible(true);
-	    
-	    TableColumn tcFileName = new TableColumn(table, SWT.LEFT);
-	    tcFileName.setText("File name");
-	    
-	    TableColumn tcFileSize = new TableColumn(table, SWT.RIGHT);
-	    tcFileSize.setText("Size");
-	    
-	    TableColumn tcDateModified = new TableColumn(table, SWT.RIGHT);
-	    tcDateModified.setText("Date Modified");
-	    
-	    tcFileName.setWidth(200);
-	    tcFileSize.setWidth(80);
-	    tcDateModified.setWidth(180);
-	    
-	    TableItem item = new TableItem(table, SWT.NULL);
-	    item.setText(new String[]{"Name", "Size"});
-	    
-	    table.setLayoutData(new GridData(GridData.FILL_BOTH));
+		// Table.
+		Table table = new Table(parent, SWT.BORDER | SWT.FULL_SELECTION);
+
+		// table.setLinesVisible(true);
+		table.setHeaderVisible(true);
+
+		TableColumn tcFileName = new TableColumn(table, SWT.LEFT);
+		tcFileName.setText("File name");
+
+		TableColumn tcFileSize = new TableColumn(table, SWT.RIGHT);
+		tcFileSize.setText("Size");
+
+		TableColumn tcDateModified = new TableColumn(table, SWT.RIGHT);
+		tcDateModified.setText("Date Modified");
+
+		tcFileName.setWidth(200);
+		tcFileSize.setWidth(80);
+		tcDateModified.setWidth(180);
+
+		TableItem item = new TableItem(table, SWT.NULL);
+		item.setText(new String[] { "Name", "Size" });
+		/*
+		 * item.setBackground(i % 2 == 0 ? shell.getDisplay().getSystemColor(
+		 * SWT.COLOR_WHITE) : shell.getDisplay().getSystemColor(
+		 * SWT.COLOR_GRAY));
+		 */
+		table.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 	}
 

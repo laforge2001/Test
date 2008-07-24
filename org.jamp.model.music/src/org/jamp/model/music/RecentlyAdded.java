@@ -1,8 +1,8 @@
 package org.jamp.model.music;
 
-import org.jamp.model.NodeObject;
+import org.jamp.model.MusicLibraryNode;
 
-public class RecentlyAdded extends NodeObject {
+public class RecentlyAdded extends MusicLibraryNode {
 
 	public RecentlyAdded(Object data) {
 		super("Recently Added", data);

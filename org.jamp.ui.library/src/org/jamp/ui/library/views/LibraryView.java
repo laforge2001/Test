@@ -11,12 +11,13 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.part.ViewPart;
 import org.jamp.model.LibraryParent;
-import org.jamp.model.MusicLibraryParent;
+import org.jamp.model.MusicLibraryNode;
 import org.jamp.model.NodeObject;
 import org.jamp.model.PictureLibraryParent;
 import org.jamp.model.VideoLibraryParent;
@@ -27,6 +28,7 @@ import org.jamp.model.music.Rating;
 import org.jamp.model.music.RecentlyAdded;
 import org.jamp.model.music.Songs;
 import org.jamp.model.music.Year;
+import org.jamp.ui.library.editor.MediaListEditor;
 import org.jamp.ui.library.editor.MediaListEditorInput;
 
 /**
@@ -84,6 +86,13 @@ public class LibraryView extends ViewPart {
 
 				IWorkbenchPage page = PlatformUI.getWorkbench()
 						.getActiveWorkbenchWindow().getActivePage();
+
+				try {
+					page.openEditor(input, MediaListEditor.ID);
+					_treeViewer.setSelection(_treeViewer.getSelection());
+				} catch (PartInitException e) {
+					System.out.println(e.getMessage());
+				}
 			}
 		};
 
@@ -116,7 +125,7 @@ public class LibraryView extends ViewPart {
 
 	private void initializeLibrary() {
 		_library = new LibraryParent("", null);
-		MusicLibraryParent _musicParent = new MusicLibraryParent("Music", null);
+		MusicLibraryNode _musicParent = new MusicLibraryNode("Music", null);
 		VideoLibraryParent _videoParent = new VideoLibraryParent("Videos", null);
 		PictureLibraryParent _pictureParent = new PictureLibraryParent(
 				"Pictures", null);
