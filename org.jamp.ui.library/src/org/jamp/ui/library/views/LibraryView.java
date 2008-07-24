@@ -19,8 +19,6 @@ import org.eclipse.ui.part.ViewPart;
 import org.jamp.model.LibraryParent;
 import org.jamp.model.MusicLibraryNode;
 import org.jamp.model.NodeObject;
-import org.jamp.model.PictureLibraryParent;
-import org.jamp.model.VideoLibraryParent;
 import org.jamp.model.music.Album;
 import org.jamp.model.music.Artist;
 import org.jamp.model.music.Genre;
@@ -80,18 +78,21 @@ public class LibraryView extends ViewPart {
 				Object obj = ((IStructuredSelection) selection)
 						.getFirstElement();
 
-				NodeObject node = (NodeObject) obj;
-				MediaListEditorInput input = new MediaListEditorInput(node
-						.getName());
+				if (obj instanceof MusicLibraryNode) {
+					NodeObject node = (NodeObject) obj;
+					MediaListEditorInput input = new MediaListEditorInput(node
+							.getName());
 
-				IWorkbenchPage page = PlatformUI.getWorkbench()
-						.getActiveWorkbenchWindow().getActivePage();
+					IWorkbenchPage page = PlatformUI.getWorkbench()
+							.getActiveWorkbenchWindow().getActivePage();
 
-				try {
-					page.openEditor(input, MediaListEditor.ID);
-					_treeViewer.setSelection(_treeViewer.getSelection());
-				} catch (PartInitException e) {
-					System.out.println(e.getMessage());
+					try {
+						page.openEditor(input, MediaListEditor.ID);
+						_treeViewer.setSelection(_treeViewer.getSelection());
+
+					} catch (PartInitException e) {
+						System.out.println(e.getMessage());
+					}
 				}
 			}
 		};
@@ -125,10 +126,9 @@ public class LibraryView extends ViewPart {
 
 	private void initializeLibrary() {
 		_library = new LibraryParent("", null);
-		MusicLibraryNode _musicParent = new MusicLibraryNode("Music", null);
-		VideoLibraryParent _videoParent = new VideoLibraryParent("Videos", null);
-		PictureLibraryParent _pictureParent = new PictureLibraryParent(
-				"Pictures", null);
+		NodeObject _musicParent = new NodeObject("Music", null);
+		NodeObject _videoParent = new NodeObject("Videos", null);
+		NodeObject _pictureParent = new NodeObject("Pictures", null);
 
 		_library.addChild(_musicParent);
 		_library.addChild(_videoParent);
