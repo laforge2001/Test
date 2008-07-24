@@ -33,5 +33,15 @@
             file="contexts.xml">
       </contexts>
    </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.jamp.ui.library.editor.MediaList"
+            default="false"
+            icon="icons/sample.gif"
+            id="org.jamp.ui.library.mediaList"
+            name="MediaList">
+      </editor>
+   </extension>
 
 </plugin>
