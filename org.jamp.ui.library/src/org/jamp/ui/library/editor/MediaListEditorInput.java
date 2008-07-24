@@ -9,7 +9,7 @@ public class MediaListEditorInput implements IEditorInput {
 
 	private final String _playList;
 
-	MediaListEditorInput(String playListName) {
+	public MediaListEditorInput(String playListName) {
 		Assert.isNotNull(playListName);
 		_playList = playListName;
 	}

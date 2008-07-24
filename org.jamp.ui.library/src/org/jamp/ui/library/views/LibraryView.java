@@ -2,9 +2,16 @@ package org.jamp.ui.library.views;
 
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.jface.action.Action;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.part.ViewPart;
@@ -20,6 +27,7 @@ import org.jamp.model.music.Rating;
 import org.jamp.model.music.RecentlyAdded;
 import org.jamp.model.music.Songs;
 import org.jamp.model.music.Year;
+import org.jamp.ui.library.editor.MediaListEditorInput;
 
 /**
  * This sample class demonstrates how to plug-in a new workbench view. The view
@@ -41,7 +49,9 @@ public class LibraryView extends ViewPart {
 	public static final String ID = "org.jamp.ui.library.views.LibraryView";
 	private TreeViewer _treeViewer;
 	private LibraryParent _library;
-	private IAdapterFactory _adapterFactory = new LibraryAdapterFactory();
+	private final IAdapterFactory _adapterFactory = new LibraryAdapterFactory();
+
+	private Action _doubleClickAction;
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -54,6 +64,42 @@ public class LibraryView extends ViewPart {
 		_treeViewer.setLabelProvider(new WorkbenchLabelProvider());
 		_treeViewer.setContentProvider(new BaseWorkbenchContentProvider());
 		_treeViewer.setInput(_library);
+
+		hookDoubleClickAction();
+		contributeActions();
+		getSite().setSelectionProvider(_treeViewer);
+	}
+
+	private void contributeActions() {
+		_doubleClickAction = new Action() {
+			@Override
+			public void run() {
+				ISelection selection = _treeViewer.getSelection();
+				Object obj = ((IStructuredSelection) selection)
+						.getFirstElement();
+
+				NodeObject node = (NodeObject) obj;
+				MediaListEditorInput input = new MediaListEditorInput(node
+						.getName());
+
+				IWorkbenchPage page = PlatformUI.getWorkbench()
+						.getActiveWorkbenchWindow().getActivePage();
+			}
+		};
+
+	}
+
+	private void hookDoubleClickAction() {
+		_treeViewer.addDoubleClickListener(new IDoubleClickListener() {
+
+			@Override
+			public void doubleClick(DoubleClickEvent event) {
+				_doubleClickAction.run();
+
+			}
+
+		});
+
 	}
 
 	@Override
@@ -62,6 +108,7 @@ public class LibraryView extends ViewPart {
 
 	}
 
+	@Override
 	public void dispose() {
 		Platform.getAdapterManager().unregisterAdapters(_adapterFactory);
 		super.dispose();
