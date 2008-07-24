@@ -1,6 +1,8 @@
 package org.jamp.ui.library.editor;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -10,10 +12,13 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
+import org.eclipse.ui.ISelectionListener;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
+import org.jamp.ui.library.views.LibraryView;
 
-public class MediaListEditor extends EditorPart {
+public class MediaListEditor extends EditorPart implements ISelectionListener{
 
 	public final static String ID = "org.jamp.ui.library.editor.MediaList";
 
@@ -85,6 +90,8 @@ public class MediaListEditor extends EditorPart {
 		 * SWT.COLOR_GRAY));
 		 */
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
+		
+		getSite().getPage().addSelectionListener(LibraryView.ID, (ISelectionListener) this);
 
 	}
 
@@ -92,6 +99,19 @@ public class MediaListEditor extends EditorPart {
 	public void setFocus() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
+		if ( selection instanceof IStructuredSelection) {
+			NodeObject 
+		}
+		
+	}
+	
+	public void dispose() {
+		super.dispose();
+		getSite().getPage().removeSelectionListener((ISelectionListener) this);
 	}
 
 }
