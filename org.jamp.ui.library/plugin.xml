@@ -36,10 +36,10 @@
    <extension
          point="org.eclipse.ui.editors">
       <editor
-            class="org.jamp.ui.library.editor.MediaList"
+            class="org.jamp.ui.library.editor.MediaListEditor"
             default="false"
             icon="icons/sample.gif"
-            id="org.jamp.ui.library.mediaList"
+            id="org.jamp.ui.library.editor.MediaList"
             name="MediaList">
       </editor>
    </extension>
