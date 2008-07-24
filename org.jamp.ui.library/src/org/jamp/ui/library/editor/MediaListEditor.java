@@ -104,7 +104,7 @@ public class MediaListEditor extends EditorPart implements ISelectionListener{
 	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 		if ( selection instanceof IStructuredSelection) {
-			NodeObject 
+			//NodeObject 
 		}
 		
 	}
