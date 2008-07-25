@@ -8,7 +8,7 @@ import org.jamp.model.NodeObject;
 
 public class LibraryAdapterFactory implements IAdapterFactory {
 
-	private IWorkbenchAdapter _libraryAdapter = new IWorkbenchAdapter() {
+	private final IWorkbenchAdapter _libraryAdapter = new IWorkbenchAdapter() {
 		public Object getParent(Object o) {
 			return ((NodeObject) o).getParent();
 		}
@@ -32,6 +32,7 @@ public class LibraryAdapterFactory implements IAdapterFactory {
 
 	};
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Object getAdapter(Object adaptableObject, Class adapterType) {
 		if (adapterType == IWorkbenchAdapter.class
@@ -40,6 +41,7 @@ public class LibraryAdapterFactory implements IAdapterFactory {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Class[] getAdapterList() {
 		return new Class[] { IWorkbenchAdapter.class };
