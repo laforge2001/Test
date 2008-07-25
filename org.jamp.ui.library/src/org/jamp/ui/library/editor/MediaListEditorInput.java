@@ -42,6 +42,7 @@ public class MediaListEditorInput implements IEditorInput {
 		return _playList;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Object getAdapter(Class adapter) {
 		// TODO Auto-generated method stub
