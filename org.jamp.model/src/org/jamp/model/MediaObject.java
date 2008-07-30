@@ -6,10 +6,11 @@ public abstract class MediaObject extends NodeObject {
 		super(name, data);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public abstract void play();
+
 	public abstract void stop();
+
 	public abstract void pause();
-	
 
 }
