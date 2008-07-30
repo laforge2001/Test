@@ -1,27 +1,31 @@
-package org.jamp.model;
+package org.jamp.model.music.api;
+
+import org.jamp.model.MediaObject;
 
 public class MusicObject extends MediaObject {
 
+	IMusicAPI _musicAPI;
+
 	public MusicObject(String name, Object data) {
 		super(name, data);
-		// TODO Auto-generated constructor stub
+		_musicAPI = (IMusicAPI) data;
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
+		_musicAPI.pause();
 
 	}
 
 	@Override
 	public void play() {
-		// TODO Auto-generated method stub
+		_musicAPI.play();
 
 	}
 
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
+		_musicAPI.stop();
 
 	}
 
