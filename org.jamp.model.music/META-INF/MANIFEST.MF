@@ -6,4 +6,5 @@ Bundle-Version: 1.0.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.jamp.model;bundle-version="1.0.0",
  org.eclipse.ui
-Export-Package: org.jamp.model.music
+Export-Package: org.jamp.model.music,
+ org.jamp.model.music.api

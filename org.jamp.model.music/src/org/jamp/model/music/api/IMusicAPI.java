@@ -1,11 +1,9 @@
 package org.jamp.model.music.api;
 
-public interface IMusicAPI {
+import org.jamp.model.api.IMediaAPI;
 
-	public void play();
+public interface IMusicAPI extends IMediaAPI {
 
-	public void stop();
-
-	public void pause();
+	public int getPosition();
 
 }

@@ -4,4 +4,5 @@ Bundle-Name: Model Plug-in
 Bundle-SymbolicName: org.jamp.model
 Bundle-Version: 1.0.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.jamp.model
+Export-Package: org.jamp.model,
+ org.jamp.model.api

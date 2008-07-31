@@ -4,11 +4,12 @@ import org.jamp.model.MediaObject;
 
 public class MusicObject extends MediaObject {
 
-	IMusicAPI _musicAPI;
+	private final IMusicAPI _musicAPI;
 
-	public MusicObject(String name, Object data) {
-		super(name, data);
-		_musicAPI = (IMusicAPI) data;
+	public MusicObject(String name, String location, IMusicAPI api) {
+		super(name, location);
+		_musicAPI = api;
+		_musicAPI.init(getLocation());
 	}
 
 	@Override
