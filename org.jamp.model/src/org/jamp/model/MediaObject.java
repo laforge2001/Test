@@ -3,15 +3,15 @@ package org.jamp.model;
 public abstract class MediaObject {
 
 	String _name;
-	String _fileLocation;
+	String _location;
 
 	public MediaObject(String name, String location) {
 		_name = name;
-		_fileLocation = location;
+		_location = location;
 	}
 
 	public String getLocation() {
-		return _fileLocation;
+		return _location;
 	}
 
 	public String getName() {
