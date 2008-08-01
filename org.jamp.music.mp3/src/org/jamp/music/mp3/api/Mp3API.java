@@ -68,4 +68,24 @@ public class Mp3API implements IMusicAPI {
 		}
 	}
 
+	@Override
+	public String getAlbum() {
+		return _mp3Info.getAlbumTitle();
+	}
+
+	@Override
+	public String getArtist() {
+		return _mp3Info.getLeadArtist();
+	}
+
+	@Override
+	public Integer getSongLength() {
+		return _mp3Info.getSize();
+	}
+
+	@Override
+	public Integer getYear() {
+		return Integer.valueOf(_mp3Info.getYearReleased());
+	}
+
 }
