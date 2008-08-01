@@ -3,6 +3,7 @@ package org.jamp.ui.library.editor;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -18,9 +19,13 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 import org.jamp.ui.library.views.LibraryView;
 
-public class MediaListEditor extends EditorPart implements ISelectionListener{
+public class MediaListEditor extends EditorPart implements ISelectionListener {
 
 	public final static String ID = "org.jamp.ui.library.editor.MediaList";
+
+	private Table _table;
+
+	private TableViewer _tableViewer;
 
 	public MediaListEditor() {
 		// TODO Auto-generated constructor stub
@@ -63,35 +68,46 @@ public class MediaListEditor extends EditorPart implements ISelectionListener{
 		GridLayout gridLayout = new GridLayout();
 		parent.setLayout(gridLayout);
 
+		createTable(parent);
+		createTableViewer();
+
+		getSite().getPage().addSelectionListener(LibraryView.ID, this);
+
+	}
+
+	private void createTableViewer() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void createTable(Composite parent) {
 		// Table.
-		Table table = new Table(parent, SWT.BORDER | SWT.FULL_SELECTION);
+		_table = new Table(parent, SWT.BORDER | SWT.FULL_SELECTION);
 
 		// table.setLinesVisible(true);
-		table.setHeaderVisible(true);
+		_table.setHeaderVisible(true);
 
-		TableColumn tcFileName = new TableColumn(table, SWT.LEFT);
-		tcFileName.setText("File name");
+		TableColumn tcFileName = new TableColumn(_table, SWT.LEFT);
+		tcFileName.setText("Title");
 
-		TableColumn tcFileSize = new TableColumn(table, SWT.RIGHT);
-		tcFileSize.setText("Size");
+		TableColumn tcFileSize = new TableColumn(_table, SWT.RIGHT);
+		tcFileSize.setText("Artist");
 
-		TableColumn tcDateModified = new TableColumn(table, SWT.RIGHT);
-		tcDateModified.setText("Date Modified");
+		TableColumn tcDateModified = new TableColumn(_table, SWT.RIGHT);
+		tcDateModified.setText("Year");
 
 		tcFileName.setWidth(200);
 		tcFileSize.setWidth(80);
 		tcDateModified.setWidth(180);
 
-		TableItem item = new TableItem(table, SWT.NULL);
+		TableItem item = new TableItem(_table, SWT.NULL);
 		item.setText(new String[] { "Name", "Size" });
 		/*
 		 * item.setBackground(i % 2 == 0 ? shell.getDisplay().getSystemColor(
 		 * SWT.COLOR_WHITE) : shell.getDisplay().getSystemColor(
 		 * SWT.COLOR_GRAY));
 		 */
-		table.setLayoutData(new GridData(GridData.FILL_BOTH));
-		
-		getSite().getPage().addSelectionListener(LibraryView.ID, (ISelectionListener) this);
+		_table.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 	}
 
@@ -103,15 +119,16 @@ public class MediaListEditor extends EditorPart implements ISelectionListener{
 
 	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-		if ( selection instanceof IStructuredSelection) {
-			//NodeObject 
+		if (selection instanceof IStructuredSelection) {
+			// NodeObject
 		}
-		
+
 	}
-	
+
+	@Override
 	public void dispose() {
 		super.dispose();
-		getSite().getPage().removeSelectionListener((ISelectionListener) this);
+		getSite().getPage().removeSelectionListener(this);
 	}
 
 }

@@ -2,11 +2,11 @@ package org.jamp.model;
 
 public abstract class MediaObject {
 
-	String _name;
+	String _title;
 	String _location;
 
 	public MediaObject(String name, String location) {
-		_name = name;
+		_title = name;
 		_location = location;
 	}
 
@@ -15,7 +15,7 @@ public abstract class MediaObject {
 	}
 
 	public String getName() {
-		return _name;
+		return _title;
 	}
 
 	public abstract void play();
