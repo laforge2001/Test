@@ -12,6 +12,7 @@ Export-Package: org.jamp.ui.library.editor;
   uses:="org.eclipse.core.runtime,
    org.eclipse.jface.resource,
    org.eclipse.ui,
+   org.eclipse.jface.viewers,
    org.eclipse.ui.part,
    org.eclipse.swt.widgets",
  org.jamp.ui.library.views;uses:="org.eclipse.core.runtime,org.eclipse.ui.part,org.eclipse.swt.widgets"
