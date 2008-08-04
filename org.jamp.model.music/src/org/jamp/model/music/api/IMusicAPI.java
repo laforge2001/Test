@@ -6,6 +6,8 @@ public interface IMusicAPI extends IMediaAPI {
 
 	public int getPosition();
 
+	public String getSongTitle();
+
 	public String getAlbum();
 
 	public String getArtist();

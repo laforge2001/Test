@@ -20,7 +20,7 @@ public class MediaListLabelProvider extends LabelProvider implements
 		MusicObject task = (MusicObject) element;
 		switch (columnIndex) {
 		case 0:
-			result = task.getName();
+			result = task.getAPI().getSongTitle();
 			break;
 		case 1:
 			result = task.getAPI().getArtist();

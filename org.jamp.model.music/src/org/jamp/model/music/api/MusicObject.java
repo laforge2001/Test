@@ -12,15 +12,15 @@ public class MusicObject extends MediaObject {
 	private int year;
 	private String location;
 
-	public MusicObject(String name, String location, IMusicAPI api) {
-		super(name, location);
+	public MusicObject(String location, IMusicAPI api) {
+		super(location);
 		_musicAPI = api;
 		_musicAPI.init(super.getLocation());
-		title = getName();
+		title = getAPI().getSongTitle();
 		artist = getAPI().getArtist();
 		album = getAPI().getAlbum();
 		year = getAPI().getYear();
-		location = super.getLocation();
+		this.location = super.getLocation();
 	}
 
 	@Override

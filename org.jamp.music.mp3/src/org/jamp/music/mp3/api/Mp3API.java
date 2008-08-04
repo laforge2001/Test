@@ -72,6 +72,10 @@ public class Mp3API implements IMusicAPI {
 		}
 	}
 
+	public String getSongTitle() {
+		return _mp3Info.getSongTitle();
+	}
+
 	@Override
 	public String getAlbum() {
 		return _mp3Info.getAlbumTitle();

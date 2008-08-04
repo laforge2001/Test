@@ -55,8 +55,11 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 	}
 
 	private void initData() {
-		MusicObject testMe = new MusicObject("Viva",
-				"c:/Users/geordi/Desktop/coldplay.mp3", new Mp3API());
+		// MusicObject testMe = new MusicObject("Viva",
+		// "c:/Users/geordi/Desktop/coldplay.mp3", new Mp3API());
+		MusicObject testMe = new MusicObject(
+				"C:/Users/geordi/Music/30 Seconds To Mars/A Beautiful Lie/01 - Attack.mp3",
+				new Mp3API());
 		testList.add(testMe);
 		_playList = new Playlist("Test", testList);
 		// TODO Auto-generated method stub
@@ -137,7 +140,7 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 
 		// Column 1 : Description (Free text)
 		TextCellEditor locationCellEditor = new TextCellEditor(_table);
-		((Text) locationCellEditor.getControl()).setTextLimit(60);
+		((Text) locationCellEditor.getControl()).setTextLimit(160);
 		editors[4] = locationCellEditor;
 
 		// Assign the cell editors to the viewer
@@ -156,23 +159,23 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 		// Table.
 		_table = new Table(parent, SWT.BORDER | SWT.FULL_SELECTION);
 
-		// table.setLinesVisible(true);
+		_table.setLinesVisible(true);
 		_table.setHeaderVisible(true);
 
 		TableColumn tcTitle = new TableColumn(_table, SWT.LEFT);
-		tcTitle.setText("Title");
+		tcTitle.setText("TitlePOOPOO");
 
-		TableColumn tcArtist = new TableColumn(_table, SWT.RIGHT);
+		TableColumn tcArtist = new TableColumn(_table, SWT.LEFT);
 		tcArtist.setText("Artist");
 
-		TableColumn tcAlbum = new TableColumn(_table, SWT.RIGHT);
+		TableColumn tcAlbum = new TableColumn(_table, SWT.LEFT);
 		tcAlbum.setText("Album");
 
-		TableColumn tcYear = new TableColumn(_table, SWT.RIGHT);
+		TableColumn tcYear = new TableColumn(_table, SWT.LEFT);
 		tcYear.setText("Year");
 
-		TableColumn tcLocation = new TableColumn(_table, SWT.RIGHT);
-		tcYear.setText("Location");
+		TableColumn tcLocation = new TableColumn(_table, SWT.LEFT);
+		tcLocation.setText("Location");
 
 		tcTitle.setWidth(80);
 		tcArtist.setWidth(80);
