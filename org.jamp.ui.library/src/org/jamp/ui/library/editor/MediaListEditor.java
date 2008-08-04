@@ -170,7 +170,7 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 		_table.setHeaderVisible(true);
 
 		TableColumn tcTitle = new TableColumn(_table, SWT.LEFT);
-		tcTitle.setText("TitlePOOPOO");
+		tcTitle.setText("Title");
 
 		TableColumn tcArtist = new TableColumn(_table, SWT.LEFT);
 		tcArtist.setText("Artist");
