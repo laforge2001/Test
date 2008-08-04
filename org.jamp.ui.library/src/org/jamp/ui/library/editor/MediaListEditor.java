@@ -57,9 +57,14 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 	private void initData() {
 		// MusicObject testMe = new MusicObject("Viva",
 		// "c:/Users/geordi/Desktop/coldplay.mp3", new Mp3API());
+		// MusicObject testMe = new MusicObject(
+		// "C:/Users/geordi/Music/30 Seconds To Mars/A Beautiful Lie/01 - Attack.mp3"
+		// ,
+		// new Mp3API());
 		MusicObject testMe = new MusicObject(
-				"C:/Users/geordi/Music/30 Seconds To Mars/A Beautiful Lie/01 - Attack.mp3",
+				"C:/Users/geordi/workspace/org.jamp.music.mp3/testfile/test.mp3",
 				new Mp3API());
+
 		testList.add(testMe);
 		_playList = new Playlist("Test", testList);
 		// TODO Auto-generated method stub
