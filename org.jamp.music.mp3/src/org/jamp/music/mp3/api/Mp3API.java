@@ -56,6 +56,10 @@ public class Mp3API implements IMusicAPI {
 			_player = new Player(in);
 			try {
 				MP3File tagFile = new MP3File(fileLocation);
+				if (tagFile.hasID3v2Tag())
+					_mp3Info = tagFile.getID3v2Tag();
+				else
+					_mp3Info = tagFile.getID3v1Tag();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -85,7 +89,11 @@ public class Mp3API implements IMusicAPI {
 
 	@Override
 	public Integer getYear() {
-		return Integer.valueOf(_mp3Info.getYearReleased());
+		String year = _mp3Info.getYearReleased();
+		if (year != "")
+			return Integer.valueOf(_mp3Info.getYearReleased());
+		else
+			return 9999;
 	}
 
 }

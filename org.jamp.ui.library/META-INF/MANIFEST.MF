@@ -6,7 +6,8 @@ Bundle-Version: 1.0.0
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
  org.jamp.model;bundle-version="1.0.0",
- org.jamp.model.music;bundle-version="1.0.0"
+ org.jamp.model.music;bundle-version="1.0.0",
+ org.jamp.music.mp3;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.jamp.ui.library.editor;
   uses:="org.eclipse.core.runtime,
