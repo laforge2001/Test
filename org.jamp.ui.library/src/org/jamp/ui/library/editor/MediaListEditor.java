@@ -1,6 +1,7 @@
 package org.jamp.ui.library.editor;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.viewers.CellEditor;
@@ -21,6 +22,7 @@ import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
+import org.jamp.model.MediaObject;
 import org.jamp.model.Playlist;
 import org.jamp.model.music.api.MusicObject;
 import org.jamp.music.mp3.api.Mp3API;
@@ -38,14 +40,14 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 	private final String LOCATION_COLUMN = "location";
 
 	// Set column names
-	private String[] columnNames = new String[] { TITLE_COLUMN, ARTIST_COLUMN,
-			ALBUM_COLUMN, YEAR_COLUMN, LOCATION_COLUMN };
+	private final String[] columnNames = new String[] { TITLE_COLUMN,
+			ARTIST_COLUMN, ALBUM_COLUMN, YEAR_COLUMN, LOCATION_COLUMN };
 
 	private Table _table;
 
 	private TableViewer _tableViewer;
 
-	private Vector testList = new Vector(10);
+	private final List<MediaObject> testList = new ArrayList<MediaObject>();
 
 	private Playlist _playList;
 
@@ -62,7 +64,7 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 		// ,
 		// new Mp3API());
 		MusicObject testMe = new MusicObject(
-				"C:/Users/geordi/workspace/org.jamp.music.mp3/testfile/test.mp3",
+				"/home/georde/jamp/org.jamp.music.mp3/testfile/test.mp3",
 				new Mp3API());
 
 		testList.add(testMe);

@@ -17,7 +17,6 @@ public class Mp3API implements IMusicAPI {
 
 	private Player _player;
 	private AbstractID3 _mp3Info;
-	private int _currentPosition;
 
 	@Override
 	public void pause() {

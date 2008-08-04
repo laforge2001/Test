@@ -1,11 +1,11 @@
 package org.jamp.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.Vector;
 
 import org.jamp.model.viewer.IPlayListViewer;
 
@@ -15,14 +15,14 @@ public class Playlist implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 4398528061055146208L;
-	private final Vector _playList = new Vector(10);
+	private final List<MediaObject> _playList = new ArrayList<MediaObject>();
 	private MediaObject _currentlyPlaying = null;
 	private String _name = new String();
-	private Set _changeListeners = new HashSet();
+	private final Set<IPlayListViewer> _changeListeners = new HashSet<IPlayListViewer>();
 
-	public Playlist(String name, List<MediaObject> playList) {
+	public Playlist(String name, List<MediaObject> testList) {
 		_name = name;
-		for (MediaObject m : playList) {
+		for (MediaObject m : testList) {
 			_playList.add(m);
 		}
 	}
@@ -34,27 +34,27 @@ public class Playlist implements Serializable {
 
 	public void add(MediaObject o) {
 		_playList.add(o);
-		Iterator next = _changeListeners.iterator();
+		Iterator<IPlayListViewer> next = _changeListeners.iterator();
 		while (next.hasNext()) {
-			((IPlayListViewer) next.next()).addMediaObject(o);
+			next.next().addMediaObject(o);
 		}
 	}
 
 	public void remove(MediaObject o) {
 		if (_playList.contains(o)) {
 			_playList.remove(o);
-			Iterator iterator = _changeListeners.iterator();
+			Iterator<IPlayListViewer> iterator = _changeListeners.iterator();
 			while (iterator.hasNext())
-				((IPlayListViewer) iterator.next()).removeMediaObject(o);
+				iterator.next().removeMediaObject(o);
 		}
 	}
 
 	public void update(MediaObject o) {
 		if (_playList.contains(o)) {
 			_playList.remove(o);
-			Iterator iterator = _changeListeners.iterator();
+			Iterator<IPlayListViewer> iterator = _changeListeners.iterator();
 			while (iterator.hasNext())
-				((IPlayListViewer) iterator.next()).updateMediaObject(o);
+				iterator.next().updateMediaObject(o);
 		}
 	}
 
@@ -64,7 +64,7 @@ public class Playlist implements Serializable {
 
 	public void play(int index) {
 		for (int i = index; index < _playList.size(); ++i) {
-			_currentlyPlaying = (MediaObject) _playList.get(i);
+			_currentlyPlaying = _playList.get(i);
 			_currentlyPlaying.play();
 		}
 	}
@@ -106,7 +106,7 @@ public class Playlist implements Serializable {
 		_changeListeners.add(viewer);
 	}
 
-	public Vector getList() {
+	public List<MediaObject> getList() {
 		return _playList;
 	}
 
