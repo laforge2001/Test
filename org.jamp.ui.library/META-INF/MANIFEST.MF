@@ -12,8 +12,11 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.jamp.ui.library.editor;
   uses:="org.eclipse.core.runtime,
    org.eclipse.jface.resource,
+   org.jamp.model,
    org.eclipse.ui,
+   org.eclipse.swt.graphics,
    org.eclipse.jface.viewers,
+   org.jamp.model.viewer,
    org.eclipse.ui.part,
    org.eclipse.swt.widgets",
  org.jamp.ui.library.views;uses:="org.eclipse.core.runtime,org.eclipse.ui.part,org.eclipse.swt.widgets"
