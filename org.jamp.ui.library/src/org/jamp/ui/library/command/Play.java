@@ -1,4 +1,4 @@
-package org.jamp.model.music.commands;
+package org.jamp.ui.library.command;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -21,7 +21,6 @@ public class Play implements IHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		
 		return null;
 	}
 

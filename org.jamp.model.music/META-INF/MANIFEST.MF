@@ -4,8 +4,6 @@ Bundle-Name: Music Plug-in
 Bundle-SymbolicName: org.jamp.model.music;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.jamp.model;bundle-version="1.0.0",
- org.eclipse.ui
+Require-Bundle: org.jamp.model;bundle-version="1.0.0"
 Export-Package: org.jamp.model.music;uses:="org.jamp.model",
- org.jamp.model.music.api;uses:="org.jamp.model,org.jamp.model.api",
- org.jamp.model.music.commands;uses:="org.eclipse.core.commands"
+ org.jamp.model.music.api;uses:="org.jamp.model,org.jamp.model.api"
