@@ -113,6 +113,7 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 		createTableViewer();
 
 		getSite().getPage().addSelectionListener(LibraryView.ID, this);
+		getSite().setSelectionProvider(_tableViewer);
 
 	}
 

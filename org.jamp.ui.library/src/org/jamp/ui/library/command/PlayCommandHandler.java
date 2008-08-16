@@ -1,4 +1,4 @@
-package org.jamp.ui.commandhandler;
+package org.jamp.ui.library.command;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -8,6 +8,8 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.jamp.model.MediaObject;
 
 public class PlayCommandHandler extends AbstractHandler implements IHandler {
+
+	public static final String ID = "play.command";
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {

@@ -9,7 +9,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.jamp.model.music;bundle-version="1.0.0",
  org.jamp.music.mp3;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.jamp.ui.library.editor;
+Export-Package: org.jamp.ui.library.command;uses:="org.eclipse.core.commands",
+ org.jamp.ui.library.editor;
   uses:="org.eclipse.core.runtime,
    org.eclipse.jface.resource,
    org.jamp.model,
@@ -19,4 +20,9 @@ Export-Package: org.jamp.ui.library.editor;
    org.jamp.model.viewer,
    org.eclipse.ui.part,
    org.eclipse.swt.widgets",
- org.jamp.ui.library.views;uses:="org.eclipse.core.runtime,org.eclipse.ui.part,org.eclipse.swt.widgets"
+ org.jamp.ui.library.views;
+  uses:="org.eclipse.core.runtime,
+   org.eclipse.ui,
+   org.eclipse.jface.viewers,
+   org.eclipse.ui.part,
+   org.eclipse.swt.widgets"
