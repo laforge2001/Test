@@ -45,6 +45,35 @@
             id="play.command"
             name="Play">
       </command>
+      <command
+            defaultHandler="org.jamp.ui.library.command.TestCommand"
+            id="test.command"
+            name="Test">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu">
+         <menu
+               id="my Test Menu"
+               label="Test">
+            <command
+                  commandId="play.command"
+                  label="CLOSE"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.jamp.ui.library.editor.MediaList">
+         <command
+               commandId="play.command"
+               icon="icons/sample.gif"
+               label="Play"
+               style="push">
+         </command>
+      </menuContribution>
    </extension>
 
 </plugin>

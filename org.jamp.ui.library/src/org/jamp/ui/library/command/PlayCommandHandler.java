@@ -13,10 +13,14 @@ public class PlayCommandHandler extends AbstractHandler implements IHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
+
+		// MessageDialog.openInformation(HandlerUtil.getActiveWorkbenchWindow(
+		// event).getShell(), "Info", "Info for you");
+
 		MediaObject selectedMedia = (MediaObject) HandlerUtil
 				.getCurrentSelection(event);
 		selectedMedia.play();
-		return selectedMedia;
+		return null;
 	}
 
 }

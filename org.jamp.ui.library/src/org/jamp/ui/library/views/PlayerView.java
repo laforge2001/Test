@@ -1,6 +1,7 @@
 package org.jamp.ui.library.views;
 
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -9,14 +10,15 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.part.ViewPart;
-import org.jamp.ui.library.command.PlayCommandHandler;
+import org.jamp.model.MediaObject;
 import org.jamp.ui.library.editor.MediaListEditor;
 
 public class PlayerView extends ViewPart implements ISelectionListener {
 
 	public static final String ID = "org.jamp.ui.library.views.PlayerView";
+
+	private MediaObject _playMe;
 
 	public PlayerView() {
 		// TODO Auto-generated constructor stub
@@ -29,6 +31,7 @@ public class PlayerView extends ViewPart implements ISelectionListener {
 		parent.setLayout(fillLayout);
 		Button playButton = new Button(parent, SWT.PUSH);
 		playButton.setText("Play");
+		getSite().getPage().addSelectionListener(MediaListEditor.ID, this);
 		playButton.addSelectionListener(new SelectionListener() {
 
 			@Override
@@ -39,24 +42,20 @@ public class PlayerView extends ViewPart implements ISelectionListener {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				IHandlerService handlerService = (IHandlerService) getSite()
-						.getService(IHandlerService.class);
 
 				try {
-
-					handlerService.executeCommand(PlayCommandHandler.ID, null);
+					if (_playMe != null)
+						_playMe.play();
 
 				} catch (Exception ex) {
 
-					throw new RuntimeException("play.command not found");
+					throw new RuntimeException("Error playing file");
 
 				}
 
 			}
 
 		});
-
-		getSite().getPage().addSelectionListener(MediaListEditor.ID, this);
 
 	}
 
@@ -68,8 +67,11 @@ public class PlayerView extends ViewPart implements ISelectionListener {
 
 	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-		// TODO Auto-generated method stub
-
+		if (selection instanceof IStructuredSelection) {
+			MediaObject newPerson = (MediaObject) ((IStructuredSelection) selection)
+					.getFirstElement();
+			_playMe = newPerson;
+		}
 	}
 
 }
