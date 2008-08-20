@@ -1,6 +1,6 @@
 package org.jamp.model;
 
-public abstract class MediaObject {
+public abstract class MediaObject implements Runnable {
 
 	String _location;
 
@@ -17,5 +17,9 @@ public abstract class MediaObject {
 	public abstract void stop();
 
 	public abstract void pause();
+
+	public void run() {
+		this.play();
+	}
 
 }
