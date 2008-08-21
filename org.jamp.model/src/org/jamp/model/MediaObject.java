@@ -2,7 +2,9 @@ package org.jamp.model;
 
 public abstract class MediaObject implements Runnable {
 
-	String _location;
+	protected String _location;
+
+	protected boolean isPaused = false;
 
 	public MediaObject(String location) {
 		_location = location;
