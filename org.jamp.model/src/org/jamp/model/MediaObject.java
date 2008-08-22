@@ -18,6 +18,11 @@ public abstract class MediaObject implements Runnable {
 
 	public abstract void play();
 
+	public void start() {
+		_playThread = new Thread(this);
+		_playThread.start();
+	}
+
 	public void stop() {
 		_playThread = null;
 		System.out.println("Stopped");
@@ -30,19 +35,14 @@ public abstract class MediaObject implements Runnable {
 
 	@Override
 	public void run() {
-		try {
-			this.play();
-			Thread.sleep(100);
-			System.out.println("Playing");
-
-			synchronized (this) {
-				while (_isPaused) {
-					wait();
-					System.out.println("Paused");
-				}
+		Thread thisThread = Thread.currentThread();
+		while (_playThread == thisThread) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+			play();
 		}
 	}
 
