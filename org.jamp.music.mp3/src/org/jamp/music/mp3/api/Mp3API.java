@@ -19,18 +19,6 @@ public class Mp3API implements IMusicAPI {
 	private AbstractID3 _mp3Info;
 
 	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void stop() {
-		_player.close();
-
-	}
-
-	@Override
 	public int getPosition() {
 		return _player.getPosition();
 	}
@@ -97,6 +85,14 @@ public class Mp3API implements IMusicAPI {
 			return Integer.valueOf(_mp3Info.getYearReleased());
 		else
 			return 9999;
+	}
+
+	@Override
+	public void dispose() {
+		if (_player != null) {
+			_player.close();
+		}
+
 	}
 
 }

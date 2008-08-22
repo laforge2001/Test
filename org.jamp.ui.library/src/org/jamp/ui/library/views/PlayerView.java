@@ -22,8 +22,6 @@ public class PlayerView extends ViewPart implements ISelectionListener {
 
 	private Thread _currentPlaying = null;
 
-	private boolean isPaused = false;
-
 	public PlayerView() {
 		// TODO Auto-generated constructor stub
 	}
@@ -49,9 +47,7 @@ public class PlayerView extends ViewPart implements ISelectionListener {
 			public void widgetSelected(SelectionEvent e) {
 
 				try {
-					if (_currentPlaying != null && _currentPlaying.isAlive()) {
-						_currentPlaying.resume();
-					} else if (_playMe != null) {
+					if (_playMe != null) {
 						_currentPlaying = new Thread(_playMe);
 						_currentPlaying.start();
 					}
@@ -78,10 +74,7 @@ public class PlayerView extends ViewPart implements ISelectionListener {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				if (_currentPlaying != null && _currentPlaying.isAlive()) {
-					_currentPlaying.suspend();
-				}
-
+				_playMe.pause();
 			}
 
 		});
@@ -101,12 +94,6 @@ public class PlayerView extends ViewPart implements ISelectionListener {
 				if (_playMe != null) {
 					_playMe.stop();
 				}
-
-				if (_currentPlaying != null) {
-					_currentPlaying.stop();
-					_currentPlaying = null;
-				}
-
 			}
 
 		});

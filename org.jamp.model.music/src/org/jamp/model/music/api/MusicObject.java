@@ -24,20 +24,8 @@ public class MusicObject extends MediaObject {
 	}
 
 	@Override
-	public void pause() {
-		_musicAPI.pause();
-
-	}
-
-	@Override
 	public void play() {
 		_musicAPI.play();
-
-	}
-
-	@Override
-	public void stop() {
-		_musicAPI.stop();
 
 	}
 
@@ -77,6 +65,7 @@ public class MusicObject extends MediaObject {
 		this.year = year;
 	}
 
+	@Override
 	public String getLocation() {
 		return location;
 	}
