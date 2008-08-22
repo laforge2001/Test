@@ -20,6 +20,8 @@ public class PlayerView extends ViewPart implements ISelectionListener {
 
 	private MediaObject _playMe;
 
+	private volatile Thread _currentlyPlaying = null;
+
 	public PlayerView() {
 		// TODO Auto-generated constructor stub
 	}
@@ -45,8 +47,11 @@ public class PlayerView extends ViewPart implements ISelectionListener {
 			public void widgetSelected(SelectionEvent e) {
 
 				try {
-					if (_playMe != null) {
-						_playMe.start();
+					if (_playMe != null && _currentlyPlaying == null) {
+						_currentlyPlaying = new Thread(_playMe);
+						_currentlyPlaying.start();
+					} else {
+						_playMe.play();
 					}
 
 				} catch (Exception ex) {
