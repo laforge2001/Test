@@ -20,8 +20,6 @@ public class PlayerView extends ViewPart implements ISelectionListener {
 
 	private MediaObject _playMe;
 
-	private final Thread _currentPlaying = null;
-
 	public PlayerView() {
 		// TODO Auto-generated constructor stub
 	}
