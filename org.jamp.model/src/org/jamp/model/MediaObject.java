@@ -38,12 +38,15 @@ public abstract class MediaObject implements Runnable {
 		Thread thisThread = Thread.currentThread();
 		while (_playThread == thisThread) {
 			try {
-				Thread.sleep(100);
+				thisThread.sleep(100);
+				System.out.println("slept");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			play();
+
+			synchronized (this) {
+				play();
+			}
 		}
 	}
-
 }
