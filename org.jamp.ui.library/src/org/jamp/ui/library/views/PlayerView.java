@@ -47,9 +47,11 @@ public class PlayerView extends ViewPart implements ISelectionListener {
 			public void widgetSelected(SelectionEvent e) {
 
 				try {
-					if (_playMe != null) {
+					if (_playMe != null && _currentPlaying == null) {
 						_currentPlaying = new Thread(_playMe);
 						_currentPlaying.start();
+					} else {
+						_currentPlaying.resume();
 					}
 
 				} catch (Exception ex) {
@@ -74,7 +76,9 @@ public class PlayerView extends ViewPart implements ISelectionListener {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				_playMe.pause();
+				if (_currentPlaying != null) {
+					_currentPlaying.suspend();
+				}
 			}
 
 		});
@@ -91,8 +95,9 @@ public class PlayerView extends ViewPart implements ISelectionListener {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				if (_playMe != null) {
-					_playMe.stop();
+				if (_currentPlaying != null) {
+					_currentPlaying.stop();
+					_currentPlaying = null;
 				}
 			}
 
