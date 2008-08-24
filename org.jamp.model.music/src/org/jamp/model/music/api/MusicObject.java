@@ -12,6 +12,10 @@ public class MusicObject extends MediaObject {
 	private int year;
 	private String location;
 
+	private volatile Thread _playMe;
+
+	private boolean threadSuspended = false;
+
 	public MusicObject(String location, IMusicAPI api) {
 		super(location);
 		_musicAPI = api;
@@ -28,14 +32,21 @@ public class MusicObject extends MediaObject {
 		_musicAPI.play();
 	}
 
-	@Override
-	public void pause() {
-		_musicAPI.pause();
+	public boolean play(int frames) {
+		return _musicAPI.play(frames);
 	}
 
 	@Override
-	public void stop() {
+	public void pause() {
+		// _musicAPI.pause();
+		threadSuspended = !threadSuspended;
+	}
+
+	@Override
+	public synchronized void stop() {
 		_musicAPI.stop();
+		_playMe = null;
+		notify();
 	}
 
 	public IMusicAPI getAPI() {
@@ -81,6 +92,33 @@ public class MusicObject extends MediaObject {
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	public void start() {
+		_playMe = new Thread(this);
+		_playMe.start();
+	}
+
+	public void run() {
+		Thread thisThread = Thread.currentThread();
+		while (_playMe == thisThread) {
+			try {
+				thisThread.sleep(100);
+
+				synchronized (this) {
+					while (threadSuspended && thisThread == _playMe) {
+						wait();
+					}
+				}
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			if (!_musicAPI.play(100)) {
+				stop();
+			}
+		}
 	}
 
 }

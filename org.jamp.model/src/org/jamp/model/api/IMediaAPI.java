@@ -6,6 +6,8 @@ public interface IMediaAPI {
 
 	public void play();
 
+	public boolean play(int frames);
+
 	public void pause();
 
 	public void stop();

@@ -16,12 +16,16 @@ public abstract class MediaObject implements Runnable {
 
 	public abstract void play();
 
+	public abstract boolean play(int frames);
+
 	public abstract void pause();
 
 	public abstract void stop();
 
-	@Override
-	public void run() {
-		play();
-	}
+	public abstract void start();
+
+	// @Override
+	// public void run() {
+	// play();
+	// }
 }

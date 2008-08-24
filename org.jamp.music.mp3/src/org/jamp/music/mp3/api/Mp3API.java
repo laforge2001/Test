@@ -5,12 +5,15 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import javazoom.jl.decoder.Bitstream;
+import javazoom.jl.decoder.Decoder;
+import javazoom.jl.decoder.Header;
 import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.decoder.SampleBuffer;
 import javazoom.jl.player.AudioDevice;
 import javazoom.jl.player.FactoryRegistry;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 import javazoom.jl.player.advanced.PlaybackEvent;
-import javazoom.jl.player.advanced.PlaybackListener;
 
 import org.farng.mp3.MP3File;
 import org.farng.mp3.TagException;
@@ -19,10 +22,19 @@ import org.jamp.model.music.api.IMusicAPI;
 
 public class Mp3API implements IMusicAPI {
 
+	// public Mp3API(InputStream stream) {
+	// super(stream);
+	// }
+
 	private AdvancedPlayer _player;
 	private AudioDevice _device;
 	private AbstractID3 _mp3Info;
-	private int _currentPosition = 0;
+	private int _currentFrame = 0;
+	protected boolean _isStopped = true;
+	protected String _fileLocation;
+	protected PlaybackEvent _playEvent;
+	protected Bitstream _bitStream;
+	private Decoder _decoder;
 
 	@Override
 	public int getPosition() {
@@ -30,29 +42,49 @@ public class Mp3API implements IMusicAPI {
 	}
 
 	private void resetPosition() {
-		_currentPosition = 0;
+		_currentFrame = 0;
 	}
 
 	@Override
 	public void play() {
 		try {
-			_player.play(_currentPosition, Integer.MAX_VALUE);
+			if (_isStopped) {
+				_playEvent.getSource().play(_currentFrame, Integer.MAX_VALUE);
+			}
 		} catch (JavaLayerException e) {
 			e.printStackTrace();
 		}
 	}
 
+	// @Override
+	// public boolean play(int frames) {
+	// try {
+	// _playEvent.setFrame(_currentFrame);
+	// return _playEvent.getSource().play(_currentFrame,
+	// _currentFrame += frames);
+	// } catch (JavaLayerException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// return true;
+	// }
+	// }
+
 	public void pause() {
-		_player.stop();
-		_currentPosition = getPosition();
+		if (!_isStopped) {
+			_currentFrame = _playEvent.getFrame();
+			_playEvent.getSource().stop();
+		}
 	}
 
 	public void stop() {
-		_player.stop();
+		if (!_isStopped) {
+			_player.stop();
+		}
 		resetPosition();
 	}
 
 	public void init(String fileLocation) {
+		_fileLocation = fileLocation;
 		BufferedInputStream in = null;
 		try {
 			in = new BufferedInputStream(new FileInputStream(fileLocation));
@@ -66,36 +98,41 @@ public class Mp3API implements IMusicAPI {
 		} catch (JavaLayerException e) {
 			e.printStackTrace();
 		}
+		// try {
+		_bitStream = new Bitstream(in);
+		_decoder = new Decoder();
+		// _player = new AdvancedPlayer(in, _device);
+		// _playEvent = new PlaybackEvent(_player, 1, 0);
+		// _player.setPlayBackListener(new PlaybackListener() {
+		// @Override
+		// public void playbackStarted(PlaybackEvent pevt) {
+		// _isStopped = false;
+		// System.out.println("Playing started...");
+		// }
+		//
+		// @Override
+		// public void playbackFinished(PlaybackEvent pevt) {
+		// _isStopped = true;
+		// System.out.println("Playback stopped...");
+		// }
+		//
+		// });
 		try {
-			_player = new AdvancedPlayer(in, _device);
-			_player.setPlayBackListener(new PlaybackListener() {
-				@Override
-				public void playbackStarted(PlaybackEvent pevt) {
-					System.out.println("Playback started...");
-				}
-
-				@Override
-				public void playbackFinished(PlaybackEvent pevt) {
-					System.out.println("Playback finished...");
-				}
-
-			});
-			try {
-				MP3File tagFile = new MP3File(fileLocation);
-				if (tagFile.hasID3v2Tag())
-					_mp3Info = tagFile.getID3v2Tag();
-				else
-					_mp3Info = tagFile.getID3v1Tag();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (TagException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (JavaLayerException e) {
+			MP3File tagFile = new MP3File(fileLocation);
+			if (tagFile.hasID3v2Tag())
+				_mp3Info = tagFile.getID3v2Tag();
+			else
+				_mp3Info = tagFile.getID3v1Tag();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TagException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		// } catch (JavaLayerException e) {
+		// e.printStackTrace();
+		// }
 	}
 
 	public String getSongTitle() {
@@ -134,4 +171,74 @@ public class Mp3API implements IMusicAPI {
 
 	}
 
+	/**
+	 * Decodes a single frame.
+	 * 
+	 * @return true if there are no more frames to decode, false otherwise.
+	 */
+	protected boolean decodeFrame() throws JavaLayerException {
+		try {
+			AudioDevice out = _device;
+			if (out == null)
+				return false;
+
+			Header h = _bitStream.readFrame();
+			if (h == null)
+				return false;
+
+			// sample buffer set when decoder constructed
+			SampleBuffer output = (SampleBuffer) _decoder.decodeFrame(h,
+					_bitStream);
+
+			synchronized (this) {
+				out = _device;
+				if (out != null) {
+					out.write(output.getBuffer(), 0, output.getBufferLength());
+				}
+			}
+
+			_bitStream.closeFrame();
+		} catch (RuntimeException ex) {
+			throw new JavaLayerException("Exception decoding audio frame", ex);
+		}
+		return true;
+	}
+
+	public boolean play(int frames) {
+		boolean ret = true;
+
+		// report to listener
+		// if (listener != null)
+		// listener.playbackStarted(createEvent(PlaybackEvent.STARTED));
+
+		while (frames-- > 0 && ret) {
+			try {
+				ret = decodeFrame();
+			} catch (JavaLayerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		// if (!ret)
+		{
+			// last frame, ensure all data flushed to the audio device.
+			AudioDevice out = _device;
+			if (out != null) {
+				// System.out.println(audio.getPosition());
+				out.flush();
+				// System.out.println(audio.getPosition());
+				// synchronized (this) {
+				// complete = (!closed);
+				// close();
+				// }
+
+				// report to listener
+				// if (listener != null)
+				// listener.playbackFinished(createEvent(out,
+				// PlaybackEvent.STOPPED));
+			}
+		}
+		return ret;
+	}
 }
