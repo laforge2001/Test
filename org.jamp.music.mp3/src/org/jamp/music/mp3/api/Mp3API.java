@@ -101,6 +101,12 @@ public class Mp3API implements IMusicAPI {
 		// try {
 		_bitStream = new Bitstream(in);
 		_decoder = new Decoder();
+		try {
+			_device.open(_decoder);
+		} catch (JavaLayerException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		// _player = new AdvancedPlayer(in, _device);
 		// _playEvent = new PlaybackEvent(_player, 1, 0);
 		// _player.setPlayBackListener(new PlaybackListener() {
