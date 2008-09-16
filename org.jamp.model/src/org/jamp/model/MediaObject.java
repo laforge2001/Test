@@ -5,6 +5,10 @@ public abstract class MediaObject implements Runnable {
 	protected String _location;
 
 	protected boolean _isPaused = false;
+	
+	protected volatile Thread _playMe;
+	
+	protected boolean isSuspended;
 
 	public MediaObject(String location) {
 		_location = location;
@@ -16,16 +20,22 @@ public abstract class MediaObject implements Runnable {
 
 	public abstract void play();
 
-	public abstract boolean play(int frames);
-
-	public abstract void pause();
+	public void pause() {
+		if (_playMe != null) {
+			if (!isSuspended) {
+				_playMe.suspend();
+			} else {
+				_playMe.resume();
+			}
+			isSuspended = !isSuspended;
+		}
+	}
 
 	public abstract void stop();
 
-	public abstract void start();
+	public void start() {
+		_playMe = new Thread(this);
+		_playMe.start();
+	}
 
-	// @Override
-	// public void run() {
-	// play();
-	// }
 }
