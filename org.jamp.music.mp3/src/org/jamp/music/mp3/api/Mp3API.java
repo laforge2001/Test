@@ -131,24 +131,7 @@ public class Mp3API implements IMusicAPI, Runnable {
 		} catch (JavaLayerException e) {
 			e.printStackTrace();
 		}
-		// try {
-		// _player = new AdvancedPlayer(in, _device);
-		// } catch (JavaLayerException e1) {
-		// // TODO Auto-generated catch block
-		// e1.printStackTrace();
-		// }
-		// _player.setPlayBackListener(new PlaybackListener() {
-		// @Override
-		// public void playbackStarted(PlaybackEvent pevt) {
-		// System.out.println("Playing started...");
-		// }
-		//
-		// @Override
-		// public void playbackFinished(PlaybackEvent pevt) {
-		// System.out.println("Playback stopped...");
-		// }
-		//
-		// });
+
 		try {
 			MP3File tagFile = new MP3File(getURL());
 			if (tagFile.hasID3v2Tag())
