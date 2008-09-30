@@ -19,6 +19,12 @@ public abstract class MediaObject implements Runnable {
 	}
 
 	public abstract void play();
+	
+	public synchronized void stop() {
+		if (_playMe != null) {
+			_playMe.stop();
+		}
+	}
 
 	public void pause() {
 		if (_playMe != null) {
@@ -31,8 +37,8 @@ public abstract class MediaObject implements Runnable {
 		}
 	}
 
-	public abstract void stop();
-
+	//public abstract void stop();
+	
 	public void start() {
 		_playMe = new Thread(this);
 		_playMe.start();
