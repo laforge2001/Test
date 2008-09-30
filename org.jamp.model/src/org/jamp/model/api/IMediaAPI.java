@@ -4,6 +4,10 @@ public interface IMediaAPI {
 
 	public void init(String location);
 
+	public void setURL(String location);
+
+	public String getURL();
+
 	public void play();
 
 	public void pause();

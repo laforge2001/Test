@@ -6,10 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javazoom.jl.decoder.Bitstream;
-import javazoom.jl.decoder.Decoder;
-import javazoom.jl.decoder.Header;
 import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.decoder.SampleBuffer;
 import javazoom.jl.player.AudioDevice;
 import javazoom.jl.player.FactoryRegistry;
 import javazoom.jl.player.advanced.AdvancedPlayer;
@@ -21,7 +18,7 @@ import org.farng.mp3.TagException;
 import org.farng.mp3.id3.AbstractID3;
 import org.jamp.model.music.api.IMusicAPI;
 
-public class Mp3API implements IMusicAPI {
+public class Mp3API implements IMusicAPI, Runnable {
 
 	private AdvancedPlayer _player;
 	private AudioDevice _device;
@@ -30,19 +27,49 @@ public class Mp3API implements IMusicAPI {
 	protected String _fileLocation;
 	protected PlaybackEvent _playEvent;
 	protected Bitstream _bitStream;
-	
+
+	private Thread _playMeThread;
+
 	@Override
 	public int getPosition() {
 		return _device.getPosition();
 	}
 
-	private void resetPosition() {
+	private Thread createPlayerThread() {
+		return new Thread(this, "This is the audio thread");
+	}
+
+	private void stopPlayerThread() {
+		if (_player != null) {
+			_player.close();
+			_player = null;
+			_playMeThread = null;
+		}
 	}
 
 	@Override
 	public void play() {
+		stopPlayerThread();
 		try {
-			_player.play();
+			_player = new AdvancedPlayer(getInputStream(getURL()), _device);
+
+			_player.setPlayBackListener(new PlaybackListener() {
+				@Override
+				public void playbackStarted(PlaybackEvent pevt) {
+					_isStopped = false;
+					System.out.println("Playing started...");
+				}
+
+				@Override
+				public void playbackFinished(PlaybackEvent pevt) {
+					_isStopped = true;
+					System.out.println("Playback stopped...");
+				}
+
+			});
+
+			_playMeThread = createPlayerThread();
+			_playMeThread.start();
 		} catch (JavaLayerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,54 +77,59 @@ public class Mp3API implements IMusicAPI {
 	}
 
 	public void pause() {
-		if (!_isStopped) {
-			_playEvent.getFrame();
-			_playEvent.getSource().stop();
+		if (_player != null) {
+			if (!_isStopped) {
+				_playMeThread.suspend();
+			} else {
+				_playMeThread.resume();
+			}
+			_isStopped = !_isStopped;
 		}
 	}
 
 	public void stop() {
-		if (!_isStopped) {
-			_player.stop();
-		}
-		resetPosition();
+		stopPlayerThread();
 	}
 
-	public void init(String fileLocation) {
-		_fileLocation = fileLocation;
-		BufferedInputStream in = null;
+	private BufferedInputStream getInputStream(String location) {
 		try {
-			in = new BufferedInputStream(new FileInputStream(fileLocation));
+			return new BufferedInputStream(new FileInputStream(location));
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+
+	public void init(String fileLocation) {
+		_fileLocation = fileLocation;
+		BufferedInputStream in = getInputStream(fileLocation);
 		FactoryRegistry f = FactoryRegistry.systemRegistry();
 		try {
 			_device = f.createAudioDevice();
 		} catch (JavaLayerException e) {
 			e.printStackTrace();
 		}
-		 try {
+		try {
 			_player = new AdvancedPlayer(in, _device);
 		} catch (JavaLayerException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		 _player.setPlayBackListener(new PlaybackListener() {
-		 @Override
-		 public void playbackStarted(PlaybackEvent pevt) {
-		 _isStopped = false;
-		 System.out.println("Playing started...");
-		 }
-		
-		 @Override
-		 public void playbackFinished(PlaybackEvent pevt) {
-		 _isStopped = true;
-		 System.out.println("Playback stopped...");
-		 }
-		
-		 });
+		_player.setPlayBackListener(new PlaybackListener() {
+			@Override
+			public void playbackStarted(PlaybackEvent pevt) {
+				_isStopped = false;
+				System.out.println("Playing started...");
+			}
+
+			@Override
+			public void playbackFinished(PlaybackEvent pevt) {
+				_isStopped = true;
+				System.out.println("Playback stopped...");
+			}
+
+		});
 		try {
 			MP3File tagFile = new MP3File(fileLocation);
 			if (tagFile.hasID3v2Tag())
@@ -152,5 +184,28 @@ public class Mp3API implements IMusicAPI {
 	public boolean play(int frames) {
 		play();
 		return true;
+	}
+
+	@Override
+	public void setURL(String location) {
+		_fileLocation = location;
+
+	}
+
+	@Override
+	public String getURL() {
+		return _fileLocation;
+	}
+
+	@Override
+	public void run() {
+		if (_player != null) {
+			try {
+				_player.play();
+			} catch (JavaLayerException ex) {
+				System.err.println("Problem playing audio: " + ex);
+			}
+		}
+
 	}
 }

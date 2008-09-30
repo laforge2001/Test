@@ -10,17 +10,15 @@ public class MusicObject extends MediaObject {
 	private String artist;
 	private String album;
 	private int year;
-	private String location;
 
 	public MusicObject(String location, IMusicAPI api) {
-		super(location);
 		_musicAPI = api;
-		_musicAPI.init(super.getLocation());
+		_musicAPI.setURL(location);
+		_musicAPI.init(location);
 		title = getAPI().getSongTitle();
 		artist = getAPI().getArtist();
 		album = getAPI().getAlbum();
 		year = getAPI().getYear();
-		this.location = super.getLocation();
 	}
 
 	@Override
@@ -29,9 +27,8 @@ public class MusicObject extends MediaObject {
 	}
 
 	@Override
-	public synchronized void stop() {
+	public void stop() {
 		_musicAPI.stop();
-		notify();
 	}
 
 	public IMusicAPI getAPI() {
@@ -71,16 +68,22 @@ public class MusicObject extends MediaObject {
 	}
 
 	@Override
-	public String getLocation() {
-		return location;
+	public String getURL() {
+		return _musicAPI.getURL();
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	@Override
+	public void setURL(String location) {
+		_musicAPI.setURL(location);
 	}
 
 	public void run() {
 		_musicAPI.play();
+	}
+
+	@Override
+	public void pause() {
+		_musicAPI.pause();
 	}
 
 }

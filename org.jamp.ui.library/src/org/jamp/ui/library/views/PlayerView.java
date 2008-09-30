@@ -48,7 +48,7 @@ public class PlayerView extends ViewPart implements ISelectionListener {
 
 				try {
 					if (_playMe != null) {
-						_playMe.start();
+						_playMe.play();
 					}
 
 				} catch (Exception ex) {

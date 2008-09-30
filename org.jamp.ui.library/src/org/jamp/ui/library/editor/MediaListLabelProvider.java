@@ -32,7 +32,7 @@ public class MediaListLabelProvider extends LabelProvider implements
 			result = task.getAPI().getYear().toString();
 			break;
 		case 4:
-			result = task.getLocation();
+			result = task.getAPI().getURL();
 		default:
 			break;
 		}
