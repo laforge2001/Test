@@ -39,12 +39,13 @@ public class Mp3API implements IMusicAPI, Runnable {
 		return new Thread(this, "This is the audio thread");
 	}
 
-	private void stopPlayerThread() {
+	private synchronized void stopPlayerThread() {
 		if (_player != null) {
 			_player.stop();
 			_player = null;
 			_playMeThread = null;
 		}
+		notify();
 	}
 
 	@Override
@@ -54,12 +55,14 @@ public class Mp3API implements IMusicAPI, Runnable {
 		BufferedInputStream in = getInputStream(getURL());
 		if (in != null && _device != null) {
 			try {
+				init();
 				_player = new AdvancedPlayer(in, _device);
 
 				_player.setPlayBackListener(new PlaybackListener() {
 					@Override
 					public void playbackStarted(PlaybackEvent pevt) {
-						System.out.println("Playing started...");
+						System.out.println("Playing " + getURL()
+								+ " started...");
 					}
 
 					@Override
@@ -68,6 +71,20 @@ public class Mp3API implements IMusicAPI, Runnable {
 					}
 
 				});
+
+				try {
+					MP3File tagFile = new MP3File(getURL());
+					if (tagFile.hasID3v2Tag())
+						_mp3Info = tagFile.getID3v2Tag();
+					else
+						_mp3Info = tagFile.getID3v1Tag();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (TagException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				_playMeThread = createPlayerThread();
 				_playMeThread.start();
@@ -114,26 +131,24 @@ public class Mp3API implements IMusicAPI, Runnable {
 		} catch (JavaLayerException e) {
 			e.printStackTrace();
 		}
-		try {
-			_player = new AdvancedPlayer(in, _device);
-		} catch (JavaLayerException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		_player.setPlayBackListener(new PlaybackListener() {
-			@Override
-			public void playbackStarted(PlaybackEvent pevt) {
-				_isPaused = false;
-				System.out.println("Playing started...");
-			}
-
-			@Override
-			public void playbackFinished(PlaybackEvent pevt) {
-				_isPaused = true;
-				System.out.println("Playback stopped...");
-			}
-
-		});
+		// try {
+		// _player = new AdvancedPlayer(in, _device);
+		// } catch (JavaLayerException e1) {
+		// // TODO Auto-generated catch block
+		// e1.printStackTrace();
+		// }
+		// _player.setPlayBackListener(new PlaybackListener() {
+		// @Override
+		// public void playbackStarted(PlaybackEvent pevt) {
+		// System.out.println("Playing started...");
+		// }
+		//
+		// @Override
+		// public void playbackFinished(PlaybackEvent pevt) {
+		// System.out.println("Playback stopped...");
+		// }
+		//
+		// });
 		try {
 			MP3File tagFile = new MP3File(getURL());
 			if (tagFile.hasID3v2Tag())
