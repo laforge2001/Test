@@ -2,7 +2,7 @@ package org.jamp.model.api;
 
 public interface IMediaAPI {
 
-	public void init(String location);
+	public void init();
 
 	public void setURL(String location);
 

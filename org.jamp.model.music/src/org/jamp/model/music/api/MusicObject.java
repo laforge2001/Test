@@ -14,7 +14,7 @@ public class MusicObject extends MediaObject {
 	public MusicObject(String location, IMusicAPI api) {
 		_musicAPI = api;
 		_musicAPI.setURL(location);
-		_musicAPI.init(location);
+		_musicAPI.init();
 		title = getAPI().getSongTitle();
 		artist = getAPI().getArtist();
 		album = getAPI().getAlbum();

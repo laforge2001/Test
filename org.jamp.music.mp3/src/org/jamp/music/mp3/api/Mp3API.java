@@ -23,7 +23,7 @@ public class Mp3API implements IMusicAPI, Runnable {
 	private AdvancedPlayer _player;
 	private AudioDevice _device;
 	private AbstractID3 _mp3Info;
-	protected boolean _isStopped = true;
+	protected boolean _isPaused = false;
 	protected String _fileLocation;
 	protected PlaybackEvent _playEvent;
 	protected Bitstream _bitStream;
@@ -41,7 +41,7 @@ public class Mp3API implements IMusicAPI, Runnable {
 
 	private void stopPlayerThread() {
 		if (_player != null) {
-			_player.close();
+			_player.stop();
 			_player = null;
 			_playMeThread = null;
 		}
@@ -50,40 +50,44 @@ public class Mp3API implements IMusicAPI, Runnable {
 	@Override
 	public void play() {
 		stopPlayerThread();
-		try {
-			_player = new AdvancedPlayer(getInputStream(getURL()), _device);
 
-			_player.setPlayBackListener(new PlaybackListener() {
-				@Override
-				public void playbackStarted(PlaybackEvent pevt) {
-					_isStopped = false;
-					System.out.println("Playing started...");
-				}
+		BufferedInputStream in = getInputStream(getURL());
+		if (in != null && _device != null) {
+			try {
+				_player = new AdvancedPlayer(in, _device);
 
-				@Override
-				public void playbackFinished(PlaybackEvent pevt) {
-					_isStopped = true;
-					System.out.println("Playback stopped...");
-				}
+				_player.setPlayBackListener(new PlaybackListener() {
+					@Override
+					public void playbackStarted(PlaybackEvent pevt) {
+						System.out.println("Playing started...");
+					}
 
-			});
+					@Override
+					public void playbackFinished(PlaybackEvent pevt) {
+						System.out.println("Playback stopped...");
+					}
 
-			_playMeThread = createPlayerThread();
-			_playMeThread.start();
-		} catch (JavaLayerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				});
+
+				_playMeThread = createPlayerThread();
+				_playMeThread.start();
+			} catch (JavaLayerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public void pause() {
 		if (_player != null) {
-			if (!_isStopped) {
+			if (!_isPaused) {
+				System.out.println("Playback paused...");
 				_playMeThread.suspend();
 			} else {
+				System.out.println("Playback resumed...");
 				_playMeThread.resume();
 			}
-			_isStopped = !_isStopped;
+			_isPaused = !_isPaused;
 		}
 	}
 
@@ -101,9 +105,9 @@ public class Mp3API implements IMusicAPI, Runnable {
 		return null;
 	}
 
-	public void init(String fileLocation) {
-		_fileLocation = fileLocation;
-		BufferedInputStream in = getInputStream(fileLocation);
+	public void init() {
+		_fileLocation = getURL();
+		BufferedInputStream in = getInputStream(getURL());
 		FactoryRegistry f = FactoryRegistry.systemRegistry();
 		try {
 			_device = f.createAudioDevice();
@@ -119,19 +123,19 @@ public class Mp3API implements IMusicAPI, Runnable {
 		_player.setPlayBackListener(new PlaybackListener() {
 			@Override
 			public void playbackStarted(PlaybackEvent pevt) {
-				_isStopped = false;
+				_isPaused = false;
 				System.out.println("Playing started...");
 			}
 
 			@Override
 			public void playbackFinished(PlaybackEvent pevt) {
-				_isStopped = true;
+				_isPaused = true;
 				System.out.println("Playback stopped...");
 			}
 
 		});
 		try {
-			MP3File tagFile = new MP3File(fileLocation);
+			MP3File tagFile = new MP3File(getURL());
 			if (tagFile.hasID3v2Tag())
 				_mp3Info = tagFile.getID3v2Tag();
 			else
@@ -179,11 +183,6 @@ public class Mp3API implements IMusicAPI, Runnable {
 			_player.close();
 		}
 
-	}
-
-	public boolean play(int frames) {
-		play();
-		return true;
 	}
 
 	@Override
