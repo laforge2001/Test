@@ -17,7 +17,6 @@ import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.part.ViewPart;
 import org.jamp.model.LibraryParent;
-import org.jamp.model.MusicLibraryNode;
 import org.jamp.model.NodeObject;
 import org.jamp.model.music.Album;
 import org.jamp.model.music.Artist;
@@ -78,7 +77,7 @@ public class LibraryView extends ViewPart {
 				Object obj = ((IStructuredSelection) selection)
 						.getFirstElement();
 
-				if (obj instanceof MusicLibraryNode) {
+				if (obj instanceof NodeObject) {
 					NodeObject node = (NodeObject) obj;
 					MediaListEditorInput input = new MediaListEditorInput(node
 							.getName());
