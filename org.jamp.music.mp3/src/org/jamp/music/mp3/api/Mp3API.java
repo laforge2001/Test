@@ -13,16 +13,18 @@ import javazoom.jl.player.advanced.AdvancedPlayer;
 import javazoom.jl.player.advanced.PlaybackEvent;
 import javazoom.jl.player.advanced.PlaybackListener;
 
-import org.farng.mp3.MP3File;
-import org.farng.mp3.TagException;
-import org.farng.mp3.id3.AbstractID3;
 import org.jamp.model.music.api.IMusicAPI;
+import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
+import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
+import org.jaudiotagger.audio.mp3.MP3File;
+import org.jaudiotagger.tag.Tag;
+import org.jaudiotagger.tag.TagException;
 
 public class Mp3API implements IMusicAPI, Runnable {
 
 	private AdvancedPlayer _player;
 	private AudioDevice _device;
-	private AbstractID3 _mp3Info;
+	private Tag _mp3Info;
 	protected boolean _isPaused = false;
 	protected String _fileLocation;
 	protected PlaybackEvent _playEvent;
@@ -43,59 +45,75 @@ public class Mp3API implements IMusicAPI, Runnable {
 		if (_player != null) {
 			_player.stop();
 			_player = null;
+			if (_isPaused) {
+				_playMeThread.resume();
+			}
 			_playMeThread = null;
+			_isPaused = false;
 		}
 		notify();
 	}
 
 	@Override
-	public void play() {
-		stopPlayerThread();
+	public synchronized void play() {
+		if (_isPaused) {
+			_playMeThread.resume();
+			_isPaused = !_isPaused;
+		} else {
+			stopPlayerThread();
 
-		BufferedInputStream in = getInputStream(getURL());
-		if (in != null && _device != null) {
-			try {
-				init();
-				_player = new AdvancedPlayer(in, _device);
-
-				_player.setPlayBackListener(new PlaybackListener() {
-					@Override
-					public void playbackStarted(PlaybackEvent pevt) {
-						System.out.println("Playing " + getURL()
-								+ " started...");
-					}
-
-					@Override
-					public void playbackFinished(PlaybackEvent pevt) {
-						System.out.println("Playback stopped...");
-					}
-
-				});
-
+			BufferedInputStream in = getInputStream(getURL());
+			if (in != null && _device != null) {
 				try {
-					MP3File tagFile = new MP3File(getURL());
-					if (tagFile.hasID3v2Tag())
-						_mp3Info = tagFile.getID3v2Tag();
-					else
-						_mp3Info = tagFile.getID3v1Tag();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (TagException e) {
+					init();
+					_player = new AdvancedPlayer(in, _device);
+
+					_player.setPlayBackListener(new PlaybackListener() {
+						@Override
+						public void playbackStarted(PlaybackEvent pevt) {
+							System.out.println("Playing " + getURL()
+									+ " started...");
+						}
+
+						@Override
+						public void playbackFinished(PlaybackEvent pevt) {
+							System.out.println("Playback stopped...");
+						}
+
+					});
+
+					MP3File tagFile;
+					try {
+						tagFile = new MP3File(getURL());
+						if (tagFile.hasID3v2Tag())
+							_mp3Info = tagFile.getID3v2Tag();
+						else
+							_mp3Info = tagFile.getID3v1Tag();
+					} catch (ReadOnlyFileException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (InvalidAudioFrameException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (TagException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					_playMeThread = createPlayerThread();
+					_playMeThread.start();
+				} catch (JavaLayerException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
-				_playMeThread = createPlayerThread();
-				_playMeThread.start();
-			} catch (JavaLayerException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
 	}
 
-	public void pause() {
+	public synchronized void pause() {
 		if (_player != null) {
 			if (!_isPaused) {
 				System.out.println("Playback paused...");
@@ -108,7 +126,7 @@ public class Mp3API implements IMusicAPI, Runnable {
 		}
 	}
 
-	public void stop() {
+	public synchronized void stop() {
 		stopPlayerThread();
 	}
 
@@ -144,33 +162,39 @@ public class Mp3API implements IMusicAPI, Runnable {
 		} catch (TagException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ReadOnlyFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidAudioFrameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
 	public String getSongTitle() {
-		return _mp3Info.getSongTitle();
+		return _mp3Info.getFirstTitle();
 	}
 
 	@Override
 	public String getAlbum() {
-		return _mp3Info.getAlbumTitle();
+		return _mp3Info.getFirstAlbum();
 	}
 
 	@Override
 	public String getArtist() {
-		return _mp3Info.getLeadArtist();
+		return _mp3Info.getFirstArtist();
 	}
 
 	@Override
 	public Integer getSongLength() {
-		return _mp3Info.getSize();
+		return 0; // TODO: implement me
 	}
 
 	@Override
 	public Integer getYear() {
-		String year = _mp3Info.getYearReleased();
+		String year = _mp3Info.getFirstYear();
 		if (year != "")
-			return Integer.valueOf(_mp3Info.getYearReleased());
+			return Integer.valueOf(year);
 		else
 			return 9999;
 	}
