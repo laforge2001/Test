@@ -86,10 +86,12 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor
 			public void handleEvent(Event event) {
 				Menu menu = new Menu(window.getShell(), SWT.POP_UP);
 
-				// Creates a new menu item that terminates the program
+				// Creates a new menu item that plays media
 				// when selected
 				MenuItem play = new MenuItem(menu, SWT.NONE);
 				play.setText("Play");
+				play.setImage(AbstractUIPlugin.imageDescriptorFromPlugin(
+						"org.jamp.ui", IImageKeys.ONLINE).createImage());
 				play.addListener(SWT.Selection, new Listener() {
 					public void handleEvent(Event event) {
 						// Lets call our command
@@ -102,9 +104,65 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor
 						}
 					}
 				});
+
+				MenuItem pause = new MenuItem(menu, SWT.NONE);
+				pause.setText("Pause");
+				pause.setImage(AbstractUIPlugin.imageDescriptorFromPlugin(
+						"org.jamp.ui", IImageKeys.ONLINE).createImage());
+				pause.addListener(SWT.Selection, new Listener() {
+					public void handleEvent(Event event) {
+						// Lets call our command
+						IHandlerService handlerService = (IHandlerService) window
+								.getService(IHandlerService.class);
+						try {
+							handlerService
+									.executeCommand("pause.command", null);
+						} catch (Exception ex) {
+							throw new RuntimeException(
+									"pause.command not found");
+						}
+					}
+				});
+
+				MenuItem stop = new MenuItem(menu, SWT.NONE);
+				stop.setText("Stop");
+				stop.setImage(AbstractUIPlugin.imageDescriptorFromPlugin(
+						"org.jamp.ui", IImageKeys.ONLINE).createImage());
+				stop.addListener(SWT.Selection, new Listener() {
+					public void handleEvent(Event event) {
+						// Lets call our command
+						IHandlerService handlerService = (IHandlerService) window
+								.getService(IHandlerService.class);
+						try {
+							handlerService.executeCommand("stop.command", null);
+						} catch (Exception ex) {
+							throw new RuntimeException("stop.command not found");
+						}
+					}
+				});
+
+				MenuItem exit = new MenuItem(menu, SWT.NONE);
+				exit.setText("Exit");
+				exit.setImage(AbstractUIPlugin.imageDescriptorFromPlugin(
+						"org.jamp.ui", IImageKeys.ONLINE).createImage());
+				exit.addListener(SWT.Selection, new Listener() {
+					public void handleEvent(Event event) {
+						// Lets call our command
+						IHandlerService handlerService = (IHandlerService) window
+								.getService(IHandlerService.class);
+						try {
+							handlerService.executeCommand(
+									"org.eclipse.ui.file.exit", null);
+						} catch (Exception ex) {
+							throw new RuntimeException(
+									"org.eclipse.ui.file.exit not found");
+						}
+					}
+				});
+
 				// We need to make the menu visible
 				menu.setVisible(true);
-				menu.setEnabled(false);
+
 			}
 		});
 	}

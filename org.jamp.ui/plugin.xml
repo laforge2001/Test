@@ -32,23 +32,23 @@
       </product>
    </extension>
    <extension
-         point="org.eclipse.ui.commands">
-      <command
-            defaultHandler="org.jamp.ui.commandhandler.ViewCommandHandler"
-            id="viewlist.command"
-            name="View">
-      </command>
-   </extension>
-   <extension
          point="org.eclipse.ui.menus">
       <menuContribution
             locationURI="menu:org.eclipse.ui.main.menu">
          <menu
-               id="TheViewMenu"
-               label="View">
+               id="fileMenu"
+               label="File">
             <command
-                  commandId="viewlist.command"
-                  label="List Views"
+                  commandId="org.eclipse.ui.help.aboutAction"
+                  hoverIcon="icons/alt_window_16.gif"
+                  icon="icons/alt_window_16.gif"
+                  label="About"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.eclipse.ui.file.exit"
+                  icon="icons/alt_window_16.gif"
+                  label="Exit"
                   style="push">
             </command>
          </menu>
