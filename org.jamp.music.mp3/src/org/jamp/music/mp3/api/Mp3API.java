@@ -142,7 +142,6 @@ public class Mp3API implements IMusicAPI, Runnable {
 
 	public void init() {
 		_fileLocation = getURL();
-		BufferedInputStream in = getInputStream(getURL());
 		FactoryRegistry f = FactoryRegistry.systemRegistry();
 		try {
 			_device = f.createAudioDevice();
@@ -228,5 +227,15 @@ public class Mp3API implements IMusicAPI, Runnable {
 			}
 		}
 
+	}
+
+	@Override
+	public boolean isPaused() {
+		return _isPaused;
+	}
+
+	@Override
+	public boolean isPlaying() {
+		return (_playMeThread != null);
 	}
 }

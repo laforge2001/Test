@@ -86,4 +86,14 @@ public class MusicObject extends MediaObject {
 		_musicAPI.pause();
 	}
 
+	@Override
+	public boolean isPaused() {
+		return _musicAPI.isPaused();
+	}
+
+	@Override
+	public boolean isPlaying() {
+		return _musicAPI.isPlaying();
+	}
+
 }

@@ -19,4 +19,8 @@ public abstract class MediaObject {
 
 	public abstract void pause();
 
+	public abstract boolean isPaused();
+
+	public abstract boolean isPlaying();
+
 }

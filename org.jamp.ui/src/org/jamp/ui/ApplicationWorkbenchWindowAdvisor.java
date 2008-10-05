@@ -1,6 +1,5 @@
 package org.jamp.ui;
 
-import org.eclipse.jface.action.MenuManager;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ShellAdapter;
 import org.eclipse.swt.events.ShellEvent;
@@ -9,6 +8,7 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tray;
 import org.eclipse.swt.widgets.TrayItem;
@@ -17,6 +17,7 @@ import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchWindowAdvisor;
+import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor
@@ -82,16 +83,30 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor
 	private void hookPopupMenu(final IWorkbenchWindow window) {
 		_trayItem.addListener(SWT.MenuDetect, new Listener() {
 
-			@Override
 			public void handleEvent(Event event) {
-				MenuManager trayMenu = new MenuManager();
-				Menu menu = trayMenu.createContextMenu(window.getShell());
-				_actionBarAdvisor.fillTrayItem(trayMenu);
+				Menu menu = new Menu(window.getShell(), SWT.POP_UP);
+
+				// Creates a new menu item that terminates the program
+				// when selected
+				MenuItem play = new MenuItem(menu, SWT.NONE);
+				play.setText("Play");
+				play.addListener(SWT.Selection, new Listener() {
+					public void handleEvent(Event event) {
+						// Lets call our command
+						IHandlerService handlerService = (IHandlerService) window
+								.getService(IHandlerService.class);
+						try {
+							handlerService.executeCommand("play.command", null);
+						} catch (Exception ex) {
+							throw new RuntimeException("play.command not found");
+						}
+					}
+				});
+				// We need to make the menu visible
 				menu.setVisible(true);
+				menu.setEnabled(false);
 			}
-
 		});
-
 	}
 
 	private TrayItem initTaskItem(IWorkbenchWindow window) {

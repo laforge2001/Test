@@ -1,8 +1,8 @@
 package org.jamp.ui.library.views;
 
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
@@ -10,17 +10,16 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.part.ViewPart;
-import org.jamp.model.MediaObject;
+import org.jamp.ui.library.command.JampPauseCommand;
+import org.jamp.ui.library.command.JampPlayCommand;
+import org.jamp.ui.library.command.JampStopCommand;
 import org.jamp.ui.library.editor.MediaListEditor;
 
 public class PlayerView extends ViewPart implements ISelectionListener {
 
 	public static final String ID = "org.jamp.ui.library.views.PlayerView";
-
-	private MediaObject _playMe;
-
-	// private volatile Thread _currentlyPlaying = null;
 
 	public PlayerView() {
 		// TODO Auto-generated constructor stub
@@ -35,35 +34,30 @@ public class PlayerView extends ViewPart implements ISelectionListener {
 		playButton.setText("Play");
 
 		getSite().getPage().addSelectionListener(MediaListEditor.ID, this);
-		playButton.addSelectionListener(new SelectionListener() {
+		playButton.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				IHandlerService handlerService = (IHandlerService) getSite()
+						.getService(IHandlerService.class);
+				try {
+					handlerService.executeCommand(JampPlayCommand.ID, null);
+				} catch (Exception ex) {
+					throw new RuntimeException(JampPlayCommand.ID
+							+ " not found");
+				}
+			}
 
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-
-				try {
-					if (_playMe != null) {
-						_playMe.play();
-					}
-
-				} catch (Exception ex) {
-
-					throw new RuntimeException("Error playing file");
-
-				}
-
 			}
 
 		});
 
 		Button pauseButton = new Button(parent, SWT.PUSH);
 		pauseButton.setText("Pause");
-		pauseButton.addSelectionListener(new SelectionListener() {
+		pauseButton.addSelectionListener(new SelectionAdapter() {
 
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
@@ -73,12 +67,15 @@ public class PlayerView extends ViewPart implements ISelectionListener {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				if (_playMe != null) {
-					_playMe.pause();
-					// _currentlyPlaying = null;
+				IHandlerService handlerService = (IHandlerService) getSite()
+						.getService(IHandlerService.class);
+				try {
+					handlerService.executeCommand(JampPauseCommand.ID, null);
+				} catch (Exception ex) {
+					throw new RuntimeException(JampPauseCommand.ID
+							+ " not found");
 				}
 			}
-
 		});
 
 		Button stopButton = new Button(parent, SWT.PUSH);
@@ -93,9 +90,13 @@ public class PlayerView extends ViewPart implements ISelectionListener {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				if (_playMe != null) {
-					_playMe.stop();
-					// _currentlyPlaying = null;
+				IHandlerService handlerService = (IHandlerService) getSite()
+						.getService(IHandlerService.class);
+				try {
+					handlerService.executeCommand(JampStopCommand.ID, null);
+				} catch (Exception ex) {
+					throw new RuntimeException(JampStopCommand.ID
+							+ " not found");
 				}
 			}
 
@@ -111,11 +112,12 @@ public class PlayerView extends ViewPart implements ISelectionListener {
 
 	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-		if (selection instanceof IStructuredSelection) {
-			MediaObject newPerson = (MediaObject) ((IStructuredSelection) selection)
-					.getFirstElement();
-			_playMe = newPerson;
-		}
+		// if (selection instanceof IStructuredSelection) {
+		// MediaObject newPerson = (MediaObject) ((IStructuredSelection)
+		// selection)
+		// .getFirstElement();
+		// _playMe = newPerson;
+		// }
 	}
 
 }

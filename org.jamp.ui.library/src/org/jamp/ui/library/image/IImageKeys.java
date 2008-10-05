@@ -1,4 +1,4 @@
-package org.jamp.ui.library.views;
+package org.jamp.ui.library.image;
 
 public interface IImageKeys {
 

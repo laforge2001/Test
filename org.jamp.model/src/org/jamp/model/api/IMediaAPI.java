@@ -16,4 +16,8 @@ public interface IMediaAPI {
 
 	public void dispose();
 
+	public boolean isPlaying();
+
+	public boolean isPaused();
+
 }
