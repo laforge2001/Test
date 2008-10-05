@@ -21,11 +21,13 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 	// in the fill methods. This ensures that the actions aren't recreated
 	// when fillActionBars is called with FILL_PROXY.
 	private IWorkbenchAction exitAction;
+	private IWorkbenchAction aboutAction;
 
 	public ApplicationActionBarAdvisor(IActionBarConfigurer configurer) {
 		super(configurer);
 	}
 
+	@Override
 	protected void makeActions(final IWorkbenchWindow window) {
 		// Creates the actions and registers them.
 		// Registering is needed to ensure that key bindings work.
@@ -36,13 +38,22 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 
 		exitAction = ActionFactory.QUIT.create(window);
 		register(exitAction);
+
+		aboutAction = ActionFactory.ABOUT.create(window);
+		register(aboutAction);
 	}
 
+	@Override
 	protected void fillMenuBar(IMenuManager menuBar) {
 		MenuManager fileMenu = new MenuManager("&File",
 				IWorkbenchActionConstants.M_FILE);
 		menuBar.add(fileMenu);
 		fileMenu.add(exitAction);
+	}
+
+	protected void fillTrayItem(MenuManager trayMenu) {
+		trayMenu.add(aboutAction);
+		trayMenu.add(exitAction);
 	}
 
 }
