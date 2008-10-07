@@ -41,7 +41,6 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            defaultHandler="org.jamp.ui.library.command.JampPlayCommand"
             id="play.command"
             name="Play">
       </command>
@@ -62,10 +61,9 @@
             locationURI="menu:org.eclipse.ui.main.menu">
       </menuContribution>
       <menuContribution
-            locationURI="toolbar:org.jamp.ui.library.editor.MediaList">
+            locationURI="toolbar:org.jamp.ui.library.views.LibraryView">
          <command
                commandId="play.command"
-               icon="icons/sample.gif"
                label="Play"
                style="push">
          </command>
@@ -78,6 +76,42 @@
             hoverIcon="icons/sample.gif"
             icon="icons/sample.gif">
       </image>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.definitions">
+      <definition
+            id="isMediaObject">
+         <with
+               variable="selection">
+            <instanceof
+                  value="org.eclipse.jface.viewers.IStructuredSelection">
+            </instanceof>
+            <adapt
+                  type="org.jamp.ui.library.Object1">
+            </adapt>
+         </with>
+      </definition>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.jamp.ui.library.command.JampPlayCommand"
+            commandId="play.command">
+         <enabledWhen>
+            <reference
+                  definitionId="isMediaObject">
+            </reference>
+         </enabledWhen>
+         <activeWhen>
+            <iterate
+                  ifEmpty="false"
+                  operator="and">
+               <test
+                     property="org.jamp.ui.library.test1">
+               </test>
+            </iterate>
+         </activeWhen>
+      </handler>
    </extension>
 
 </plugin>
