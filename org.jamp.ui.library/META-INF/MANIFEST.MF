@@ -7,15 +7,14 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
  org.jamp.model;bundle-version="1.0.0",
  org.jamp.model.music;bundle-version="1.0.0",
- org.jamp.music.mp3;bundle-version="1.0.0",
- org.eclipse.core.expressions;bundle-version="3.4.0"
+ org.jamp.music.mp3;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.jamp.ui.library.action;
   uses:="org.eclipse.jface.action,
    org.eclipse.ui,
    org.eclipse.ui.actions,
    org.eclipse.jface.viewers",
- org.jamp.ui.library.command;uses:="org.eclipse.core.commands",
+ org.jamp.ui.library.command;uses:="org.eclipse.jface.action,org.eclipse.core.commands",
  org.jamp.ui.library.editor;
   uses:="org.eclipse.core.runtime,
    org.eclipse.jface.resource,

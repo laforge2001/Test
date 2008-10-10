@@ -20,6 +20,19 @@
          id="org.eclipse.rcp"
          version="0.0.0"/>
 
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.jamp.ui.library" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.jamp.model" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.jamp.model.music" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.jamp.music.mp3" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.expressions" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.forms" version="3.3.100" match="greaterOrEqual"/>
+      <import plugin="net.javazoom.jl" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="net.java.dev.jaudiotagger" version="1.0.0" match="greaterOrEqual"/>
+   </requires>
+
    <plugin
          id="org.jamp.ui"
          download-size="0"
