@@ -54,5 +54,19 @@
          </menu>
       </menuContribution>
    </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.jamp.ui.preferences.SamplePreferencePage2"
+            id="org.jamp.ui.preferences.SamplePreferencePage2"
+            name="Sample Preferences">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.jamp.ui.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
 
 </plugin>
