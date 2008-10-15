@@ -1,6 +1,8 @@
 package org.jamp.model.library;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
@@ -10,6 +12,8 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 
 	private final IPreferencesService _prefService = Platform
 			.getPreferencesService();
+
+	private final List<String> _locations = new ArrayList<String>();
 	/**
 	 * 
 	 */
@@ -53,8 +57,11 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 
 	@Override
 	public void updateLibrary() {
+		_locations.add(_prefService.get("libraryPaths", "test", null));
+		for (String s : _locations) {
+			System.out.println(s);
+		}
 		// TODO Auto-generated method stub
 
 	}
-
 }
