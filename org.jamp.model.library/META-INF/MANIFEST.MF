@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Library Plug-in
+Bundle-SymbolicName: org.jamp.model.library
+Bundle-Version: 1.0.0
+Bundle-Activator: org.jamp.model.library.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.jamp.model;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
