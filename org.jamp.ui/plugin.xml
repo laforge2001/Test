@@ -52,14 +52,23 @@
                   style="push">
             </command>
          </menu>
+         <menu
+               id="editMenu"
+               label="Edit">
+            <command
+                  commandId="org.eclipse.ui.window.preferences"
+                  label="Preferences"
+                  style="push">
+            </command>
+         </menu>
       </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            class="org.jamp.ui.preferences.SamplePreferencePage2"
+            class="org.jamp.ui.preferences.LibraryPreferencePage"
             id="org.jamp.ui.preferences.SamplePreferencePage2"
-            name="Sample Preferences">
+            name="Library">
       </page>
    </extension>
    <extension
