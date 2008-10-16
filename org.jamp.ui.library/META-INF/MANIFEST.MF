@@ -27,3 +27,5 @@ Export-Package: org.jamp.ui.library.action;
    org.eclipse.swt.widgets",
  org.jamp.ui.library.image,
  org.jamp.ui.library.views;uses:="org.eclipse.core.runtime,org.eclipse.ui.part,org.eclipse.swt.widgets"
+Bundle-Activator: org.jamp.ui.preferences.Activator
+Bundle-ActivationPolicy: lazy

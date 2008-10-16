@@ -59,6 +59,16 @@
          point="org.eclipse.ui.menus">
       <menuContribution
             locationURI="menu:org.eclipse.ui.main.menu">
+         <menu
+               id="editMenu"
+               label="Edit">
+            <command
+                  commandId="org.eclipse.ui.window.preferences"
+                  id="preferences.command"
+                  label="Preferences"
+                  style="push">
+            </command>
+         </menu>
       </menuContribution>
       <menuContribution
             locationURI="toolbar:org.eclipse.ui.main.toolbar">
@@ -108,6 +118,20 @@
             </reference>
          </activeWhen>
       </handler>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.jamp.ui.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.jamp.ui.preferences.LibraryPreferencePage"
+            id="org.jamp.ui.library.page3"
+            name="Library">
+      </page>
    </extension>
 
 </plugin>

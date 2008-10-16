@@ -2,6 +2,7 @@ package org.jamp.ui.preferences;
 
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.PathEditor;
+import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
@@ -19,6 +20,8 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 public class LibraryPreferencePage extends FieldEditorPreferencePage implements
 		IWorkbenchPreferencePage {
 
+	public static final String ID = "org.jamp.ui.preferences.LibraryPreferencePage";
+
 	public LibraryPreferencePage() {
 		super(GRID);
 		setPreferenceStore(Activator.getDefault().getPreferenceStore());
@@ -35,6 +38,8 @@ public class LibraryPreferencePage extends FieldEditorPreferencePage implements
 		addField(new PathEditor(PreferenceConstants.P_PATHS,
 				"&Directory preference:", "Select Folders to Add to Library",
 				getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceConstants.P_STRING,
+				"A &text preference:", getFieldEditorParent()));
 	}
 
 	/*
