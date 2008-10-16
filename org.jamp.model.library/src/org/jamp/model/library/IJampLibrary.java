@@ -28,4 +28,6 @@ public interface IJampLibrary {
 	// for media objects
 	public void updateLibrary();
 
+	public void updateLibrary(String paths);
+
 }

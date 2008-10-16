@@ -46,4 +46,10 @@ public class JampApacheBasedLibrary implements IJampLibrary {
 
 	}
 
+	@Override
+	public void updateLibrary(String paths) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

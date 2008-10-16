@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -57,22 +55,17 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 
 	private final IJampLibrary _library = new JampFileBasedLibrary();
 
-	private final IPreferencesService _service = Platform
-			.getPreferencesService();
-
 	public MediaListEditor() {
 		this.initData();
 		// TODO Auto-generated constructor stub
 	}
 
 	private void initData() {
-		String testme = Activator.getDefault().getPluginPreferences()
-				.getString(PreferenceConstants.P_PATHS);
+		String urls = Activator.getDefault().getPluginPreferences().getString(
+				PreferenceConstants.P_PATHS);
 
-		System.out.println(testme);
-		_library.updateLibrary();
-		// MusicObject testMe = new MusicObject("Viva",
-		// "c:/Users/geordi/Desktop/coldplay.mp3", new Mp3API());
+		_library.updateLibrary(urls);
+
 		// MusicObject testMe = new MusicObject(
 		// "C:/Users/geordi/Music/30 Seconds To Mars/A Beautiful Lie/01 Attack.mp3"
 		// ,

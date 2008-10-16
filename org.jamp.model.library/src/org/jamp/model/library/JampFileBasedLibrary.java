@@ -1,9 +1,13 @@
 package org.jamp.model.library;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.StringTokenizer;
 
+import org.apache.commons.io.FileUtils;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.jamp.model.MediaObject;
@@ -13,11 +17,23 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 	private final IPreferencesService _prefService = Platform
 			.getPreferencesService();
 
-	private final List<String> _locations = new ArrayList<String>();
+	private List<String> _locations = new ArrayList<String>();
+
+	private final Collection<File> _names = new ArrayList<File>();
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5679254328240338749L;
+
+	private List<String> parseString(String stringList) {
+		StringTokenizer st = new StringTokenizer(stringList, File.pathSeparator
+				+ "\n\r");//$NON-NLS-1$
+		ArrayList<String> v = new ArrayList<String>();
+		while (st.hasMoreElements()) {
+			v.add((String) st.nextElement());
+		}
+		return v;
+	}
 
 	@Override
 	public void add(MediaObject addMe) {
@@ -56,11 +72,24 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 	}
 
 	@Override
-	public void updateLibrary() {
-		_locations.add(_prefService.get("stringPreference", "test", null));
+	public void updateLibrary(String paths) {
+		_locations = parseString(paths);
+
 		for (String s : _locations) {
-			System.out.println(s);
+			File test = new File(s);
+			_names.addAll(FileUtils.listFiles(test, new String[] { "zip" },
+					true));
+
 		}
+		for (File file : _names) {
+			System.out.println(file.getAbsolutePath());
+		}
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void updateLibrary() {
 		// TODO Auto-generated method stub
 
 	}
