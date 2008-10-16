@@ -6,5 +6,5 @@ Bundle-Version: 1.0.0
 Bundle-Activator: org.jamp.model.library.Activator
 Require-Bundle: org.eclipse.core.runtime,
  org.jamp.model;bundle-version="1.0.0"
-Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.jamp.model.library

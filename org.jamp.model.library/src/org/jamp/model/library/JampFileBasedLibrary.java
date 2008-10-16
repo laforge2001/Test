@@ -57,7 +57,7 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 
 	@Override
 	public void updateLibrary() {
-		_locations.add(_prefService.get("libraryPaths", "test", null));
+		_locations.add(_prefService.get("stringPreference", "test", null));
 		for (String s : _locations) {
 			System.out.println(s);
 		}

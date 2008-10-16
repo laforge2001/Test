@@ -24,8 +24,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 import org.jamp.model.MediaObject;
 import org.jamp.model.Playlist;
-import org.jamp.model.music.api.MusicObject;
-import org.jamp.music.mp3.api.Mp3API;
+import org.jamp.model.library.IJampLibrary;
+import org.jamp.model.library.JampFileBasedLibrary;
 import org.jamp.ui.library.views.LibraryView;
 
 public class MediaListEditor extends EditorPart implements ISelectionListener {
@@ -51,27 +51,30 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 
 	private Playlist _playList;
 
+	private final IJampLibrary _library = new JampFileBasedLibrary();
+
 	public MediaListEditor() {
 		this.initData();
 		// TODO Auto-generated constructor stub
 	}
 
 	private void initData() {
+		_library.updateLibrary();
 		// MusicObject testMe = new MusicObject("Viva",
 		// "c:/Users/geordi/Desktop/coldplay.mp3", new Mp3API());
 		// MusicObject testMe = new MusicObject(
 		// "C:/Users/geordi/Music/30 Seconds To Mars/A Beautiful Lie/01 Attack.mp3"
 		// ,
 		// new Mp3API());
-		MusicObject testMe = new MusicObject(
-				"/home/georde/jamp/org.jamp.music.mp3/testfile/test.mp3",
-				new Mp3API());
+		// MusicObject testMe = new MusicObject(
+		// "/home/georde/jamp/org.jamp.music.mp3/testfile/test.mp3",
+		// new Mp3API());
 		// MusicObject testMe = new MusicObject(
 		// "C:/Documents and Settings/georde/jamp/org.jamp.music.mp3/testfile/test.mp3",
 		// new Mp3API());
 
-		testList.add(testMe);
-		_playList = new Playlist("Test", testList);
+		// testList.add(testMe);
+		// _playList = new Playlist("Test", testList);
 		// TODO Auto-generated method stub
 
 	}
