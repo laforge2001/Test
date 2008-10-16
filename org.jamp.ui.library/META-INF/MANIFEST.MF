@@ -7,7 +7,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
  org.jamp.model;bundle-version="1.0.0",
  org.jamp.model.music;bundle-version="1.0.0",
- org.jamp.music.mp3;bundle-version="1.0.0",
  org.jamp.model.library;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.jamp.ui.library.action;
@@ -27,6 +26,13 @@ Export-Package: org.jamp.ui.library.action;
    org.eclipse.ui.part,
    org.eclipse.swt.widgets",
  org.jamp.ui.library.image,
- org.jamp.ui.library.views;uses:="org.eclipse.core.runtime,org.eclipse.ui.part,org.eclipse.swt.widgets"
+ org.jamp.ui.library.views;uses:="org.eclipse.core.runtime,org.eclipse.ui.part,org.eclipse.swt.widgets",
+ org.jamp.ui.preferences;
+  uses:="org.eclipse.jface.preference,
+   org.eclipse.jface.resource,
+   org.eclipse.ui,
+   org.eclipse.ui.plugin,
+   org.osgi.framework,
+   org.eclipse.core.runtime.preferences"
 Bundle-Activator: org.jamp.ui.preferences.Activator
 Bundle-ActivationPolicy: lazy
