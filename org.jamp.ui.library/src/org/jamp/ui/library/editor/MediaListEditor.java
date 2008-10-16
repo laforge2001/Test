@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -27,6 +29,8 @@ import org.jamp.model.Playlist;
 import org.jamp.model.library.IJampLibrary;
 import org.jamp.model.library.JampFileBasedLibrary;
 import org.jamp.ui.library.views.LibraryView;
+import org.jamp.ui.preferences.Activator;
+import org.jamp.ui.preferences.PreferenceConstants;
 
 public class MediaListEditor extends EditorPart implements ISelectionListener {
 
@@ -53,12 +57,19 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 
 	private final IJampLibrary _library = new JampFileBasedLibrary();
 
+	private final IPreferencesService _service = Platform
+			.getPreferencesService();
+
 	public MediaListEditor() {
 		this.initData();
 		// TODO Auto-generated constructor stub
 	}
 
 	private void initData() {
+		String testme = Activator.getDefault().getPluginPreferences()
+				.getString(PreferenceConstants.P_PATHS);
+
+		System.out.println(testme);
 		_library.updateLibrary();
 		// MusicObject testMe = new MusicObject("Viva",
 		// "c:/Users/geordi/Desktop/coldplay.mp3", new Mp3API());
@@ -70,7 +81,8 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 		// "/home/georde/jamp/org.jamp.music.mp3/testfile/test.mp3",
 		// new Mp3API());
 		// MusicObject testMe = new MusicObject(
-		// "C:/Documents and Settings/georde/jamp/org.jamp.music.mp3/testfile/test.mp3",
+		// "C:/Documents and Settings/georde/jamp/org.jamp.music.mp3/testfile/test.mp3"
+		// ,
 		// new Mp3API());
 
 		// testList.add(testMe);

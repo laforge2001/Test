@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Library Plug-in
-Bundle-SymbolicName: org.jamp.ui.library; singleton:=true
+Bundle-SymbolicName: org.jamp.ui.library;singleton:=true
 Bundle-Version: 1.0.0
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
