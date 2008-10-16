@@ -14,4 +14,3 @@ Export-Package: org.jamp.ui;
    org.eclipse.equinox.app",
  org.jamp.ui.commandhandler;uses:="org.eclipse.core.commands"
 Bundle-ActivationPolicy: lazy
-Bundle-Activator: org.jamp.ui.preferences.Activator
