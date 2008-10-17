@@ -112,11 +112,11 @@
       <handler
             class="org.jamp.ui.library.command.JampPlayCommand"
             commandId="play.command">
-         <activeWhen>
+         <enabledWhen>
             <reference
                   definitionId="isMediaObject">
             </reference>
-         </activeWhen>
+         </enabledWhen>
       </handler>
    </extension>
    <extension
