@@ -1,8 +1,5 @@
 package org.jamp.ui.library.editor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ISelection;
@@ -22,7 +19,6 @@ import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
-import org.jamp.model.MediaObject;
 import org.jamp.model.library.IJampLibrary;
 import org.jamp.model.library.JampFileBasedLibrary;
 import org.jamp.model.library.Playlist;
@@ -49,8 +45,6 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 	private Table _table;
 
 	private TableViewer _tableViewer;
-
-	private final List<MediaObject> testList = new ArrayList<MediaObject>();
 
 	private Playlist _playList;
 
