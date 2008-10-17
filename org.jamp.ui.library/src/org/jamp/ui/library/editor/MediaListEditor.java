@@ -26,6 +26,7 @@ import org.jamp.model.MediaObject;
 import org.jamp.model.library.IJampLibrary;
 import org.jamp.model.library.JampFileBasedLibrary;
 import org.jamp.model.library.Playlist;
+import org.jamp.model.query.JampMediaObjectQuery;
 import org.jamp.ui.library.views.LibraryView;
 import org.jamp.ui.preferences.Activator;
 import org.jamp.ui.preferences.PreferenceConstants;
@@ -66,21 +67,8 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 
 		_library.updateLibrary(urls);
 
-		// MusicObject testMe = new MusicObject(
-		// "C:/Users/geordi/Music/30 Seconds To Mars/A Beautiful Lie/01 Attack.mp3"
-		// ,
-		// new Mp3API());
-		// MusicObject testMe = new MusicObject(
-		// "/home/georde/jamp/org.jamp.music.mp3/testfile/test.mp3",
-		// new Mp3API());
-		// MusicObject testMe = new MusicObject(
-		// "C:/Documents and Settings/georde/jamp/org.jamp.music.mp3/testfile/test.mp3"
-		// ,
-		// new Mp3API());
-
-		// testList.add(testMe);
-		_playList = new Playlist("Test", testList);
-		// TODO Auto-generated method stub
+		JampMediaObjectQuery query = new JampMediaObjectQuery("mp3");
+		_playList = new Playlist("Test", _library.get(query));
 
 	}
 
