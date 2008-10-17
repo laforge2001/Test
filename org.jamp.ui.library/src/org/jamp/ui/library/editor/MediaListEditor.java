@@ -23,9 +23,9 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 import org.jamp.model.MediaObject;
-import org.jamp.model.Playlist;
 import org.jamp.model.library.IJampLibrary;
 import org.jamp.model.library.JampFileBasedLibrary;
+import org.jamp.model.library.Playlist;
 import org.jamp.ui.library.views.LibraryView;
 import org.jamp.ui.preferences.Activator;
 import org.jamp.ui.preferences.PreferenceConstants;
@@ -79,7 +79,7 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 		// new Mp3API());
 
 		// testList.add(testMe);
-		// _playList = new Playlist("Test", testList);
+		_playList = new Playlist("Test", testList);
 		// TODO Auto-generated method stub
 
 	}

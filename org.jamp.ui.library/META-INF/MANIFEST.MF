@@ -21,6 +21,7 @@ Export-Package: org.jamp.ui.library.action;
    org.jamp.model,
    org.eclipse.ui,
    org.eclipse.swt.graphics,
+   org.jamp.model.library,
    org.eclipse.jface.viewers,
    org.jamp.model.viewer,
    org.eclipse.ui.part,

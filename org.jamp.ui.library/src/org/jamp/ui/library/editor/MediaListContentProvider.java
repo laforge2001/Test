@@ -4,7 +4,7 @@ import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.jamp.model.MediaObject;
-import org.jamp.model.Playlist;
+import org.jamp.model.library.Playlist;
 import org.jamp.model.viewer.IPlayListViewer;
 
 public class MediaListContentProvider implements IStructuredContentProvider,

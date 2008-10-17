@@ -1,6 +1,9 @@
 package org.jamp.model.library;
 
+import java.util.List;
+
 import org.jamp.model.MediaObject;
+import org.jamp.model.query.IJampQuery;
 
 public interface IJampLibrary {
 
@@ -15,7 +18,7 @@ public interface IJampLibrary {
 
 	// Retrieve a media object from the library
 	// supplying a query
-	public MediaObject get(IJampQuery query);
+	public List<MediaObject> get(IJampQuery query);
 
 	// Re-sync values between database and any updates
 	// in the file system.

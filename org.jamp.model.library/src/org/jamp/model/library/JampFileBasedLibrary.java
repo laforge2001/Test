@@ -4,15 +4,19 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.Map.Entry;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.jamp.model.MediaObject;
 import org.jamp.model.music.api.MusicObject;
+import org.jamp.model.query.IJampQuery;
 import org.jamp.music.mp3.api.Mp3API;
 
 public class JampFileBasedLibrary implements IJampLibrary, Serializable {
@@ -24,7 +28,8 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 
 	private final Collection<File> _names = new ArrayList<File>();
 
-	private final HashMap<String, MediaObject> _library = new HashMap<String, MediaObject>();
+	private final Map<String, MediaObject> _library = Collections
+			.synchronizedMap(new HashMap<String, MediaObject>());
 
 	private static final long serialVersionUID = -5679254328240338749L;
 
@@ -44,10 +49,22 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public MediaObject get(IJampQuery query) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<MediaObject> get(IJampQuery query) {
+		List<MediaObject> result = new ArrayList<MediaObject>();
+		List<Entry> entries = new ArrayList<Entry>();
+		synchronized (_library) {
+			entries.addAll(_library.entrySet());
+		}
+
+		for (Entry entry : entries) {
+			if (query.isSatisfiedBy(entry.getValue())) {
+				result.add((MediaObject) entry.getValue());
+			}
+		}
+
+		return result;
 	}
 
 	@Override
@@ -74,6 +91,7 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void updateLibrary(String paths) {
 		_locations = parseString(paths);

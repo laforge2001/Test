@@ -1,6 +1,9 @@
 package org.jamp.model.library;
 
+import java.util.List;
+
 import org.jamp.model.MediaObject;
+import org.jamp.model.query.IJampQuery;
 
 public class JampApacheBasedLibrary implements IJampLibrary {
 
@@ -11,7 +14,7 @@ public class JampApacheBasedLibrary implements IJampLibrary {
 	}
 
 	@Override
-	public MediaObject get(IJampQuery query) {
+	public List<MediaObject> get(IJampQuery query) {
 		// TODO Auto-generated method stub
 		return null;
 	}

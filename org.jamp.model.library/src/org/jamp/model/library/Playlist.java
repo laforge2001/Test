@@ -1,4 +1,4 @@
-package org.jamp.model;
+package org.jamp.model.library;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.jamp.model.MediaObject;
 import org.jamp.model.viewer.IPlayListViewer;
 
 public class Playlist implements Serializable {
@@ -19,6 +20,11 @@ public class Playlist implements Serializable {
 	private MediaObject _currentlyPlaying = null;
 	private String _name = new String();
 	private final Set<IPlayListViewer> _changeListeners = new HashSet<IPlayListViewer>();
+
+	public Playlist(String name, IJampLibrary library) {
+		_name = name;
+		// for (Iterator it = library.)
+	}
 
 	public Playlist(String name, List<MediaObject> testList) {
 		_name = name;
