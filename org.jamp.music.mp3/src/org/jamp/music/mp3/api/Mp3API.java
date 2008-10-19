@@ -192,10 +192,15 @@ public class Mp3API implements IMusicAPI, Runnable {
 	@Override
 	public Integer getYear() {
 		String year = _mp3Info.getFirstYear();
-		if (year != "")
-			return Integer.valueOf(year);
-		else
+
+		try {
+			if (year != "")
+				return Integer.valueOf(year);
+			else
+				return 9999;
+		} catch (NumberFormatException e) {
 			return 9999;
+		}
 	}
 
 	@Override

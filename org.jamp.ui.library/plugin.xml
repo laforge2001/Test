@@ -96,12 +96,12 @@
       <definition
             id="isMediaObject">
          <with
-               variable="selection">
+               variable="activateContexts">
             <iterate
                   ifEmpty="false"
                   operator="and">
                <instanceof
-                     value="org.jamp.model.MediaObject">
+                     value="playEnabled.context">
                </instanceof>
             </iterate>
          </with>
@@ -132,6 +132,13 @@
             id="org.jamp.ui.library.page3"
             name="Library">
       </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.contexts">
+      <context
+            id="playEnabled.context"
+            name="playEnabled.context">
+      </context>
    </extension>
 
 </plugin>

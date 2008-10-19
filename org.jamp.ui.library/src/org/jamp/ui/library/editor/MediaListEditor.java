@@ -3,7 +3,9 @@ package org.jamp.ui.library.editor;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
@@ -19,10 +21,12 @@ import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
+import org.jamp.model.MediaObject;
 import org.jamp.model.library.IJampLibrary;
 import org.jamp.model.library.JampFileBasedLibrary;
 import org.jamp.model.library.Playlist;
 import org.jamp.model.query.JampMediaObjectQuery;
+import org.jamp.ui.library.context.JampPlayContextHelper;
 import org.jamp.ui.library.views.LibraryView;
 import org.jamp.ui.preferences.Activator;
 import org.jamp.ui.preferences.PreferenceConstants;
@@ -59,9 +63,10 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 		String urls = Activator.getDefault().getPluginPreferences().getString(
 				PreferenceConstants.P_PATHS);
 
+		JampMediaObjectQuery query = new JampMediaObjectQuery("mp3");
+		// _playList = new Playlist("Test", _library.get(query));
 		_library.updateLibrary(urls);
 
-		JampMediaObjectQuery query = new JampMediaObjectQuery("mp3");
 		_playList = new Playlist("Test", _library.get(query));
 
 	}
@@ -154,6 +159,25 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 				_tableViewer));
 		_tableViewer.setLabelProvider(new MediaListLabelProvider());
 		_tableViewer.setInput(_playList);
+		_tableViewer
+				.addSelectionChangedListener(new ISelectionChangedListener() {
+
+					@Override
+					public void selectionChanged(SelectionChangedEvent event) {
+
+						if (event.getSelection() instanceof IStructuredSelection) {
+							IStructuredSelection playSelection = (IStructuredSelection) event
+									.getSelection();
+							if (playSelection.getFirstElement() instanceof MediaObject) {
+								JampPlayContextHelper.enablePlayCommand();
+							} else {
+								JampPlayContextHelper.disablePlayCommand();
+							}
+						}
+
+					}
+
+				});
 
 	}
 
@@ -205,9 +229,6 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 
 	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-		if (selection instanceof IStructuredSelection) {
-			// NodeObject
-		}
 
 	}
 
