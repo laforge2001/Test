@@ -96,13 +96,13 @@
       <definition
             id="isMediaObject">
          <with
-               variable="activateContexts">
+               variable="activeContexts">
             <iterate
                   ifEmpty="false"
-                  operator="and">
-               <instanceof
+                  operator="or">
+               <equals
                      value="playEnabled.context">
-               </instanceof>
+               </equals>
             </iterate>
          </with>
       </definition>

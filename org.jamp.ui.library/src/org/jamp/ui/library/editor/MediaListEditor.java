@@ -169,8 +169,10 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 							IStructuredSelection playSelection = (IStructuredSelection) event
 									.getSelection();
 							if (playSelection.getFirstElement() instanceof MediaObject) {
+								System.out.println("should be enabled");
 								JampPlayContextHelper.enablePlayCommand();
 							} else {
+								System.out.println("should be disabled");
 								JampPlayContextHelper.disablePlayCommand();
 							}
 						}
