@@ -1,5 +1,7 @@
 package org.jamp.model.library;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -8,9 +10,11 @@ import java.util.List;
 import java.util.Set;
 
 import org.jamp.model.MediaObject;
+import org.jamp.model.query.IJampQuery;
+import org.jamp.model.query.JampMediaObjectQuery;
 import org.jamp.model.viewer.IPlayListViewer;
 
-public class Playlist implements Serializable {
+public class Playlist implements Serializable, PropertyChangeListener {
 
 	/**
 	 * 
@@ -20,6 +24,8 @@ public class Playlist implements Serializable {
 	private MediaObject _currentlyPlaying = null;
 	private String _name = new String();
 	private final Set<IPlayListViewer> _changeListeners = new HashSet<IPlayListViewer>();
+	private IJampLibrary _library;
+	private IJampQuery _query;
 
 	public Playlist(String name, IJampLibrary library) {
 		_name = name;
@@ -36,6 +42,22 @@ public class Playlist implements Serializable {
 	public Playlist(Playlist copyMe) {
 		this(copyMe._name, copyMe._playList);
 
+	}
+
+	public Playlist(String name, IJampLibrary library,
+			JampMediaObjectQuery query) {
+		_name = name;
+		_library = library;
+		_query = query;
+		updatePlaylist();
+	}
+
+	private void updatePlaylist() {
+		List<MediaObject> queryList = _library.get(_query);
+		_playList.clear();
+		for (MediaObject m : queryList) {
+			add(m);
+		}
 	}
 
 	public void add(MediaObject o) {
@@ -114,6 +136,12 @@ public class Playlist implements Serializable {
 
 	public List<MediaObject> getList() {
 		return _playList;
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		updatePlaylist();
+
 	}
 
 }

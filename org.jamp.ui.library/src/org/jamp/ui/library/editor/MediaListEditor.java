@@ -26,8 +26,8 @@ import org.jamp.model.library.IJampLibrary;
 import org.jamp.model.library.JampFileBasedLibrary;
 import org.jamp.model.library.Playlist;
 import org.jamp.model.query.JampMediaObjectQuery;
-import org.jamp.ui.library.context.JampContextManager;
 import org.jamp.ui.library.context.JampContextConstants;
+import org.jamp.ui.library.context.JampContextManager;
 import org.jamp.ui.library.views.LibraryView;
 import org.jamp.ui.preferences.Activator;
 import org.jamp.ui.preferences.PreferenceConstants;
@@ -65,10 +65,9 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 				PreferenceConstants.P_PATHS);
 
 		JampMediaObjectQuery query = new JampMediaObjectQuery("mp3");
-		// _playList = new Playlist("Test", _library.get(query));
+		_playList = new Playlist("Test", _library, query);
+		_library.addChangeListener(_playList);
 		_library.updateLibrary(urls);
-
-		_playList = new Playlist("Test", _library.get(query));
 
 	}
 

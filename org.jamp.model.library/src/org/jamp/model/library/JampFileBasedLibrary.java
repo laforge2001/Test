@@ -1,18 +1,24 @@
 package org.jamp.model.library;
 
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.Map.Entry;
 
 import org.apache.commons.io.FileUtils;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.jamp.model.MediaObject;
 import org.jamp.model.music.api.MusicObject;
@@ -31,7 +37,21 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 	private final Map<String, MediaObject> _library = Collections
 			.synchronizedMap(new HashMap<String, MediaObject>());
 
+	private final List<PropertyChangeListener> _listener = new ArrayList<PropertyChangeListener>();
+
 	private static final long serialVersionUID = -5679254328240338749L;
+
+	private void notifyListeners() {
+		for (Iterator iterator = _listener.iterator(); iterator.hasNext();) {
+			PropertyChangeListener name = (PropertyChangeListener) iterator
+					.next();
+			name.propertyChange(null);
+		}
+	}
+
+	public void addChangeListener(PropertyChangeListener newListener) {
+		_listener.add(newListener);
+	}
 
 	private List<String> parseString(String stringList) {
 		StringTokenizer st = new StringTokenizer(stringList, File.pathSeparator
@@ -93,22 +113,35 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void updateLibrary(String paths) {
-		_locations = parseString(paths);
+	public void updateLibrary(final String paths) {
+		Job job = new Job("My First Job") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				_locations = parseString(paths);
 
-		for (String s : _locations) {
-			File test = new File(s);
-			_names.addAll(FileUtils.listFiles(test, new String[] { "mp3" },
-					true));
+				for (String s : _locations) {
+					File test = new File(s);
+					_names.addAll(FileUtils.listFiles(test,
+							new String[] { "mp3" }, true));
 
-		}
-		for (File file : _names) {
-			MusicObject addMe = new MusicObject(file.getAbsolutePath(),
-					new Mp3API());
-			_library.put(file.getAbsolutePath(), addMe);
-			System.out.println(file.getAbsolutePath());
-		}
-		// TODO Auto-generated method stub
+					if (monitor.isCanceled())
+						return Status.CANCEL_STATUS;
+
+				}
+				for (File file : _names) {
+					MusicObject addMe = new MusicObject(file.getAbsolutePath(),
+							new Mp3API());
+					_library.put(file.getAbsolutePath(), addMe);
+					System.out.println(file.getAbsolutePath());
+					if (monitor.isCanceled())
+						return Status.CANCEL_STATUS;
+				}
+				notifyListeners();
+				return Status.OK_STATUS;
+			}
+		};
+
+		job.schedule();
 
 	}
 

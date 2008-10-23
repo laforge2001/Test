@@ -1,11 +1,14 @@
 package org.jamp.model.library;
 
+import java.beans.PropertyChangeListener;
 import java.util.List;
 
 import org.jamp.model.MediaObject;
 import org.jamp.model.query.IJampQuery;
 
 public interface IJampLibrary {
+
+	public void addChangeListener(PropertyChangeListener newListener);
 
 	// add this object to the library
 	public void add(MediaObject addMe);

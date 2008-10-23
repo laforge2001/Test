@@ -1,5 +1,6 @@
 package org.jamp.model.library;
 
+import java.beans.PropertyChangeListener;
 import java.util.List;
 
 import org.jamp.model.MediaObject;
@@ -51,6 +52,12 @@ public class JampDerbyBasedLibrary implements IJampLibrary {
 
 	@Override
 	public void updateLibrary(String paths) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void addChangeListener(PropertyChangeListener newListener) {
 		// TODO Auto-generated method stub
 
 	}
