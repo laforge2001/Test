@@ -78,6 +78,18 @@
                   id="Play"
                   style="push">
             </command>
+            <command
+                  commandId="pause.command"
+                  icon="icons/sample.gif"
+                  id="Pause"
+                  style="push">
+            </command>
+            <command
+                  commandId="stop.command"
+                  icon="icons/test.GIF"
+                  id="Stop"
+                  style="push">
+            </command>
          </toolbar>
       </menuContribution>
    </extension>
