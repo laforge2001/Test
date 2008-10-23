@@ -1,5 +1,6 @@
 package org.jamp.ui.library.views;
 
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -8,6 +9,7 @@ import org.eclipse.ui.menus.CommandContributionItem;
 import org.eclipse.ui.menus.CommandContributionItemParameter;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.jamp.ui.library.command.JampPauseCommand;
 import org.jamp.ui.library.command.JampPlayCommand;
 import org.jamp.ui.library.command.JampStopCommand;
 import org.jamp.ui.library.image.IImageKeys;
@@ -20,6 +22,18 @@ public class PlayerView extends ViewPart {
 		// TODO Auto-generated constructor stub
 	}
 
+	private ImageDescriptor getImage(String pluginId, String path) {
+		return AbstractUIPlugin.imageDescriptorFromPlugin(pluginId, path);
+	}
+
+	private CommandContributionItemParameter createButton(String commandId,
+			String label, String tooltip) {
+		return new CommandContributionItemParameter(getSite(), "testMe",
+				commandId, null, getImage(IImageKeys.PLUGIN_ID,
+						IImageKeys.BIG_ICON), null, null, label, null, tooltip,
+				CommandContributionItem.STYLE_PUSH, null, true);
+	}
+
 	@Override
 	public void createPartControl(Composite parent) {
 		FillLayout fillLayout = new FillLayout();
@@ -28,19 +42,16 @@ public class PlayerView extends ViewPart {
 
 		ToolBar toolbar = new ToolBar(parent, SWT.HORIZONTAL | SWT.RIGHT);
 
-		CommandContributionItemParameter parms = new CommandContributionItemParameter(
-				getSite(), "testMe", JampPlayCommand.ID, null, AbstractUIPlugin
-						.imageDescriptorFromPlugin(IImageKeys.PLUGIN_ID,
-								IImageKeys.BIG_ICON), null, null, "Play", null,
-				"Play Me", CommandContributionItem.STYLE_PUSH, null, true);
+		CommandContributionItemParameter parms = createButton(
+				JampPlayCommand.ID, "Play", "Play Me");
 		CommandContributionItem cci = new CommandContributionItem(parms);
 		cci.fill(toolbar, 0);
 
-		parms = new CommandContributionItemParameter(getSite(), "testMe",
-				JampStopCommand.ID, null, AbstractUIPlugin
-						.imageDescriptorFromPlugin(IImageKeys.PLUGIN_ID,
-								IImageKeys.BIG_ICON), null, null, "Stop", null,
-				"Stop Me", CommandContributionItem.STYLE_PUSH, null, true);
+		parms = createButton(JampStopCommand.ID, "Stop", "Stop Me");
+		cci = new CommandContributionItem(parms);
+		cci.fill(toolbar, 1);
+
+		parms = createButton(JampPauseCommand.ID, "Pause", "Pause Me");
 		cci = new CommandContributionItem(parms);
 		cci.fill(toolbar, 1);
 
