@@ -9,6 +9,7 @@ import org.eclipse.ui.menus.CommandContributionItemParameter;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.jamp.ui.library.command.JampPlayCommand;
+import org.jamp.ui.library.command.JampStopCommand;
 import org.jamp.ui.library.image.IImageKeys;
 
 public class PlayerView extends ViewPart {
@@ -34,6 +35,14 @@ public class PlayerView extends ViewPart {
 				"Play Me", CommandContributionItem.STYLE_PUSH, null, true);
 		CommandContributionItem cci = new CommandContributionItem(parms);
 		cci.fill(toolbar, 0);
+
+		parms = new CommandContributionItemParameter(getSite(), "testMe",
+				JampStopCommand.ID, null, AbstractUIPlugin
+						.imageDescriptorFromPlugin(IImageKeys.PLUGIN_ID,
+								IImageKeys.BIG_ICON), null, null, "Stop", null,
+				"Stop Me", CommandContributionItem.STYLE_PUSH, null, true);
+		cci = new CommandContributionItem(parms);
+		cci.fill(toolbar, 1);
 
 		// Button playButton = new Button(parent, SWT.PUSH);
 		// playButton.setText("Play");

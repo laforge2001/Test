@@ -50,7 +50,6 @@
             name="Pause">
       </command>
       <command
-            defaultHandler="org.jamp.ui.library.command.JampStopCommand"
             id="stop.command"
             name="Stop">
       </command>
@@ -118,6 +117,15 @@
             </reference>
          </enabledWhen>
       </handler>
+      <handler
+            class="org.jamp.ui.library.command.JampStopCommand"
+            commandId="stop.command">
+         <enabledWhen>
+            <reference
+                  definitionId="isMediaObject">
+            </reference>
+         </enabledWhen>
+      </handler>
    </extension>
    <extension
          point="org.eclipse.core.runtime.preferences">
@@ -136,8 +144,19 @@
    <extension
          point="org.eclipse.ui.contexts">
       <context
+            description="Enable Play Button Context"
             id="playEnabled.context"
             name="playEnabled.context">
+      </context>
+      <context
+            description="Enable Stop Button Context"
+            id="stopEnabled.context"
+            name="stopEnabled.context">
+      </context>
+      <context
+            description="Enable Pause Button Context"
+            id="enablePause.context"
+            name="enablePause.context">
       </context>
    </extension>
 
