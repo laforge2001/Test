@@ -45,7 +45,6 @@
             name="Play">
       </command>
       <command
-            defaultHandler="org.jamp.ui.library.command.JampPauseCommand"
             id="pause.command"
             name="Pause">
       </command>
@@ -120,6 +119,15 @@
       <handler
             class="org.jamp.ui.library.command.JampStopCommand"
             commandId="stop.command">
+         <enabledWhen>
+            <reference
+                  definitionId="isMediaObject">
+            </reference>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="org.jamp.ui.library.command.JampPauseCommand"
+            commandId="pause.command">
          <enabledWhen>
             <reference
                   definitionId="isMediaObject">
