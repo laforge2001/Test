@@ -26,7 +26,8 @@ import org.jamp.model.library.IJampLibrary;
 import org.jamp.model.library.JampFileBasedLibrary;
 import org.jamp.model.library.Playlist;
 import org.jamp.model.query.JampMediaObjectQuery;
-import org.jamp.ui.library.context.JampPlayContextHelper;
+import org.jamp.ui.library.context.JampContextManager;
+import org.jamp.ui.library.context.JampContextConstants;
 import org.jamp.ui.library.views.LibraryView;
 import org.jamp.ui.preferences.Activator;
 import org.jamp.ui.preferences.PreferenceConstants;
@@ -170,10 +171,13 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 									.getSelection();
 							if (playSelection.getFirstElement() instanceof MediaObject) {
 								System.out.println("should be enabled");
-								JampPlayContextHelper.enablePlayCommand();
+								JampContextManager
+										.activateContext(JampContextConstants.PLAY_CONTEXT);
 							} else {
 								System.out.println("should be disabled");
-								JampPlayContextHelper.disablePlayCommand();
+								JampContextManager
+										.deactivateContext(JampContextConstants.PLAY_CONTEXT);
+								;
 							}
 						}
 

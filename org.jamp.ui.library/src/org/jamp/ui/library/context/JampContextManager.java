@@ -4,11 +4,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JampContextHelperFactory {
+public class JampContextManager {
 	private static Map<String, JampContextHelper> _contexts = Collections
 			.synchronizedMap(new HashMap<String, JampContextHelper>());
 
-	private JampContextHelperFactory() {
+	private JampContextManager() {
 	}
 
 	public static void activateContext(String id) {

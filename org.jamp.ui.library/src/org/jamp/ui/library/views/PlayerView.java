@@ -26,10 +26,6 @@ public class PlayerView extends ViewPart {
 		parent.setLayout(fillLayout);
 
 		ToolBar toolbar = new ToolBar(parent, SWT.HORIZONTAL | SWT.RIGHT);
-		// CommandContributionItemParameter parms = new
-		// CommandContributionItemParameter(
-		// getSite(), "testMe", JampPlayCommand.ID,
-		// CommandContributionItem.STYLE_PUSH);
 
 		CommandContributionItemParameter parms = new CommandContributionItemParameter(
 				getSite(), "testMe", JampPlayCommand.ID, null, AbstractUIPlugin

@@ -10,8 +10,6 @@ public class JampStopContextHelper {
 
 	private static IContextActivation _stopButton;
 
-	public static final String ID = "stopEnabled.context";
-
 	public static void enablePlayCommand() {
 		_stopButton = _service.activateContext(ID);
 	}
