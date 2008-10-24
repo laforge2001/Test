@@ -115,6 +115,10 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 		getSite().getPage().addSelectionListener(LibraryView.ID, this);
 		getSite().setSelectionProvider(_tableViewer);
 
+		String urls = Activator.getDefault().getPluginPreferences().getString(
+				PreferenceConstants.P_PATHS);
+		// _library.updateLibrary(urls);
+
 	}
 
 	private void createTableViewer() {

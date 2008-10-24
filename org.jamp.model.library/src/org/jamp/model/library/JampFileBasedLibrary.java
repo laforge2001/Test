@@ -14,11 +14,7 @@ import java.util.StringTokenizer;
 import java.util.Map.Entry;
 
 import org.apache.commons.io.FileUtils;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.jamp.model.MediaObject;
 import org.jamp.model.music.api.MusicObject;
@@ -114,34 +110,35 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void updateLibrary(final String paths) {
-		Job job = new Job("My First Job") {
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-				_locations = parseString(paths);
+		// Job job = new Job("My First Job") {
+		// @Override
+		// protected IStatus run(IProgressMonitor monitor) {
+		_locations = parseString(paths);
 
-				for (String s : _locations) {
-					File test = new File(s);
-					_names.addAll(FileUtils.listFiles(test,
-							new String[] { "mp3" }, true));
+		for (String s : _locations) {
+			File test = new File(s);
+			_names.addAll(FileUtils.listFiles(test, new String[] { "mp3" },
+					true));
 
-					if (monitor.isCanceled())
-						return Status.CANCEL_STATUS;
+			// if (monitor.isCanceled())
+			// return Status.CANCEL_STATUS;
 
-				}
-				for (File file : _names) {
-					MusicObject addMe = new MusicObject(file.getAbsolutePath(),
-							new Mp3API());
-					_library.put(file.getAbsolutePath(), addMe);
-					System.out.println(file.getAbsolutePath());
-					if (monitor.isCanceled())
-						return Status.CANCEL_STATUS;
-				}
-				notifyListeners();
-				return Status.OK_STATUS;
-			}
-		};
+		}
+		for (File file : _names) {
+			MusicObject addMe = new MusicObject(file.getAbsolutePath(),
+					new Mp3API());
+			_library.put(file.getAbsolutePath(), addMe);
+			System.out.println(file.getAbsolutePath());
+			// if (monitor.isCanceled())
+			// return Status.CANCEL_STATUS;
+		}
 
-		job.schedule();
+		// return Status.OK_STATUS;
+		// }
+		// };
+		//
+		// job.schedule();
+		notifyListeners();
 
 	}
 
