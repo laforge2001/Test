@@ -5,28 +5,20 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.jamp.model.MediaObject;
 import org.jamp.model.library.IJampLibrary;
-import org.jamp.model.library.Playlist;
 import org.jamp.model.query.IJampQuery;
 import org.jamp.model.viewer.IJampLibraryViewer;
 
 public class MediaListContentProvider implements IStructuredContentProvider,
 		IJampLibraryViewer {
 
-	private final Playlist _playList;
-	private IJampQuery _query;
-	private IJampLibrary _library;
+	private final IJampQuery _query;
+	private final IJampLibrary _library;
 	private final TableViewer _tableViewer;
 
 	public MediaListContentProvider(IJampLibrary library, IJampQuery query,
 			TableViewer tv) {
-		_playList = null;
 		_library = library;
 		_query = query;
-		_tableViewer = tv;
-	}
-
-	public MediaListContentProvider(Playlist playlist, TableViewer tv) {
-		_playList = playlist;
 		_tableViewer = tv;
 	}
 
@@ -51,7 +43,7 @@ public class MediaListContentProvider implements IStructuredContentProvider,
 	}
 
 	@Override
-	public void addMediaObject(MediaObject task) {
+	public synchronized void addMediaObject(MediaObject task) {
 		_tableViewer.add(task);
 
 	}

@@ -40,7 +40,8 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 	private final Map<String, MediaObject> _library = Collections
 			.synchronizedMap(new HashMap<String, MediaObject>());
 
-	private final Set<IJampLibraryViewer> _listener = new HashSet<IJampLibraryViewer>();
+	private final Set<IJampLibraryViewer> _listener = Collections
+			.synchronizedSet(new HashSet<IJampLibraryViewer>());
 
 	private static final long serialVersionUID = -5679254328240338749L;
 
@@ -95,7 +96,7 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 	}
 
 	@Override
-	public void add(MediaObject addMe) {
+	public synchronized void add(MediaObject addMe) {
 		_library.put(addMe.getURL(), addMe);
 		System.out.println(addMe.getURL());
 
@@ -136,8 +137,8 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 					_names.addAll(FileUtils.listFiles(test,
 							new String[] { "mp3" }, true));
 
-					// if (monitor.isCanceled())
-					// return Status.CANCEL_STATUS;
+					if (monitor.isCanceled())
+						return Status.CANCEL_STATUS;
 
 				}
 				for (File file : _names) {
@@ -146,8 +147,8 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 					add(addMe);
 					_library.put(file.getAbsolutePath(), addMe);
 					System.out.println(file.getAbsolutePath());
-					// if (monitor.isCanceled())
-					// return Status.CANCEL_STATUS;
+					if (monitor.isCanceled())
+						return Status.CANCEL_STATUS;
 				}
 
 				return Status.OK_STATUS;
