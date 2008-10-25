@@ -155,7 +155,7 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 			}
 
 		};
-
+		job.setUser(true);
 		job.schedule();
 		// notifyListeners();
 
