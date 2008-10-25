@@ -24,7 +24,6 @@ import org.eclipse.ui.part.EditorPart;
 import org.jamp.model.MediaObject;
 import org.jamp.model.library.IJampLibrary;
 import org.jamp.model.library.JampFileBasedLibrary;
-import org.jamp.model.library.Playlist;
 import org.jamp.model.query.JampMediaObjectQuery;
 import org.jamp.ui.library.context.JampContextConstants;
 import org.jamp.ui.library.context.JampContextManager;
@@ -51,9 +50,11 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 
 	private TableViewer _tableViewer;
 
-	private Playlist _playList;
+	// private Playlist _playList;
 
 	private final IJampLibrary _library = new JampFileBasedLibrary();
+
+	private JampMediaObjectQuery _query;
 
 	public MediaListEditor() {
 		this.initData();
@@ -64,9 +65,9 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 		String urls = Activator.getDefault().getPluginPreferences().getString(
 				PreferenceConstants.P_PATHS);
 
-		JampMediaObjectQuery query = new JampMediaObjectQuery("mp3");
-		_playList = new Playlist("Test", _library, query);
-		_library.addChangeListener(_playList);
+		_query = new JampMediaObjectQuery("mp3");
+		// _playList = new Playlist("Test", _library, query);
+		// _library.addChangeListener(_playList);
 		_library.updateLibrary(urls);
 
 	}
@@ -159,10 +160,13 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 
 		// Set the cell modifier for the viewer
 		_tableViewer.setCellModifier(new MediaListCellModifier());
-		_tableViewer.setContentProvider(new MediaListContentProvider(_playList,
-				_tableViewer));
+		// _tableViewer.setContentProvider(new
+		// MediaListContentProvider(_playList,
+		// _tableViewer));
+		_tableViewer.setContentProvider(new MediaListContentProvider(_library,
+				_query, _tableViewer));
 		_tableViewer.setLabelProvider(new MediaListLabelProvider());
-		_tableViewer.setInput(_playList);
+		_tableViewer.setInput(_library);
 		_tableViewer
 				.addSelectionChangedListener(new ISelectionChangedListener() {
 

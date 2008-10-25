@@ -7,18 +7,25 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.Map.Entry;
 
 import org.apache.commons.io.FileUtils;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.jamp.model.MediaObject;
 import org.jamp.model.music.api.MusicObject;
 import org.jamp.model.query.IJampQuery;
+import org.jamp.model.viewer.IJampLibraryViewer;
 import org.jamp.music.mp3.api.Mp3API;
 
 public class JampFileBasedLibrary implements IJampLibrary, Serializable {
@@ -33,7 +40,7 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 	private final Map<String, MediaObject> _library = Collections
 			.synchronizedMap(new HashMap<String, MediaObject>());
 
-	private final List<PropertyChangeListener> _listener = new ArrayList<PropertyChangeListener>();
+	private final Set<IJampLibraryViewer> _listener = new HashSet<IJampLibraryViewer>();
 
 	private static final long serialVersionUID = -5679254328240338749L;
 
@@ -45,8 +52,12 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 		}
 	}
 
-	public void addChangeListener(PropertyChangeListener newListener) {
+	public void addChangeListener(IJampLibraryViewer newListener) {
 		_listener.add(newListener);
+	}
+
+	public void removeChangeListener(IJampLibraryViewer listener) {
+		_listener.remove(listener);
 	}
 
 	private List<String> parseString(String stringList) {
@@ -57,12 +68,6 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 			v.add((String) st.nextElement());
 		}
 		return v;
-	}
-
-	@Override
-	public void add(MediaObject addMe) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@SuppressWarnings("unchecked")
@@ -90,6 +95,17 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 	}
 
 	@Override
+	public void add(MediaObject addMe) {
+		_library.put(addMe.getURL(), addMe);
+		System.out.println(addMe.getURL());
+
+		Iterator<IJampLibraryViewer> next = _listener.iterator();
+		while (next.hasNext()) {
+			next.next().addMediaObject(addMe);
+		}
+	}
+
+	@Override
 	public void remove(MediaObject removeMe) {
 		// TODO Auto-generated method stub
 
@@ -110,35 +126,36 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void updateLibrary(final String paths) {
-		// Job job = new Job("My First Job") {
-		// @Override
-		// protected IStatus run(IProgressMonitor monitor) {
-		_locations = parseString(paths);
+		Job job = new Job("My First Job") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				_locations = parseString(paths);
 
-		for (String s : _locations) {
-			File test = new File(s);
-			_names.addAll(FileUtils.listFiles(test, new String[] { "mp3" },
-					true));
+				for (String s : _locations) {
+					File test = new File(s);
+					_names.addAll(FileUtils.listFiles(test,
+							new String[] { "mp3" }, true));
 
-			// if (monitor.isCanceled())
-			// return Status.CANCEL_STATUS;
+					// if (monitor.isCanceled())
+					// return Status.CANCEL_STATUS;
 
-		}
-		for (File file : _names) {
-			MusicObject addMe = new MusicObject(file.getAbsolutePath(),
-					new Mp3API());
-			_library.put(file.getAbsolutePath(), addMe);
-			System.out.println(file.getAbsolutePath());
-			// if (monitor.isCanceled())
-			// return Status.CANCEL_STATUS;
-		}
+				}
+				for (File file : _names) {
+					MusicObject addMe = new MusicObject(file.getAbsolutePath(),
+							new Mp3API());
+					add(addMe);
+					_library.put(file.getAbsolutePath(), addMe);
+					System.out.println(file.getAbsolutePath());
+					// if (monitor.isCanceled())
+					// return Status.CANCEL_STATUS;
+				}
 
-		// return Status.OK_STATUS;
-		// }
-		// };
-		//
-		// job.schedule();
-		notifyListeners();
+				return Status.OK_STATUS;
+			}
+		};
+
+		job.schedule();
+		// notifyListeners();
 
 	}
 

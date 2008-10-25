@@ -2,7 +2,7 @@ package org.jamp.model.viewer;
 
 import org.jamp.model.MediaObject;
 
-public interface IPlayListViewer {
+public interface IJampLibraryViewer {
 	/**
 	 * Update the view to reflect the fact that a task was added to the task
 	 * list

@@ -12,7 +12,7 @@ import java.util.Set;
 import org.jamp.model.MediaObject;
 import org.jamp.model.query.IJampQuery;
 import org.jamp.model.query.JampMediaObjectQuery;
-import org.jamp.model.viewer.IPlayListViewer;
+import org.jamp.model.viewer.IJampLibraryViewer;
 
 public class Playlist implements Serializable, PropertyChangeListener {
 
@@ -23,7 +23,7 @@ public class Playlist implements Serializable, PropertyChangeListener {
 	private final List<MediaObject> _playList = new ArrayList<MediaObject>();
 	private MediaObject _currentlyPlaying = null;
 	private String _name = new String();
-	private final Set<IPlayListViewer> _changeListeners = new HashSet<IPlayListViewer>();
+	private final Set<IJampLibraryViewer> _changeListeners = new HashSet<IJampLibraryViewer>();
 	private IJampLibrary _library;
 	private IJampQuery _query;
 
@@ -62,7 +62,7 @@ public class Playlist implements Serializable, PropertyChangeListener {
 
 	public void add(MediaObject o) {
 		_playList.add(o);
-		Iterator<IPlayListViewer> next = _changeListeners.iterator();
+		Iterator<IJampLibraryViewer> next = _changeListeners.iterator();
 		while (next.hasNext()) {
 			next.next().addMediaObject(o);
 		}
@@ -71,7 +71,7 @@ public class Playlist implements Serializable, PropertyChangeListener {
 	public void remove(MediaObject o) {
 		if (_playList.contains(o)) {
 			_playList.remove(o);
-			Iterator<IPlayListViewer> iterator = _changeListeners.iterator();
+			Iterator<IJampLibraryViewer> iterator = _changeListeners.iterator();
 			while (iterator.hasNext())
 				iterator.next().removeMediaObject(o);
 		}
@@ -80,7 +80,7 @@ public class Playlist implements Serializable, PropertyChangeListener {
 	public void update(MediaObject o) {
 		if (_playList.contains(o)) {
 			_playList.remove(o);
-			Iterator<IPlayListViewer> iterator = _changeListeners.iterator();
+			Iterator<IJampLibraryViewer> iterator = _changeListeners.iterator();
 			while (iterator.hasNext())
 				iterator.next().updateMediaObject(o);
 		}
@@ -123,14 +123,14 @@ public class Playlist implements Serializable, PropertyChangeListener {
 	/**
 	 * @param viewer
 	 */
-	public void removeChangeListener(IPlayListViewer viewer) {
+	public void removeChangeListener(IJampLibraryViewer viewer) {
 		_changeListeners.remove(viewer);
 	}
 
 	/**
 	 * @param viewer
 	 */
-	public void addChangeListener(IPlayListViewer viewer) {
+	public void addChangeListener(IJampLibraryViewer viewer) {
 		_changeListeners.add(viewer);
 	}
 
