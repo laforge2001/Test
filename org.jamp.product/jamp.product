@@ -3,6 +3,7 @@
 
 <product name="JAmp" id="org.jamp.ui.product" application="org.jamp.ui.application" useFeatures="true">
 
+
    <configIni use="default">
    </configIni>
 
@@ -11,16 +12,17 @@
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
+   <windowImages/>
+
    <splash
-      startupProgressRect="5,275,445,15"
-      startupMessageRect="7,252,445,20"
-      startupForegroundColor="00FF40" />
+      startupProgressRect="5,275,445,15" />
    <launcher>
       <solaris/>
       <win useIco="false">
          <bmp/>
       </win>
    </launcher>
+
 
    <vm>
    </vm>
