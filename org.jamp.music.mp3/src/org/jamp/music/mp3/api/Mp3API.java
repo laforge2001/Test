@@ -22,7 +22,7 @@ import org.jaudiotagger.tag.TagException;
 
 public class Mp3API implements IMusicAPI, Runnable {
 
-	private AdvancedPlayer _player;
+	private static AdvancedPlayer _player;
 	private AudioDevice _device;
 	private Tag _mp3Info;
 	protected boolean _isPaused = false;
@@ -30,7 +30,7 @@ public class Mp3API implements IMusicAPI, Runnable {
 	protected PlaybackEvent _playEvent;
 	protected Bitstream _bitStream;
 
-	private Thread _playMeThread;
+	private static Thread _playMeThread;
 
 	@Override
 	public int getPosition() {
