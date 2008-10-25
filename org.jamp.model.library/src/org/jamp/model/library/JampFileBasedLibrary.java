@@ -20,8 +20,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
+import org.eclipse.ui.progress.UIJob;
 import org.jamp.model.MediaObject;
 import org.jamp.model.music.api.MusicObject;
 import org.jamp.model.query.IJampQuery;
@@ -127,9 +127,9 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void updateLibrary(final String paths) {
-		Job job = new Job("My First Job") {
+		UIJob job = new UIJob("My First Job") {
 			@Override
-			protected IStatus run(IProgressMonitor monitor) {
+			public IStatus runInUIThread(IProgressMonitor monitor) {
 				_locations = parseString(paths);
 
 				for (String s : _locations) {
@@ -153,6 +153,7 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 
 				return Status.OK_STATUS;
 			}
+
 		};
 
 		job.schedule();
