@@ -20,8 +20,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
-import org.eclipse.ui.progress.UIJob;
 import org.jamp.model.MediaObject;
 import org.jamp.model.music.api.MusicObject;
 import org.jamp.model.query.IJampQuery;
@@ -127,9 +127,36 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void updateLibrary(final String paths) {
-		UIJob job = new UIJob("My First Job") {
+		Job job = new Job("My First Job") {
+			// @Override
+			// public IStatus runInUIThread(IProgressMonitor monitor) {
+			// _locations = parseString(paths);
+			//
+			// for (String s : _locations) {
+			// File test = new File(s);
+			// _names.addAll(FileUtils.listFiles(test,
+			// new String[] { "mp3" }, true));
+			//
+			// if (monitor.isCanceled())
+			// return Status.CANCEL_STATUS;
+			//
+			// }
+			// for (File file : _names) {
+			// MusicObject addMe = new MusicObject(file.getAbsolutePath(),
+			// new Mp3API());
+			// add(addMe);
+			// _library.put(file.getAbsolutePath(), addMe);
+			// System.out.println(file.getAbsolutePath());
+			// if (monitor.isCanceled())
+			// return Status.CANCEL_STATUS;
+			// }
+			//
+			// return Status.OK_STATUS;
+			// }
+
 			@Override
-			public IStatus runInUIThread(IProgressMonitor monitor) {
+			protected IStatus run(IProgressMonitor monitor) {
+
 				_locations = parseString(paths);
 
 				for (String s : _locations) {
@@ -137,20 +164,30 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 					_names.addAll(FileUtils.listFiles(test,
 							new String[] { "mp3" }, true));
 
-					if (monitor.isCanceled())
+					if (monitor.isCanceled()) {
+						monitor.done();
 						return Status.CANCEL_STATUS;
+					}
 
 				}
+
+				monitor.beginTask("Updating Library...", _names.size());
 				for (File file : _names) {
 					MusicObject addMe = new MusicObject(file.getAbsolutePath(),
 							new Mp3API());
+					monitor.worked(1);
+
 					add(addMe);
 					_library.put(file.getAbsolutePath(), addMe);
 					System.out.println(file.getAbsolutePath());
-					if (monitor.isCanceled())
+					if (monitor.isCanceled()) {
+						monitor.done();
 						return Status.CANCEL_STATUS;
+					}
+
 				}
 
+				monitor.done();
 				return Status.OK_STATUS;
 			}
 

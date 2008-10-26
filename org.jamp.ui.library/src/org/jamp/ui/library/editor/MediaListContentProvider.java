@@ -43,8 +43,14 @@ public class MediaListContentProvider implements IStructuredContentProvider,
 	}
 
 	@Override
-	public synchronized void addMediaObject(MediaObject task) {
-		_tableViewer.add(task);
+	public synchronized void addMediaObject(final MediaObject task) {
+		_tableViewer.getTable().getDisplay().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				_tableViewer.add(task);
+			}
+
+		});
 
 	}
 
