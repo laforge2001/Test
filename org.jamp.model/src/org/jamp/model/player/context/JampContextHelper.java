@@ -1,4 +1,4 @@
-package org.jamp.ui.library.context;
+package org.jamp.model.player.context;
 
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.contexts.IContextActivation;

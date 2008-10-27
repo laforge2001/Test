@@ -1,4 +1,4 @@
-package org.jamp.ui.library.context;
+package org.jamp.model.player.context;
 
 public class JampContextConstants {
 

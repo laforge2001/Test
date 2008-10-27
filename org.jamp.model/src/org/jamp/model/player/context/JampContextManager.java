@@ -1,4 +1,4 @@
-package org.jamp.ui.library.context;
+package org.jamp.model.player.context;
 
 import java.util.Collections;
 import java.util.HashMap;

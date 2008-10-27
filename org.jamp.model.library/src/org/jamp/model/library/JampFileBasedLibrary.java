@@ -127,32 +127,7 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void updateLibrary(final String paths) {
-		Job job = new Job("My First Job") {
-			// @Override
-			// public IStatus runInUIThread(IProgressMonitor monitor) {
-			// _locations = parseString(paths);
-			//
-			// for (String s : _locations) {
-			// File test = new File(s);
-			// _names.addAll(FileUtils.listFiles(test,
-			// new String[] { "mp3" }, true));
-			//
-			// if (monitor.isCanceled())
-			// return Status.CANCEL_STATUS;
-			//
-			// }
-			// for (File file : _names) {
-			// MusicObject addMe = new MusicObject(file.getAbsolutePath(),
-			// new Mp3API());
-			// add(addMe);
-			// _library.put(file.getAbsolutePath(), addMe);
-			// System.out.println(file.getAbsolutePath());
-			// if (monitor.isCanceled())
-			// return Status.CANCEL_STATUS;
-			// }
-			//
-			// return Status.OK_STATUS;
-			// }
+		Job job = new Job("Updating Library...") {
 
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
@@ -174,7 +149,7 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 				monitor.beginTask("Updating Library...", _names.size());
 				for (File file : _names) {
 					MusicObject addMe = new MusicObject(file.getAbsolutePath(),
-							new Mp3API());
+							Mp3API.getInstance());
 					monitor.worked(1);
 
 					add(addMe);
