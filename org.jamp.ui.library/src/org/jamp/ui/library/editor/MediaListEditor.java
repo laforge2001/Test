@@ -1,6 +1,7 @@
 package org.jamp.ui.library.editor;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -12,6 +13,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
@@ -114,6 +116,16 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 		createTableViewer();
 
 		getSite().getPage().addSelectionListener(LibraryView.ID, this);
+
+		// Set up the context menu for the table - uses the extension point to
+		// add
+		// to this
+		MenuManager menuManager = new MenuManager();
+		Menu menu = menuManager.createContextMenu(_tableViewer.getTable());
+		// Set the MenuManager
+		_tableViewer.getTable().setMenu(menu);
+		getSite().registerContextMenu(menuManager, _tableViewer);
+
 		getSite().setSelectionProvider(_tableViewer);
 
 		String urls = Activator.getDefault().getPluginPreferences().getString(

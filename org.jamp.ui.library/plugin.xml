@@ -92,6 +92,15 @@
             </command>
          </toolbar>
       </menuContribution>
+      <menuContribution
+            locationURI="popup:org.jamp.ui.library.editor.MediaList">
+         <command
+               commandId="play.command"
+               icon="icons/sample.gif"
+               label="Play"
+               style="push">
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commandImages">
