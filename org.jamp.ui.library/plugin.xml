@@ -100,6 +100,12 @@
                label="Play"
                style="push">
          </command>
+         <command
+               commandId="stop.command"
+               icon="icons/test.GIF"
+               label="Stop"
+               style="push">
+         </command>
       </menuContribution>
    </extension>
    <extension
