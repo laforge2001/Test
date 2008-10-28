@@ -116,6 +116,19 @@
             </iterate>
          </with>
       </definition>
+      <definition
+            id="isStoppable">
+         <with
+               variable="activeContexts">
+            <iterate
+                  ifEmpty="false"
+                  operator="or">
+               <equals
+                     value="stopEnabled.context">
+               </equals>
+            </iterate>
+         </with>
+      </definition>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -133,7 +146,7 @@
             commandId="stop.command">
          <enabledWhen>
             <reference
-                  definitionId="isMediaObject">
+                  definitionId="isStoppable">
             </reference>
          </enabledWhen>
       </handler>

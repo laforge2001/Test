@@ -140,7 +140,6 @@ public class Mp3API implements IMusicAPI, Runnable {
 		_playMeThread = new Thread(this);
 		_playMeThread.start();
 
-		JampContextManager.activateContext(JampContextConstants.STOP_CONTEXT);
 	}
 
 	public synchronized void pause() {
@@ -171,7 +170,6 @@ public class Mp3API implements IMusicAPI, Runnable {
 			_player.stop();
 		}
 		_playMeThread = null;
-		JampContextManager.deactivateContext(JampContextConstants.STOP_CONTEXT);
 
 		// stopPlayerThread();
 	}
@@ -310,12 +308,16 @@ public class Mp3API implements IMusicAPI, Runnable {
 					_currentFrame = evt.getFrame();
 					if (getState() == State.PLAYING) {
 						setState(State.STOPPED);
+						JampContextManager
+								.deactivateContext(JampContextConstants.STOP_CONTEXT);
 					}
 				}
 
 				@Override
 				public void playbackStarted(PlaybackEvent evt) {
 					setState(State.PLAYING);
+					JampContextManager
+							.activateContext(JampContextConstants.STOP_CONTEXT);
 				}
 			});
 
