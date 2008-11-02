@@ -10,6 +10,7 @@ import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.graphics.RGB;
 
+/* mercilessly jacked from an eclipse example snippet */
 public class ImageUtils {
 
 	static BufferedImage convertToAWT(ImageData data) {
@@ -120,5 +121,5 @@ public class ImageUtils {
 		}
 		return null;
 	}
-	
+
 }
