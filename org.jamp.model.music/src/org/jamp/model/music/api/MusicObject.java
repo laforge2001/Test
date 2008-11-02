@@ -12,9 +12,10 @@ public class MusicObject extends MediaObject {
 	private int year;
 
 	public MusicObject(String location, IMusicAPI api) {
+		super(api);
 		_musicAPI = api;
-		_musicAPI.setURL(location);
-		_musicAPI.init();
+		setURL(location);
+		// _musicAPI.init();
 		title = getAPI().getSongTitle();
 		artist = getAPI().getArtist();
 		album = getAPI().getAlbum();
@@ -31,22 +32,27 @@ public class MusicObject extends MediaObject {
 		_musicAPI.stop();
 	}
 
+	@Override
 	public IMusicAPI getAPI() {
 		return _musicAPI;
 	}
 
+	@Override
 	public String getTitle() {
 		return title;
 	}
 
+	@Override
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+	@Override
 	public String getArtist() {
 		return artist;
 	}
 
+	@Override
 	public void setArtist(String artist) {
 		this.artist = artist;
 	}
@@ -59,10 +65,12 @@ public class MusicObject extends MediaObject {
 		this.album = album;
 	}
 
+	@Override
 	public int getYear() {
 		return year;
 	}
 
+	@Override
 	public void setYear(int year) {
 		this.year = year;
 	}
