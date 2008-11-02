@@ -52,15 +52,12 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 
 	private TableViewer _tableViewer;
 
-	// private Playlist _playList;
-
 	private final IJampLibrary _library = new JampFileBasedLibrary();
 
 	private JampMediaObjectQuery _query;
 
 	public MediaListEditor() {
 		this.initData();
-		// TODO Auto-generated constructor stub
 	}
 
 	private void initData() {
@@ -68,8 +65,6 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 				PreferenceConstants.P_PATHS);
 
 		_query = new JampMediaObjectQuery("mp3");
-		// _playList = new Playlist("Test", _library, query);
-		// _library.addChangeListener(_playList);
 		_library.updateLibrary(urls);
 
 	}
@@ -127,11 +122,6 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 		getSite().registerContextMenu(menuManager, _tableViewer);
 
 		getSite().setSelectionProvider(_tableViewer);
-
-		String urls = Activator.getDefault().getPluginPreferences().getString(
-				PreferenceConstants.P_PATHS);
-		// _library.updateLibrary(urls);
-
 	}
 
 	private void createTableViewer() {
@@ -189,11 +179,9 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 							IStructuredSelection playSelection = (IStructuredSelection) event
 									.getSelection();
 							if (playSelection.getFirstElement() instanceof MediaObject) {
-								System.out.println("should be enabled");
 								JampContextManager
 										.activateContext(JampContextConstants.PLAY_CONTEXT);
 							} else {
-								System.out.println("should be disabled");
 								JampContextManager
 										.deactivateContext(JampContextConstants.PLAY_CONTEXT);
 								;

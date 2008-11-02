@@ -1,10 +1,10 @@
 package org.jamp.model;
 
+import org.eclipse.swt.graphics.Image;
+
 public abstract class MediaObject {
 
-	protected boolean _isPaused = false;
-
-	protected boolean isSuspended;
+	protected Image previewImage;
 
 	public MediaObject() {
 	}
