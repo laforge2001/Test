@@ -1,7 +1,15 @@
 package org.jamp.ui.library.editor;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.core.databinding.beans.BeansObservables;
+import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
+import org.eclipse.jface.databinding.viewers.ObservableMapLabelProvider;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -26,6 +34,7 @@ import org.eclipse.ui.part.EditorPart;
 import org.jamp.model.MediaObject;
 import org.jamp.model.library.IJampLibrary;
 import org.jamp.model.library.JampFileBasedLibrary;
+import org.jamp.model.music.api.MusicObject;
 import org.jamp.model.player.context.JampContextConstants;
 import org.jamp.model.player.context.JampContextManager;
 import org.jamp.model.query.JampMediaObjectQuery;
@@ -48,6 +57,11 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 	private final String[] columnNames = new String[] { TITLE_COLUMN,
 			ARTIST_COLUMN, ALBUM_COLUMN, YEAR_COLUMN, LOCATION_COLUMN };
 
+	private final String[] propertyNames = new String[] { TITLE_COLUMN,
+			ARTIST_COLUMN, ALBUM_COLUMN, YEAR_COLUMN };
+
+	private static List<MediaObject> _mp3List = new ArrayList<MediaObject>();
+
 	private Table _table;
 
 	private TableViewer _tableViewer;
@@ -66,6 +80,7 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 
 		_query = new JampMediaObjectQuery("mp3");
 		_library.updateLibrary(urls);
+		_mp3List = _library.get(_query);
 
 	}
 
@@ -129,6 +144,20 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 		_tableViewer.setUseHashlookup(true);
 		_tableViewer.setColumnProperties(columnNames);
 
+		// Create a standard content provider
+		ObservableListContentProvider peopleViewerContentProvider = new ObservableListContentProvider();
+		_tableViewer.setContentProvider(peopleViewerContentProvider);
+
+		// And a standard label provider that maps columns
+		IObservableMap[] attributeMaps = BeansObservables.observeMaps(
+				peopleViewerContentProvider.getKnownElements(),
+				MusicObject.class, propertyNames);
+		_tableViewer.setLabelProvider(new ObservableMapLabelProvider(
+				attributeMaps));
+
+		// Now set the Viewer's input
+		_tableViewer.setInput(new WritableList(_mp3List, MusicObject.class));
+
 		// Create the cell editors
 		CellEditor[] editors = new CellEditor[columnNames.length];
 
@@ -165,10 +194,11 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 		// _tableViewer.setContentProvider(new
 		// MediaListContentProvider(_playList,
 		// _tableViewer));
-		_tableViewer.setContentProvider(new MediaListContentProvider(_library,
-				_query, _tableViewer));
-		_tableViewer.setLabelProvider(new MediaListLabelProvider());
-		_tableViewer.setInput(_library);
+		// _tableViewer.setContentProvider(new
+		// MediaListContentProvider(_library,
+		// _query, _tableViewer));
+		// _tableViewer.setLabelProvider(new MediaListLabelProvider());
+		// _tableViewer.setInput(_library);
 		_tableViewer
 				.addSelectionChangedListener(new ISelectionChangedListener() {
 

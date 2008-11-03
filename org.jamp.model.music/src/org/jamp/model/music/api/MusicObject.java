@@ -10,12 +10,18 @@ public class MusicObject extends MediaObject {
 	private String artist;
 	private String album;
 	private int year;
+	private String location;
+
+	public static final String TITLE = "title";
+	public static final String ARTIST = "artist";
+	public static final String ALBUM = "album";
+	public static final String YEAR = "year";
 
 	public MusicObject(String location, IMusicAPI api) {
 		super(api);
 		_musicAPI = api;
 		setURL(location);
-		// _musicAPI.init();
+		_musicAPI.init();
 		title = getAPI().getSongTitle();
 		artist = getAPI().getArtist();
 		album = getAPI().getAlbum();
@@ -54,7 +60,7 @@ public class MusicObject extends MediaObject {
 
 	@Override
 	public void setArtist(String artist) {
-		this.artist = artist;
+		firePropertyChange(ARTIST, this.artist, this.artist = artist);
 	}
 
 	public String getAlbum() {
@@ -62,7 +68,7 @@ public class MusicObject extends MediaObject {
 	}
 
 	public void setAlbum(String album) {
-		this.album = album;
+		firePropertyChange(ALBUM, this.album, this.album = album);
 	}
 
 	@Override
@@ -72,7 +78,7 @@ public class MusicObject extends MediaObject {
 
 	@Override
 	public void setYear(int year) {
-		this.year = year;
+		firePropertyChange(YEAR, this.year, this.year = year);
 	}
 
 	@Override

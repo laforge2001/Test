@@ -98,12 +98,12 @@ public class JampFileBasedLibrary implements IJampLibrary, Serializable {
 	@Override
 	public synchronized void add(MediaObject addMe) {
 		_library.put(addMe.getURL(), addMe);
-		System.out.println(addMe.getURL());
-
-		Iterator<IJampLibraryViewer> next = _listener.iterator();
-		while (next.hasNext()) {
-			next.next().addMediaObject(addMe);
-		}
+		// System.out.println(addMe.getURL());
+		//
+		// Iterator<IJampLibraryViewer> next = _listener.iterator();
+		// while (next.hasNext()) {
+		// next.next().addMediaObject(addMe);
+		// }
 	}
 
 	@Override
