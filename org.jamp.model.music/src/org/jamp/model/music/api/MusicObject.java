@@ -17,6 +17,11 @@ public class MusicObject extends MediaObject {
 	public static final String ALBUM = "album";
 	public static final String YEAR = "year";
 
+	public MusicObject() {
+		super();
+		_musicAPI = null;
+	}
+
 	public MusicObject(String location, IMusicAPI api) {
 		super(api);
 		_musicAPI = api;

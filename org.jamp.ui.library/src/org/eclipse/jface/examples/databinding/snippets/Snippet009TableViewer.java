@@ -39,7 +39,7 @@ public class Snippet009TableViewer {
 
 	// Minimal JavaBeans support
 	public static abstract class AbstractModelObject {
-		private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(
+		private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(
 				this);
 
 		public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -93,11 +93,12 @@ public class Snippet009TableViewer {
 	//
 	// Typically each View class has a corresponding ViewModel class.
 	// The ViewModel is responsible for getting the objects to edit from the
-	// data access tier. Since this snippet doesn't have any persistent objects 
+	// data access tier. Since this snippet doesn't have any persistent objects
 	// ro retrieve, this ViewModel just instantiates a model object to edit.
 	static class ViewModel {
 		// The model to bind
-		private List people = new LinkedList(); {
+		private final List people = new LinkedList();
+		{
 			people.add(new Person("Steve Northover"));
 			people.add(new Person("Grant Gayed"));
 			people.add(new Person("Veronika Irvine"));
@@ -114,7 +115,7 @@ public class Snippet009TableViewer {
 
 	// The GUI view
 	static class View {
-		private ViewModel viewModel;
+		private final ViewModel viewModel;
 		private Table committers;
 
 		public View(ViewModel viewModel) {
@@ -128,17 +129,18 @@ public class Snippet009TableViewer {
 			shell.setLayout(new FillLayout());
 			committers = new Table(shell, SWT.BORDER | SWT.FULL_SELECTION);
 			committers.setLinesVisible(true);
-			
+
 			// Set up data binding. In an RCP application, the threading Realm
 			// will be set for you automatically by the Workbench. In an SWT
 			// application, you can do this once, wrpping your binding
 			// method call.
-			Realm.runWithDefault(SWTObservables.getRealm(display), new Runnable() {
-				public void run() {
-					DataBindingContext bindingContext = new DataBindingContext();
-					bindGUI(bindingContext);
-				}
-			});
+			Realm.runWithDefault(SWTObservables.getRealm(display),
+					new Runnable() {
+						public void run() {
+							DataBindingContext bindingContext = new DataBindingContext();
+							bindGUI(bindingContext);
+						}
+					});
 
 			// Open and return the Shell
 			shell.setSize(100, 300);
@@ -149,20 +151,21 @@ public class Snippet009TableViewer {
 		protected void bindGUI(DataBindingContext bindingContext) {
 			// Since we're using a JFace Viewer, we do first wrap our Table...
 			TableViewer peopleViewer = new TableViewer(committers);
-			
+
 			// Create a standard content provider
-			ObservableListContentProvider peopleViewerContentProvider = 
-				new ObservableListContentProvider();
+			ObservableListContentProvider peopleViewerContentProvider = new ObservableListContentProvider();
 			peopleViewer.setContentProvider(peopleViewerContentProvider);
-			
+
 			// And a standard label provider that maps columns
 			IObservableMap[] attributeMaps = BeansObservables.observeMaps(
-					peopleViewerContentProvider.getKnownElements(), Person.class,
-					new String[] { "name" });
-			peopleViewer.setLabelProvider(new ObservableMapLabelProvider(attributeMaps));
-			
+					peopleViewerContentProvider.getKnownElements(),
+					Person.class, new String[] { "name" });
+			peopleViewer.setLabelProvider(new ObservableMapLabelProvider(
+					attributeMaps));
+
 			// Now set the Viewer's input
-			peopleViewer.setInput(new WritableList(viewModel.getPeople(), Person.class));
+			peopleViewer.setInput(new WritableList(viewModel.getPeople(),
+					Person.class));
 		}
 	}
 

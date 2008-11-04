@@ -10,6 +10,10 @@ public abstract class MediaObject extends AbstractModelObject {
 
 	protected Image previewImage;
 
+	public MediaObject() {
+
+	}
+
 	public MediaObject(IMediaAPI mediaAPI) {
 		_mediaAPI = mediaAPI;
 	}
