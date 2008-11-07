@@ -22,9 +22,9 @@ public abstract class MediaObject extends AbstractModelObject {
 		return _mediaAPI;
 	}
 
-	public abstract String getURL();
+	public abstract String getLocation();
 
-	public abstract void setURL(String location);
+	public abstract void setLocation(String location);
 
 	public abstract String getTitle();
 

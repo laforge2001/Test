@@ -307,6 +307,7 @@ public class Mp3API implements IMusicAPI, Runnable {
 				public void playbackFinished(PlaybackEvent evt) {
 					_currentFrame = evt.getFrame();
 					if (getState() == State.PLAYING) {
+						System.out.println("Stopped!!!!!");
 						setState(State.STOPPED);
 						JampContextManager
 								.deactivateContext(JampContextConstants.STOP_CONTEXT);
@@ -315,6 +316,7 @@ public class Mp3API implements IMusicAPI, Runnable {
 
 				@Override
 				public void playbackStarted(PlaybackEvent evt) {
+					System.out.println("Started!!!");
 					setState(State.PLAYING);
 					JampContextManager
 							.activateContext(JampContextConstants.STOP_CONTEXT);

@@ -15,7 +15,7 @@ public class JampMediaObjectQuery extends AbstractJampQuery {
 		if (obj instanceof MediaObject) {
 			MediaObject m = (MediaObject) obj;
 			// ignores case and matches string anywhere in the word
-			if (m.getURL().matches("(?i).*" + _filter + ".*")) {
+			if (m.getLocation().matches("(?i).*" + _filter + ".*")) {
 				return true;
 			}
 		}

@@ -74,19 +74,19 @@
                id="org.jamp.ui.library.toolbar1">
             <command
                   commandId="play.command"
-                  icon="icons/sample.gif"
+                  icon="icons/player_play_48x48.png"
                   id="Play"
                   style="push">
             </command>
             <command
                   commandId="pause.command"
-                  icon="icons/sample.gif"
+                  icon="icons/player_pause_48x48.png"
                   id="Pause"
                   style="push">
             </command>
             <command
                   commandId="stop.command"
-                  icon="icons/test.GIF"
+                  icon="icons/player_stop_48x48.png"
                   id="Stop"
                   style="push">
             </command>
@@ -96,13 +96,13 @@
             locationURI="popup:org.jamp.ui.library.editor.MediaList">
          <command
                commandId="play.command"
-               icon="icons/sample.gif"
+               icon="icons/player_play_48x48.png"
                label="Play"
                style="push">
          </command>
          <command
                commandId="stop.command"
-               icon="icons/test.GIF"
+               icon="icons/player_stop_48x48.png"
                label="Stop"
                style="push">
          </command>
