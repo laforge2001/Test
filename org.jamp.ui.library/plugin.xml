@@ -112,8 +112,8 @@
          point="org.eclipse.ui.commandImages">
       <image
             commandId="play.command"
-            hoverIcon="icons/sample.gif"
-            icon="icons/sample.gif">
+            hoverIcon="icons/player_play_48x48.png"
+            icon="icons/player_play_48x48.png">
       </image>
    </extension>
    <extension
