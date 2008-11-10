@@ -146,7 +146,7 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 		_tableViewer.setUseHashlookup(true);
 		_tableViewer.setColumnProperties(columnNames);
 
-		// // Create a standard content provider
+		// Create a standard content provider
 		// ObservableListContentProvider peopleViewerContentProvider = new
 		// ObservableListContentProvider();
 		// _tableViewer.setContentProvider(peopleViewerContentProvider);
@@ -154,7 +154,7 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 		// // And a standard label provider that maps columns
 		// IObservableMap[] attributeMaps = BeansObservables.observeMaps(
 		// peopleViewerContentProvider.getKnownElements(),
-		// MusicObject.class, columnNames/* new String[] { "name" } */);
+		// MusicObject.class, columnNames);
 		// _tableViewer.setLabelProvider(new ObservableMapLabelProvider(
 		// attributeMaps));
 		//
