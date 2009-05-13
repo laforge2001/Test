@@ -6,6 +6,6 @@ Bundle-Version: 1.0.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.jamp.model.music;bundle-version="1.0.0",
  org.jamp.model;bundle-version="1.0.0",
- net.javazoom.jl;bundle-version="1.0.0",
- net.java.dev.jaudiotagger;bundle-version="1.0.0"
+ net.java.dev.jaudiotagger;bundle-version="1.0.0",
+ net.javazoom.jlayer;bundle-version="1.0.0"
 Export-Package: org.jamp.music.mp3.api;uses:="org.jamp.model.music.api"
