@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.5"?>
+
+<target name="jamp.target">
+<locations>
+<location path="${workspace_loc}/org.jamp.target/eclipse35M7/" type="Directory"/>
+<location path="${workspace_loc}/org.jamp.target/net.java.dev.jaudiotagger" type="Directory"/>
+</locations>
+<environment>
+<os>win32</os>
+<ws>win32</ws>
+<arch>x86</arch>
+<nl>en_US</nl>
+</environment>
+</target>
