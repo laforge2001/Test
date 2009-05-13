@@ -1,10 +1,10 @@
 package org.jamp.model;
 
 import org.eclipse.swt.graphics.Image;
-import org.jamp.model.api.AbstractModelObject;
+import org.jamp.model.api.AbstractModel;
 import org.jamp.model.api.IMediaAPI;
 
-public abstract class MediaObject extends AbstractModelObject {
+public abstract class MediaObject extends AbstractModel {
 
 	protected IMediaAPI _mediaAPI;
 

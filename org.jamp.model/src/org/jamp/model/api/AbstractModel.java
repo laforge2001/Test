@@ -3,7 +3,7 @@ package org.jamp.model.api;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public abstract class AbstractModelObject {
+public abstract class AbstractModel {
 	private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(
 			this);
 
