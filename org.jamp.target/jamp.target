@@ -5,6 +5,7 @@
 <locations>
 <location path="${workspace_loc}/org.jamp.target/eclipse35M7/" type="Directory"/>
 <location path="${workspace_loc}/org.jamp.target/net.java.dev.jaudiotagger" type="Directory"/>
+<location path="${workspace_loc}/org.jamp.target/net.javazoom.jlayer" type="Directory"/>
 </locations>
 <environment>
 <os>win32</os>
