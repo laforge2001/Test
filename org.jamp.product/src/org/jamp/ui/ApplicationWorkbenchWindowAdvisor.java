@@ -173,7 +173,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor
 			return null;
 
 		TrayItem trayItem = new TrayItem(tray, SWT.NONE);
-		_trayImage = AbstractUIPlugin.imageDescriptorFromPlugin("org.jamp.ui",
+		_trayImage = AbstractUIPlugin.imageDescriptorFromPlugin("org.jamp.product",
 				IImageKeys.ONLINE).createImage();
 		trayItem.setImage(_trayImage);
 		trayItem.setToolTipText("JAMP");
