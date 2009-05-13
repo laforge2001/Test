@@ -11,6 +11,5 @@ Export-Package: org.jamp.ui;
   uses:="org.eclipse.jface.action,
    org.eclipse.ui.application,
    org.eclipse.ui,
-   org.eclipse.equinox.app",
- org.jamp.ui.commandhandler;uses:="org.eclipse.core.commands"
+   org.eclipse.equinox.app"
 Bundle-ActivationPolicy: lazy
