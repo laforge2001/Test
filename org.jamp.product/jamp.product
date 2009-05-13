@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?pde version="3.4"?>
+<?pde version="3.5"?>
 
-<product name="JAmp" id="org.jamp.ui.product" application="org.jamp.ui.application" useFeatures="true">
-
+<product name="JAmp" id="org.jamp.product.product" application="org.jamp.product.application" useFeatures="true">
 
    <configIni use="default">
    </configIni>
@@ -23,7 +22,6 @@
       </win>
    </launcher>
 
-
    <vm>
    </vm>
 
@@ -33,5 +31,6 @@
    <features>
       <feature id="org.jamp.feature" version="1.0.0"/>
    </features>
+
 
 </product>

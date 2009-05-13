@@ -23,7 +23,7 @@
          id="product"
          point="org.eclipse.core.runtime.products">
       <product
-            application="org.jamp.ui.application"
+            application="org.jamp.product.application"
             name="JAmp">
          <property
                name="appName"
