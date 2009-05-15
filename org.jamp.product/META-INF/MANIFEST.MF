@@ -13,4 +13,3 @@ Export-Package: org.jamp.ui;
    org.eclipse.ui.application,
    org.eclipse.ui,
    org.eclipse.equinox.app"
-Bundle-ActivationPolicy: lazy
