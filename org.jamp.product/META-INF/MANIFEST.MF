@@ -5,7 +5,8 @@ Bundle-SymbolicName: org.jamp.product;singleton:=true
 Bundle-Version: 1.0.0
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
- org.jamp.ui.library;bundle-version="1.0.0"
+ org.jamp.ui.library;bundle-version="1.0.0",
+ org.eclipse.swt.nebula.presentations.shelf;bundle-version="3.3.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.jamp.ui;
   uses:="org.eclipse.jface.action,
