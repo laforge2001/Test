@@ -20,24 +20,6 @@
          id="org.eclipse.rcp"
          version="0.0.0"/>
 
-   <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.jamp.ui.library" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.jamp.model" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.jamp.model.music" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="net.java.dev.jaudiotagger" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.jamp.music.mp3" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.jamp.model.library" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.databinding" version="1.1.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.jface.databinding" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.databinding.beans" version="1.1.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="net.javazoom.jlayer" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.apache.commons.io" version="1.0.0" match="greaterOrEqual"/>
-   </requires>
-
    <plugin
          id="org.jamp.ui.library"
          download-size="0"
@@ -96,6 +78,13 @@
 
    <plugin
          id="net.javazoom.jlayer"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.jamp.ui.library.navigator"
          download-size="0"
          install-size="0"
          version="0.0.0"

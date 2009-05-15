@@ -5,55 +5,55 @@
          point="org.eclipse.ui.views">
       <view
             allowMultiple="false"
-            class="org.eclipse.ui.navigator.CommonNavigator"
+            class="org.jamp.ui.library.navigator.LibraryView"
             icon="icon/navigator_16x16.png"
-            id="org.eclipse.ui.examples.navigator.view"
+            id="org.jamp.library.view"
             name="ExampleView"
             restorable="true">
       </view>
    </extension>
    <extension
+         point="org.eclipse.ui.navigator.navigatorContent">
+      <navigatorContent
+            activeByDefault="true"
+            contentProvider="org.jamp.ui.library.navigator.LibraryContentProvider"
+            id="org.jamp.library.navigatorcontent"
+            labelProvider="org.jamp.ui.library.navigator.LibraryLabelProvider"
+            name="navigator content"
+            priority="normal">
+         <triggerPoints>
+            <or>
+               <instanceof
+                     value="org.jamp.model.LibraryParent">
+               </instanceof>
+               <instanceof
+                     value="org.jamp.ui.library.navigator.Root">
+               </instanceof>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <or>
+               <instanceof
+                     value="org.jamp.model.LibraryParent">
+               </instanceof>
+               <instanceof
+                     value="org.jamp.model.NodeObject">
+               </instanceof>
+            </or>
+         </possibleChildren>
+      </navigatorContent>
+   </extension>
+   <extension
          point="org.eclipse.ui.navigator.viewer">
-      <viewer
-            viewerId="org.eclipse.ui.examples.navigator.view">
-      </viewer>
       <viewerContentBinding
-            viewerId="org.eclipse.ui.examples.navigator.view">
+            viewerId="org.jamp.library.view">
          <includes>
             <contentExtension
-                  pattern="org.eclipse.ui.navigator.resourceContent">
-            </contentExtension>
-            <contentExtension
-                  pattern="org.eclipse.ui.navigator.resources.filters.*">
+                  isRoot="false"
+                  pattern="org.jamp.library.navigatorcontent">
             </contentExtension>
          </includes>
       </viewerContentBinding>
-      <viewerActionBinding
-            viewerId="org.eclipse.ui.examples.navigator.view">
-         <includes>
-            <actionExtension
-                  pattern="org.eclipse.ui.navigator.resources.*">
-            </actionExtension>
-         </includes>
-      </viewerActionBinding>
-   </extension>
-   <extension
-         point="org.eclipse.ui.navigator.navigatorContent">
-      <commonFilter
-            id="org.eclipse.ui.examples.navigator.filters.hideNonJavaProjects"
-            name="Hide non-Java projects">
-         <filterExpression>
-            <not>
-               <adapt
-                     type="org.eclipse.core.resources.IProject">
-                  <test
-                        property="org.eclipse.core.resources.projectNature"
-                        value="org.eclipse.jdt.core.javanature">
-                  </test>
-               </adapt>
-            </not>
-         </filterExpression>
-      </commonFilter>
    </extension>
 
 </plugin>

@@ -7,8 +7,8 @@ Bundle-Activator: org.jamp.ui.library.navigator.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.ui.navigator;bundle-version="3.4.0",
- org.eclipse.ui.navigator.resources;bundle-version="3.4.0",
- org.eclipse.core.resources;bundle-version="3.5.0"
+ org.jamp.model;bundle-version="1.0.0",
+ org.jamp.model.music;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.jamp.ui.library.navigator
