@@ -7,3 +7,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.jamp.model;bundle-version="1.0.0"
 Export-Package: org.jamp.model.music;uses:="org.jamp.model",
  org.jamp.model.music.api;uses:="org.jamp.model,org.jamp.model.api"
+Import-Package: org.eclipse.jface.resource,
+ org.eclipse.ui.plugin

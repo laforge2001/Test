@@ -3,9 +3,7 @@ package org.jamp.ui.library.views;
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.model.IWorkbenchAdapter;
-import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.jamp.model.NodeObject;
-import org.jamp.ui.library.image.IImageKeys;
 
 public class LibraryAdapterFactory implements IAdapterFactory {
 
@@ -21,9 +19,7 @@ public class LibraryAdapterFactory implements IAdapterFactory {
 
 		@Override
 		public ImageDescriptor getImageDescriptor(Object object) {
-			String key = ((NodeObject) object).getIconLocation();
-			return AbstractUIPlugin.imageDescriptorFromPlugin(
-					IImageKeys.PLUGIN_ID, key);
+			return ((NodeObject) object).getImageDescriptor();
 		}
 
 		@Override

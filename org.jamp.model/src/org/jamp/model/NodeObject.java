@@ -2,20 +2,24 @@ package org.jamp.model;
 
 import java.util.ArrayList;
 
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+
 public class NodeObject {
 
-	private String _name;
-	private Object _data;
+	private final String _name;
+	private final Object _data;
 	private ArrayList<NodeObject> _children;
 	private NodeObject _parent;
-	private String _imageDescriptor;
+	private ImageDescriptor _imageDescr;
 
 	public NodeObject(String name, Object data) {
 		_name = name;
 		_data = data;
 		_parent = null;
 		_children = null;
-		_imageDescriptor = "icons/sample.gif";
+		_imageDescr = AbstractUIPlugin.imageDescriptorFromPlugin(
+				"org.jamp.model", "icons/playlist_22x22.png");
 	}
 
 	public String getName() {
@@ -69,8 +73,12 @@ public class NodeObject {
 		return _parent;
 	}
 
-	public String getIconLocation() {
-		return _imageDescriptor;
+	public ImageDescriptor getImageDescriptor() {
+		return _imageDescr;
+	}
+
+	public void setImageDescriptor(ImageDescriptor desc) {
+		_imageDescr = desc;
 	}
 
 }

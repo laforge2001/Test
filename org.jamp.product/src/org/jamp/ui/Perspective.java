@@ -3,6 +3,7 @@ package org.jamp.ui;
 import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
+import org.jamp.ui.library.views.PlayerView;
 
 public class Perspective implements IPerspectiveFactory {
 
@@ -14,6 +15,7 @@ public class Perspective implements IPerspectiveFactory {
 		IFolderLayout leftside = layout.createFolder("library",
 				IPageLayout.LEFT, 0.3f, editorArea);
 		leftside.addView("org.jamp.library.view");
+		leftside.addView(PlayerView.ID);
 
 		// layout.addStandaloneView("org.jamp.library.view", true,
 		// IPageLayout.LEFT, 0.3f, editorArea);

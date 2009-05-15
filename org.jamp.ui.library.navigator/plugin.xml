@@ -6,9 +6,9 @@
       <view
             allowMultiple="false"
             class="org.jamp.ui.library.navigator.LibraryView"
-            icon="icon/navigator_16x16.png"
+            icon="icon/musicstore_48x48.png"
             id="org.jamp.library.view"
-            name="ExampleView"
+            name="Music"
             restorable="true">
       </view>
    </extension>
@@ -17,6 +17,7 @@
       <navigatorContent
             activeByDefault="true"
             contentProvider="org.jamp.ui.library.navigator.LibraryContentProvider"
+            icon="icon/playlist_16x16.png"
             id="org.jamp.library.navigatorcontent"
             labelProvider="org.jamp.ui.library.navigator.LibraryLabelProvider"
             name="navigator content"

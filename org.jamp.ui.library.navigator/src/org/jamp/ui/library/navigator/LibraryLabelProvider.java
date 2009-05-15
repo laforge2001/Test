@@ -18,8 +18,9 @@ public class LibraryLabelProvider implements ILabelProvider,
 			return PlatformUI.getWorkbench().getSharedImages().getImage(
 					ISharedImages.IMG_OBJ_FOLDER);
 		} else if (element instanceof NodeObject) {
-			return PlatformUI.getWorkbench().getSharedImages().getImage(
-					ISharedImages.IMG_OBJ_FILE);
+			// return PlatformUI.getWorkbench().getSharedImages().getImage(
+			// ISharedImages.IMG_OBJ_FILE);
+			return ((NodeObject) element).getImageDescriptor().createImage();
 		}
 		return null;
 	}
