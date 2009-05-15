@@ -7,6 +7,7 @@
 <location path="${workspace_loc}/org.jamp.target/net.java.dev.jaudiotagger" type="Directory"/>
 <location path="${workspace_loc}/org.jamp.target/net.javazoom.jlayer" type="Directory"/>
 <location path="${workspace_loc}/org.jamp.target/org.apache.commons.io" type="Directory"/>
+<location path="${workspace_loc}/org.jamp.target/org.eclipse.swt.nebula.presentations.shelf" type="Directory"/>
 </locations>
 <environment>
 <os>win32</os>
