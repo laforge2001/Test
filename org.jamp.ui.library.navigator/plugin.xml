@@ -7,8 +7,24 @@
             allowMultiple="false"
             class="org.jamp.ui.library.navigator.LibraryView"
             icon="icon/musicstore_48x48.png"
-            id="org.jamp.library.view"
+            id="org.jamp.library.music.view"
             name="Music"
+            restorable="true">
+      </view>
+      <view
+            allowMultiple="false"
+            class="org.jamp.ui.library.navigator.LibraryView"
+            icon="icon/video_48x48.png"
+            id="org.jamp.library.movies.view"
+            name="Movies"
+            restorable="true">
+      </view>
+      <view
+            allowMultiple="false"
+            class="org.jamp.ui.library.navigator.LibraryView"
+            icon="icon/photobook_48x48.png"
+            id="org.jamp.library.photos.view"
+            name="Photos"
             restorable="true">
       </view>
    </extension>
@@ -47,7 +63,25 @@
    <extension
          point="org.eclipse.ui.navigator.viewer">
       <viewerContentBinding
-            viewerId="org.jamp.library.view">
+            viewerId="org.jamp.library.music.view">
+         <includes>
+            <contentExtension
+                  isRoot="false"
+                  pattern="org.jamp.library.navigatorcontent">
+            </contentExtension>
+         </includes>
+      </viewerContentBinding>
+      <viewerContentBinding
+            viewerId="org.jamp.library.movies.view">
+         <includes>
+            <contentExtension
+                  isRoot="false"
+                  pattern="org.jamp.library.navigatorcontent">
+            </contentExtension>
+         </includes>
+      </viewerContentBinding>
+      <viewerContentBinding
+            viewerId="org.jamp.library.photos.view">
          <includes>
             <contentExtension
                   isRoot="false"

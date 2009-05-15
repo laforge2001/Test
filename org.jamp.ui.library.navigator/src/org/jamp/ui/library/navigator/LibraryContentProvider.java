@@ -69,22 +69,14 @@ public class LibraryContentProvider implements ITreeContentProvider {
 
 	private void initializeLibrary() {
 		_library = new LibraryParent("", null);
-		NodeObject _musicParent = new NodeObject("Music", null);
-		NodeObject _videoParent = new NodeObject("Videos", null);
-		NodeObject _pictureParent = new NodeObject("Pictures", null);
 
-		_library.addChild(_musicParent);
-		_library.addChild(_videoParent);
-		_library.addChild(_pictureParent);
-
-		_musicParent.addChild(new RecentlyAdded(null));
-		_musicParent.addChild(new Artist(null));
-		_musicParent.addChild(new Album(null));
-		_musicParent.addChild(new Songs(null));
-		_musicParent.addChild(new Genre(null));
-		_musicParent.addChild(new Year(null));
-		_musicParent.addChild(new Rating(null));
-
+		_library.addChild(new RecentlyAdded(null));
+		_library.addChild(new Artist(null));
+		_library.addChild(new Album(null));
+		_library.addChild(new Songs(null));
+		_library.addChild(new Genre(null));
+		_library.addChild(new Year(null));
+		_library.addChild(new Rating(null));
 	}
 
 }
