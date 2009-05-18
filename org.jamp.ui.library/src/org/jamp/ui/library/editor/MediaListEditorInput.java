@@ -8,10 +8,12 @@ import org.eclipse.ui.IPersistableElement;
 public class MediaListEditorInput implements IEditorInput {
 
 	private final String _playList;
+	private final ImageDescriptor _imageDescr;
 
-	public MediaListEditorInput(String playListName) {
+	public MediaListEditorInput(String playListName, ImageDescriptor imageDescr) {
 		Assert.isNotNull(playListName);
 		_playList = playListName;
+		_imageDescr = imageDescr;
 	}
 
 	@Override

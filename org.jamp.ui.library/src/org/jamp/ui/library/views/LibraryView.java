@@ -80,7 +80,7 @@ public class LibraryView extends ViewPart {
 				if (obj instanceof NodeObject) {
 					NodeObject node = (NodeObject) obj;
 					MediaListEditorInput input = new MediaListEditorInput(node
-							.getName());
+							.getName(), node.getImageDescriptor());
 
 					IWorkbenchPage page = PlatformUI.getWorkbench()
 							.getActiveWorkbenchWindow().getActivePage();
