@@ -90,5 +90,44 @@
          </includes>
       </viewerContentBinding>
    </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.jamp.ui.library.navigator.listManagement"
+            id="org.jamp.ui.library.navigator.openEditor"
+            name="open editor">
+      </command>
+      <category
+            id="org.jamp.ui.library.navigator.listManagement"
+            name="playlist management">
+      </category>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <command
+               commandId="org.jamp.ui.library.navigator.openEditor"
+               icon="icon/playlist_16x16.png"
+               label="Open Editor"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="selection">
+                  <iterate
+                        ifEmpty="false"
+                        operator="or">
+                     <or>
+                        <instanceof
+                              value="org.jamp.model.NodeObject">
+                        </instanceof>
+                     </or>
+                  </iterate>
+               </with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
 
 </plugin>
