@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -103,6 +104,8 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 			throws PartInitException {
 		setSite(site);
 		setInput(input);
+		setTitleImage(JFaceResources.getResources().createImageWithDefault(
+				input.getImageDescriptor()));
 		setPartName(input.getName());
 	}
 
