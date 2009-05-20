@@ -24,6 +24,7 @@ public class MediaListEditorInput implements IEditorInput {
 
 	@Override
 	public ImageDescriptor getImageDescriptor() {
+		
 		return _imageDescr;
 	}
 
