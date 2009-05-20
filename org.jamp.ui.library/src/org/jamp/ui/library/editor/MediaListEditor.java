@@ -1,8 +1,5 @@
 package org.jamp.ui.library.editor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.resource.JFaceResources;
@@ -30,12 +27,10 @@ import org.eclipse.ui.part.EditorPart;
 import org.jamp.model.MediaObject;
 import org.jamp.model.library.IJampLibrary;
 import org.jamp.model.library.JampFileBasedLibrary;
-import org.jamp.model.music.api.MusicObject;
 import org.jamp.model.player.context.JampContextConstants;
 import org.jamp.model.player.context.JampContextManager;
 import org.jamp.model.query.JampMediaObjectQuery;
 import org.jamp.ui.library.views.LibraryView;
-import org.jamp.ui.preferences.Activator;
 import org.jamp.ui.preferences.PreferenceConstants;
 
 public class MediaListEditor extends EditorPart implements ISelectionListener {
@@ -53,9 +48,9 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 	private final String[] columnNames = new String[] { TITLE_COLUMN,
 			ARTIST_COLUMN, ALBUM_COLUMN, YEAR_COLUMN, LOCATION_COLUMN };
 
-	private static List<MediaObject> _mp3List = new ArrayList<MediaObject>();
-
-	private static List<MusicObject> _music;
+	// private static List<MediaObject> _mp3List = new ArrayList<MediaObject>();
+	//
+	// private static List<MusicObject> _music;
 
 	private Table _table;
 
@@ -70,22 +65,21 @@ public class MediaListEditor extends EditorPart implements ISelectionListener {
 	}
 
 	private void initData() {
-		String urls = Activator.getDefault().getPluginPreferences().getString(
-				PreferenceConstants.P_PATHS);
+		String urls = PreferenceConstants.P_PATHS;
 
 		_query = new JampMediaObjectQuery("mp3");
 		_library.updateLibrary(urls);
-		_mp3List = _library.get(_query);
+		// _mp3List = _library.get(_query);
 
 	}
 
-	private List<MusicObject> convertToMusicObject() {
-		List<MusicObject> result = new ArrayList<MusicObject>();
-		for (MediaObject m : _mp3List) {
-			result.add((MusicObject) m);
-		}
-		return result;
-	}
+	// private List<MusicObject> convertToMusicObject() {
+	// List<MusicObject> result = new ArrayList<MusicObject>();
+	// for (MediaObject m : _mp3List) {
+	// result.add((MusicObject) m);
+	// }
+	// return result;
+	// }
 
 	@Override
 	public void doSave(IProgressMonitor monitor) {
