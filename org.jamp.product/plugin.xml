@@ -37,6 +37,10 @@
                name="preferenceCustomization"
                value="plugin_customization.ini">
          </property>
+         <property
+               name="windowImages"
+               value="platform:/plugin/org.jamp.ui.library.navigator/icon/playlist_16x16.png">
+         </property>
       </product>
    </extension>
    <extension

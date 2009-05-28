@@ -3,6 +3,7 @@
 
 <product name="JAmp" id="org.jamp.product.product" application="org.jamp.product.application" useFeatures="true">
 
+
    <configIni use="default">
    </configIni>
 
@@ -11,7 +12,7 @@
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
-   <windowImages/>
+   <windowImages i16="/org.jamp.ui.library.navigator/icon/playlist_16x16.png"/>
 
    <splash
       startupProgressRect="5,275,445,15" />
@@ -21,6 +22,7 @@
          <bmp/>
       </win>
    </launcher>
+
 
    <vm>
    </vm>
