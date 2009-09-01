@@ -3,11 +3,14 @@
 
 <target name="jamp.target">
 <locations>
-<location path="${workspace_loc}/org.jamp.target/eclipse35M7/" type="Directory"/>
 <location path="${workspace_loc}/org.jamp.target/net.java.dev.jaudiotagger" type="Directory"/>
 <location path="${workspace_loc}/org.jamp.target/net.javazoom.jlayer" type="Directory"/>
 <location path="${workspace_loc}/org.jamp.target/org.apache.commons.io" type="Directory"/>
 <location path="${workspace_loc}/org.jamp.target/org.eclipse.swt.nebula.presentations.shelf" type="Directory"/>
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="org.eclipse.sdk.ide" version="3.5.0.I20090611-1540"/>
+<repository location="http://download.eclipse.org/eclipse/updates/3.5"/>
+</location>
 </locations>
 <environment>
 <os>win32</os>
