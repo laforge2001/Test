@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.jamp.model.media/src"
+    modelPluginID="org.jamp.model.media" modelName="Media" importerID="org.eclipse.emf.importer.java"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>@model</foreignModel>
+  <genPackages prefix="Media" basePackage="org.jamp.model" disposableProviderFactory="true"
+      ecorePackage="media.ecore#/">
+    <genClasses ecoreClass="media.ecore#//MediaApi">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute media.ecore#//MediaApi/uRL"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute media.ecore#//MediaApi/playing"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute media.ecore#//MediaApi/paused"/>
+      <genOperations ecoreOperation="media.ecore#//MediaApi/init"/>
+      <genOperations ecoreOperation="media.ecore#//MediaApi/play"/>
+      <genOperations ecoreOperation="media.ecore#//MediaApi/pause"/>
+      <genOperations ecoreOperation="media.ecore#//MediaApi/stop"/>
+      <genOperations ecoreOperation="media.ecore#//MediaApi/dispose"/>
+    </genClasses>
+    <genClasses ecoreClass="media.ecore#//MediaObject">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference media.ecore#//MediaObject/aPI"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute media.ecore#//MediaObject/location"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute media.ecore#//MediaObject/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute media.ecore#//MediaObject/artist"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute media.ecore#//MediaObject/year"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute media.ecore#//MediaObject/paused"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute media.ecore#//MediaObject/playing"/>
+      <genOperations ecoreOperation="media.ecore#//MediaObject/play"/>
+      <genOperations ecoreOperation="media.ecore#//MediaObject/stop"/>
+      <genOperations ecoreOperation="media.ecore#//MediaObject/pause"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

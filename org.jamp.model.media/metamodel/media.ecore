@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="media"
+    nsURI="http:///org/jamp/model/media.ecore" nsPrefix="org.jamp.model.media">
+  <eClassifiers xsi:type="ecore:EClass" name="MediaApi">
+    <eOperations name="init"/>
+    <eOperations name="play"/>
+    <eOperations name="pause"/>
+    <eOperations name="stop"/>
+    <eOperations name="dispose"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uRL" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MediaObject">
+    <eOperations name="play"/>
+    <eOperations name="stop"/>
+    <eOperations name="pause"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aPI" eType="#//MediaApi"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="artist" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="#//State"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="State">
+    <eLiterals name="PLAYING" literal="playing"/>
+    <eLiterals name="PAUSED" value="1" literal="paused"/>
+    <eLiterals name="STOPPED" value="2" literal="stopped"/>
+  </eClassifiers>
+</ecore:EPackage>
