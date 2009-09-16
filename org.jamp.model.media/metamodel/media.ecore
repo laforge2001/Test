@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="media"
-    nsURI="http:///org/jamp/model/media.ecore" nsPrefix="org.jamp.model.media">
-  <eClassifiers xsi:type="ecore:EClass" name="MediaApi">
-    <eOperations name="init"/>
-    <eOperations name="play"/>
-    <eOperations name="pause"/>
-    <eOperations name="stop"/>
-    <eOperations name="dispose"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uRL" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="MediaPlayer"
+    nsURI="http:///org/jamp/model/player/media.ecore" nsPrefix="org.jamp.model.player">
+  <eClassifiers xsi:type="ecore:EClass" name="Playlist">
+    <eOperations name="shuffle"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mediaList" upperBound="-1"
+        eType="#//MediaObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MediaObject">
     <eOperations name="play"/>
@@ -22,9 +20,27 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="#//State"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MediaApi">
+    <eOperations name="init"/>
+    <eOperations name="play"/>
+    <eOperations name="pause"/>
+    <eOperations name="stop"/>
+    <eOperations name="dispose"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uRL" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mediaObject" eType="#//MediaObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="canPlay"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="State">
     <eLiterals name="PLAYING" literal="playing"/>
     <eLiterals name="PAUSED" value="1" literal="paused"/>
     <eLiterals name="STOPPED" value="2" literal="stopped"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlayLayer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supportedApi" upperBound="-1"
+        eType="#//MediaApi"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Library">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mediaLibrary" eType="#//MediaObject"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>
