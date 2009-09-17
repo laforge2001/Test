@@ -10,10 +10,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MediaObject">
-    <eOperations name="play"/>
-    <eOperations name="stop"/>
-    <eOperations name="pause"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="aPI" eType="#//MediaApi"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="artist" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -26,6 +22,9 @@
     <eOperations name="pause"/>
     <eOperations name="stop"/>
     <eOperations name="dispose"/>
+    <eOperations name="canPlay" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="media" eType="#//MediaObject"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uRL" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mediaObject" eType="#//MediaObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="canPlay"/>
@@ -36,11 +35,13 @@
     <eLiterals name="STOPPED" value="2" literal="stopped"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PlayLayer">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="supportedApi" upperBound="-1"
+    <eOperations name="locateApis"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="installedApi" upperBound="-1"
         eType="#//MediaApi"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="myLibrary" eType="#//Library"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Library">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mediaLibrary" eType="#//MediaObject"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mediaLibrary" upperBound="-1"
+        eType="#//MediaObject" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>
