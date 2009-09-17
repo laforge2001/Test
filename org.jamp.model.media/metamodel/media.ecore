@@ -8,6 +8,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="mediaList" upperBound="-1"
         eType="#//MediaObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="repeat" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MediaObject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -18,16 +19,23 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MediaApi">
     <eOperations name="init"/>
-    <eOperations name="play"/>
-    <eOperations name="pause"/>
-    <eOperations name="stop"/>
+    <eOperations name="play">
+      <eParameters name="playMe" eType="#//MediaObject"/>
+    </eOperations>
+    <eOperations name="pause">
+      <eParameters name="pauseMe" eType="#//MediaObject"/>
+    </eOperations>
+    <eOperations name="stop">
+      <eParameters name="stopMe" eType="#//MediaObject"/>
+    </eOperations>
     <eOperations name="dispose"/>
     <eOperations name="canPlay" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="media" eType="#//MediaObject"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uRL" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mediaObject" eType="#//MediaObject"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="canPlay"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="currentlyPlaying" upperBound="-1"
+        eType="#//MediaObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="currentlyPaused" upperBound="-1"
+        eType="#//MediaObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="State">
     <eLiterals name="PLAYING" literal="playing"/>
