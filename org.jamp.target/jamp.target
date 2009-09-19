@@ -11,6 +11,10 @@
 <unit id="org.eclipse.sdk.ide" version="3.5.0.I20090611-1540"/>
 <repository location="http://download.eclipse.org/eclipse/updates/3.5"/>
 </location>
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.compare.sdk.feature.group" version="1.0.0.v200906160908"/>
+</location>
 </locations>
 <environment>
 <os>win32</os>
