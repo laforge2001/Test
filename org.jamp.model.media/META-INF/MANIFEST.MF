@@ -12,3 +12,4 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.osgi.services;bundle-version="3.2.0"
 Bundle-ActivationPolicy: lazy
 Service-Component: META-INF/OSGI-INF/component.xml
+Export-Package: org.jamp.model.MediaPlayer.impl
