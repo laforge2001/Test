@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Mp3
+Bundle-SymbolicName: org.jamp.codec.mp3
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.jamp.model.media;bundle-version="1.0.0"
+Bundle-ClassPath: library/jl1.0.jar,
+ library/jaudiotaggersrc.jar,
+ .
