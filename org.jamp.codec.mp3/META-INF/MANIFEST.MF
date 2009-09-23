@@ -8,3 +8,4 @@ Require-Bundle: org.jamp.model.media;bundle-version="1.0.0"
 Bundle-ClassPath: library/jl1.0.jar,
  library/jaudiotaggersrc.jar,
  .
+Service-Component: META-INF/OSGI-INF/component.xml
