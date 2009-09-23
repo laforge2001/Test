@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="org.jamp.model.media">
-   <implementation class="org.jamp.internal.model.MediaPlayer.ServiceComponent"/>
+   <implementation class="org.jamp.model.MediaPlayer.impl.PlayLayerImpl"/>
    <service>
-      <provide interface="org.jamp.model.MediaPlayer.MediaApi"/>
+      <provide interface="org.jamp.model.MediaPlayer.PlayLayer"/>
    </service>
-   <reference cardinality="1..n" interface="org.jamp.model.MediaPlayer.MediaApi" name="MediaApi" policy="static"/>
+   <reference bind="registerApi" cardinality="1..1" interface="org.jamp.model.MediaPlayer.MediaApi" name="MediaApi" policy="static" unbind="unregisterApi"/>
 </scr:component>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.jamp.model.media" version="2">
+    <resource path="src/org/jamp/model/MediaPlayer/impl/PlayLayerImpl.java" type="org.jamp.model.MediaPlayer.impl.PlayLayerImpl">
+        <filter id="576725006">
+            <message_arguments>
+                <message_argument value="PlayLayer"/>
+                <message_argument value="PlayLayerImpl"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="MediaApi"/>
+                <message_argument value="PlayLayerImpl"/>
+                <message_argument value="registerApi(MediaApi)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="MediaApi"/>
+                <message_argument value="PlayLayerImpl"/>
+                <message_argument value="unregisterApi(MediaApi)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>
