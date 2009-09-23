@@ -43,7 +43,12 @@
     <eLiterals name="STOPPED" value="2" literal="stopped"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PlayLayer">
-    <eOperations name="locateApis"/>
+    <eOperations name="registerApi">
+      <eParameters name="addMe" eType="#//MediaApi"/>
+    </eOperations>
+    <eOperations name="unregisterApi">
+      <eParameters name="unregisterMe" eType="#//MediaApi"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="installedApi" upperBound="-1"
         eType="#//MediaApi"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="myLibrary" eType="#//Library"/>

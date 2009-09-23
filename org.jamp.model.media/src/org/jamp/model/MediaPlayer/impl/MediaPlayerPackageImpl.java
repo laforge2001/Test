@@ -428,7 +428,11 @@ public class MediaPlayerPackageImpl extends EPackageImpl implements MediaPlayerP
 		initEReference(getPlayLayer_InstalledApi(), this.getMediaApi(), null, "installedApi", null, 0, -1, PlayLayer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPlayLayer_MyLibrary(), this.getLibrary(), null, "myLibrary", null, 0, 1, PlayLayer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(playLayerEClass, null, "locateApis", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(playLayerEClass, null, "registerApi", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getMediaApi(), "addMe", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(playLayerEClass, null, "unregisterApi", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getMediaApi(), "unregisterMe", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(libraryEClass, Library.class, "Library", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLibrary_MediaLibrary(), this.getMediaObject(), null, "mediaLibrary", null, 0, -1, Library.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

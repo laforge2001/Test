@@ -134,7 +134,18 @@ public class PlayLayerImpl extends EObjectImpl implements PlayLayer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void locateApis() {
+	public void registerApi(MediaApi addMe) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void unregisterApi(MediaApi unregisterMe) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();

@@ -76,6 +76,14 @@ public interface PlayLayer extends EObject {
 	 * @model
 	 * @generated
 	 */
-	void locateApis();
+	void registerApi(MediaApi addMe);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void unregisterApi(MediaApi unregisterMe);
 
 } // PlayLayer
