@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.jamp.codec.mp3
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.jamp.model.media;bundle-version="1.0.0"
-Bundle-ClassPath: library/jl1.0.jar,
- library/jaudiotaggersrc.jar,
+Bundle-ClassPath: library/jaudiotagger.jar,
+ library/jl1.0.jar,
  .
 Service-Component: META-INF/OSGI-INF/component.xml
