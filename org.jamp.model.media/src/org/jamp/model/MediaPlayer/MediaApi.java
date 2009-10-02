@@ -108,4 +108,12 @@ public interface MediaApi extends EObject {
 	 */
 	boolean canPlay(MediaObject media);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void updateMediaObjectInfo(MediaObject updateMe);
+
 } // MediaApi

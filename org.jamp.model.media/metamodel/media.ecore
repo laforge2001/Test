@@ -32,6 +32,9 @@
     <eOperations name="canPlay" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="media" eType="#//MediaObject"/>
     </eOperations>
+    <eOperations name="updateMediaObjectInfo">
+      <eParameters name="updateMe" eType="#//MediaObject"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="currentlyPlaying" upperBound="-1"
         eType="#//MediaObject"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="currentlyPaused" upperBound="-1"

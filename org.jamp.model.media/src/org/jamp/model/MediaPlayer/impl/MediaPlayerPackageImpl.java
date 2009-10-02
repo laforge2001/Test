@@ -424,6 +424,9 @@ public class MediaPlayerPackageImpl extends EPackageImpl implements MediaPlayerP
 		op = addEOperation(mediaApiEClass, ecorePackage.getEBoolean(), "canPlay", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getMediaObject(), "media", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(mediaApiEClass, null, "updateMediaObjectInfo", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getMediaObject(), "updateMe", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(playLayerEClass, PlayLayer.class, "PlayLayer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPlayLayer_InstalledApi(), this.getMediaApi(), null, "installedApi", null, 0, -1, PlayLayer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPlayLayer_MyLibrary(), this.getLibrary(), null, "myLibrary", null, 0, 1, PlayLayer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

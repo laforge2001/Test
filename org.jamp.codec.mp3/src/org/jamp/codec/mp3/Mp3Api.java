@@ -55,4 +55,9 @@ public class Mp3Api extends MediaApiImpl {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public void updateMediaObjectInfo(MediaObject updateMe) {
+		// TODO Auto-generated method stub
+	}
 }
