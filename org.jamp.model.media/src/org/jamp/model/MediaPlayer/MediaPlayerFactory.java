@@ -44,15 +44,6 @@ public interface MediaPlayerFactory extends EFactory {
 	MediaObject createMediaObject();
 
 	/**
-	 * Returns a new object of class '<em>Media Api</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Media Api</em>'.
-	 * @generated
-	 */
-	MediaApi createMediaApi();
-
-	/**
 	 * Returns a new object of class '<em>Play Layer</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

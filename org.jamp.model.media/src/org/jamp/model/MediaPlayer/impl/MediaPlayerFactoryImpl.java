@@ -63,7 +63,6 @@ public class MediaPlayerFactoryImpl extends EFactoryImpl implements MediaPlayerF
 		switch (eClass.getClassifierID()) {
 			case MediaPlayerPackage.PLAYLIST: return createPlaylist();
 			case MediaPlayerPackage.MEDIA_OBJECT: return createMediaObject();
-			case MediaPlayerPackage.MEDIA_API: return createMediaApi();
 			case MediaPlayerPackage.PLAY_LAYER: return createPlayLayer();
 			case MediaPlayerPackage.LIBRARY: return createLibrary();
 			default:
@@ -119,16 +118,6 @@ public class MediaPlayerFactoryImpl extends EFactoryImpl implements MediaPlayerF
 	public MediaObject createMediaObject() {
 		MediaObjectImpl mediaObject = new MediaObjectImpl();
 		return mediaObject;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public MediaApi createMediaApi() {
-		MediaApiImpl mediaApi = new MediaApiImpl();
-		return mediaApi;
 	}
 
 	/**

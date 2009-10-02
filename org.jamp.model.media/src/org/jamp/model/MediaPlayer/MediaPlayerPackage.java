@@ -171,10 +171,10 @@ public interface MediaPlayerPackage extends EPackage {
 	int MEDIA_OBJECT_FEATURE_COUNT = 5;
 
 	/**
-	 * The meta object id for the '{@link org.jamp.model.MediaPlayer.impl.MediaApiImpl <em>Media Api</em>}' class.
+	 * The meta object id for the '{@link org.jamp.model.MediaPlayer.MediaApi <em>Media Api</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.jamp.model.MediaPlayer.impl.MediaApiImpl
+	 * @see org.jamp.model.MediaPlayer.MediaApi
 	 * @see org.jamp.model.MediaPlayer.impl.MediaPlayerPackageImpl#getMediaApi()
 	 * @generated
 	 */
@@ -593,10 +593,10 @@ public interface MediaPlayerPackage extends EPackage {
 		EAttribute MEDIA_OBJECT__STATE = eINSTANCE.getMediaObject_State();
 
 		/**
-		 * The meta object literal for the '{@link org.jamp.model.MediaPlayer.impl.MediaApiImpl <em>Media Api</em>}' class.
+		 * The meta object literal for the '{@link org.jamp.model.MediaPlayer.MediaApi <em>Media Api</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.jamp.model.MediaPlayer.impl.MediaApiImpl
+		 * @see org.jamp.model.MediaPlayer.MediaApi
 		 * @see org.jamp.model.MediaPlayer.impl.MediaPlayerPackageImpl#getMediaApi()
 		 * @generated
 		 */

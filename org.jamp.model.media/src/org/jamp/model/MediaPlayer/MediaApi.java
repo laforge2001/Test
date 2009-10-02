@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see org.jamp.model.MediaPlayer.MediaPlayerPackage#getMediaApi()
- * @model
+ * @model interface="true" abstract="true"
  * @generated
  */
 public interface MediaApi extends EObject {

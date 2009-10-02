@@ -17,7 +17,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="#//State"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MediaApi">
+  <eClassifiers xsi:type="ecore:EClass" name="MediaApi" abstract="true" interface="true">
     <eOperations name="init"/>
     <eOperations name="play">
       <eParameters name="playMe" eType="#//MediaObject"/>
