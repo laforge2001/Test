@@ -1,10 +1,11 @@
 package org.jamp.codec.mp3;
 
+import java.io.File;
 import java.io.IOException;
 
-import javazoom.jl.player.AudioDevice;
+import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
-import javazoom.jl.player.advanced.PlaybackEvent;
+import javazoom.jl.player.advanced.jlap;
 
 import org.jamp.model.MediaPlayer.MediaObject;
 import org.jamp.model.MediaPlayer.State;
@@ -17,14 +18,10 @@ import org.jaudiotagger.tag.TagException;
 
 public class Mp3Api extends MediaApiImpl {
 
-	private State _state;
 	private static AdvancedPlayer _player;
-	private AudioDevice _device;
 	private Tag _mp3Info;
 	protected boolean _isPaused = false;
-	protected String _fileLocation;
-	protected PlaybackEvent _playEvent;
-	private int _currentFrame;
+	private Mp3PlaybackListener _listener;
 
 	@Override
 	public void init() {
@@ -34,30 +31,49 @@ public class Mp3Api extends MediaApiImpl {
 	@Override
 	public boolean canPlay(MediaObject media) {
 		// _player.
-		return false;
+		return true;
 	}
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-
+		_player.close();
 	}
 
 	@Override
 	public void pause(MediaObject pauseMe) {
-		// TODO Auto-generated method stub
+		if (pauseMe.getState() == State.PLAYING) {
+			stop(pauseMe);
+			_isPaused = true;
+		}
 
 	}
 
 	@Override
 	public void play(MediaObject playMe) {
-		// TODO Auto-generated method stub
+		try {
+			if (!_isPaused) {
+				_listener = new Mp3PlaybackListener(playMe.getState());
+				_player = jlap.playMp3(new File(playMe.getLocation()),
+						_listener);
+			} else {
+				_player = jlap.playMp3(new File(playMe.getLocation()),
+						_listener.getCurrentFrame(), Integer.MAX_VALUE,
+						_listener);
+				_isPaused = false;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (JavaLayerException e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	@Override
 	public void stop(MediaObject stopMe) {
-		// TODO Auto-generated method stub
+		if (!stopMe.getState().equals(State.STOPPED)) {
+			_player.stop();
+		}
 
 	}
 
@@ -72,16 +88,12 @@ public class Mp3Api extends MediaApiImpl {
 				_mp3Info = tagFile.getID3v1Tag();
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (TagException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ReadOnlyFileException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvalidAudioFrameException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
