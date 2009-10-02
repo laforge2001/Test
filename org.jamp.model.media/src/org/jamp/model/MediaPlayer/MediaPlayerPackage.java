@@ -8,6 +8,7 @@ package org.jamp.model.MediaPlayer;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -61,6 +62,43 @@ public interface MediaPlayerPackage extends EPackage {
 	MediaPlayerPackage eINSTANCE = org.jamp.model.MediaPlayer.impl.MediaPlayerPackageImpl.init();
 
 	/**
+	 * The meta object id for the '{@link org.jamp.model.MediaPlayer.impl.BaseObjectImpl <em>Base Object</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.jamp.model.MediaPlayer.impl.BaseObjectImpl
+	 * @see org.jamp.model.MediaPlayer.impl.MediaPlayerPackageImpl#getBaseObject()
+	 * @generated
+	 */
+	int BASE_OBJECT = 5;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_OBJECT__ID = 0;
+
+	/**
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_OBJECT__PROPERTY_CHANGE_SUPPORT = 1;
+
+	/**
+	 * The number of structural features of the '<em>Base Object</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_OBJECT_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link org.jamp.model.MediaPlayer.impl.PlaylistImpl <em>Playlist</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -71,13 +109,31 @@ public interface MediaPlayerPackage extends EPackage {
 	int PLAYLIST = 0;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PLAYLIST__ID = BASE_OBJECT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PLAYLIST__PROPERTY_CHANGE_SUPPORT = BASE_OBJECT__PROPERTY_CHANGE_SUPPORT;
+
+	/**
 	 * The feature id for the '<em><b>Media List</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PLAYLIST__MEDIA_LIST = 0;
+	int PLAYLIST__MEDIA_LIST = BASE_OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -86,7 +142,7 @@ public interface MediaPlayerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PLAYLIST__NAME = 1;
+	int PLAYLIST__NAME = BASE_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Repeat</b></em>' attribute.
@@ -95,7 +151,7 @@ public interface MediaPlayerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PLAYLIST__REPEAT = 2;
+	int PLAYLIST__REPEAT = BASE_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Playlist</em>' class.
@@ -104,7 +160,7 @@ public interface MediaPlayerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PLAYLIST_FEATURE_COUNT = 3;
+	int PLAYLIST_FEATURE_COUNT = BASE_OBJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.jamp.model.MediaPlayer.impl.MediaObjectImpl <em>Media Object</em>}' class.
@@ -117,13 +173,31 @@ public interface MediaPlayerPackage extends EPackage {
 	int MEDIA_OBJECT = 1;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_OBJECT__ID = BASE_OBJECT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_OBJECT__PROPERTY_CHANGE_SUPPORT = BASE_OBJECT__PROPERTY_CHANGE_SUPPORT;
+
+	/**
 	 * The feature id for the '<em><b>Location</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEDIA_OBJECT__LOCATION = 0;
+	int MEDIA_OBJECT__LOCATION = BASE_OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Title</b></em>' attribute.
@@ -132,7 +206,7 @@ public interface MediaPlayerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEDIA_OBJECT__TITLE = 1;
+	int MEDIA_OBJECT__TITLE = BASE_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Artist</b></em>' attribute.
@@ -141,7 +215,7 @@ public interface MediaPlayerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEDIA_OBJECT__ARTIST = 2;
+	int MEDIA_OBJECT__ARTIST = BASE_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Year</b></em>' attribute.
@@ -150,7 +224,7 @@ public interface MediaPlayerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEDIA_OBJECT__YEAR = 3;
+	int MEDIA_OBJECT__YEAR = BASE_OBJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
@@ -159,7 +233,7 @@ public interface MediaPlayerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEDIA_OBJECT__STATE = 4;
+	int MEDIA_OBJECT__STATE = BASE_OBJECT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Album</b></em>' attribute.
@@ -168,7 +242,7 @@ public interface MediaPlayerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEDIA_OBJECT__ALBUM = 5;
+	int MEDIA_OBJECT__ALBUM = BASE_OBJECT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Media Object</em>' class.
@@ -177,7 +251,7 @@ public interface MediaPlayerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEDIA_OBJECT_FEATURE_COUNT = 6;
+	int MEDIA_OBJECT_FEATURE_COUNT = BASE_OBJECT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.jamp.model.MediaPlayer.MediaApi <em>Media Api</em>}' class.
@@ -264,13 +338,31 @@ public interface MediaPlayerPackage extends EPackage {
 	int LIBRARY = 4;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIBRARY__ID = BASE_OBJECT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIBRARY__PROPERTY_CHANGE_SUPPORT = BASE_OBJECT__PROPERTY_CHANGE_SUPPORT;
+
+	/**
 	 * The feature id for the '<em><b>Media Library</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY__MEDIA_LIBRARY = 0;
+	int LIBRARY__MEDIA_LIBRARY = BASE_OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Library</em>' class.
@@ -279,7 +371,7 @@ public interface MediaPlayerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY_FEATURE_COUNT = 1;
+	int LIBRARY_FEATURE_COUNT = BASE_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.jamp.model.MediaPlayer.State <em>State</em>}' enum.
@@ -289,7 +381,38 @@ public interface MediaPlayerPackage extends EPackage {
 	 * @see org.jamp.model.MediaPlayer.impl.MediaPlayerPackageImpl#getState()
 	 * @generated
 	 */
-	int STATE = 5;
+	int STATE = 6;
+
+
+	/**
+	 * The meta object id for the '<em>Property Change Support</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.beans.PropertyChangeSupport
+	 * @see org.jamp.model.MediaPlayer.impl.MediaPlayerPackageImpl#getPropertyChangeSupport()
+	 * @generated
+	 */
+	int PROPERTY_CHANGE_SUPPORT = 7;
+
+	/**
+	 * The meta object id for the '<em>Property Change Listener</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.beans.PropertyChangeListener
+	 * @see org.jamp.model.MediaPlayer.impl.MediaPlayerPackageImpl#getPropertyChangeListener()
+	 * @generated
+	 */
+	int PROPERTY_CHANGE_LISTENER = 8;
+
+	/**
+	 * The meta object id for the '<em>Property Change Event</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.beans.PropertyChangeEvent
+	 * @see org.jamp.model.MediaPlayer.impl.MediaPlayerPackageImpl#getPropertyChangeEvent()
+	 * @generated
+	 */
+	int PROPERTY_CHANGE_EVENT = 9;
 
 
 	/**
@@ -497,6 +620,38 @@ public interface MediaPlayerPackage extends EPackage {
 	EReference getLibrary_MediaLibrary();
 
 	/**
+	 * Returns the meta object for class '{@link org.jamp.model.MediaPlayer.BaseObject <em>Base Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Base Object</em>'.
+	 * @see org.jamp.model.MediaPlayer.BaseObject
+	 * @generated
+	 */
+	EClass getBaseObject();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.jamp.model.MediaPlayer.BaseObject#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see org.jamp.model.MediaPlayer.BaseObject#getId()
+	 * @see #getBaseObject()
+	 * @generated
+	 */
+	EAttribute getBaseObject_Id();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.jamp.model.MediaPlayer.BaseObject#getPropertyChangeSupport <em>Property Change Support</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Property Change Support</em>'.
+	 * @see org.jamp.model.MediaPlayer.BaseObject#getPropertyChangeSupport()
+	 * @see #getBaseObject()
+	 * @generated
+	 */
+	EAttribute getBaseObject_PropertyChangeSupport();
+
+	/**
 	 * Returns the meta object for enum '{@link org.jamp.model.MediaPlayer.State <em>State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -505,6 +660,39 @@ public interface MediaPlayerPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getState();
+
+	/**
+	 * Returns the meta object for data type '{@link java.beans.PropertyChangeSupport <em>Property Change Support</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Property Change Support</em>'.
+	 * @see java.beans.PropertyChangeSupport
+	 * @model instanceClass="java.beans.PropertyChangeSupport" serializeable="false"
+	 * @generated
+	 */
+	EDataType getPropertyChangeSupport();
+
+	/**
+	 * Returns the meta object for data type '{@link java.beans.PropertyChangeListener <em>Property Change Listener</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Property Change Listener</em>'.
+	 * @see java.beans.PropertyChangeListener
+	 * @model instanceClass="java.beans.PropertyChangeListener" serializeable="false"
+	 * @generated
+	 */
+	EDataType getPropertyChangeListener();
+
+	/**
+	 * Returns the meta object for data type '{@link java.beans.PropertyChangeEvent <em>Property Change Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Property Change Event</em>'.
+	 * @see java.beans.PropertyChangeEvent
+	 * @model instanceClass="java.beans.PropertyChangeEvent" serializeable="false"
+	 * @generated
+	 */
+	EDataType getPropertyChangeEvent();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -691,6 +879,32 @@ public interface MediaPlayerPackage extends EPackage {
 		EReference LIBRARY__MEDIA_LIBRARY = eINSTANCE.getLibrary_MediaLibrary();
 
 		/**
+		 * The meta object literal for the '{@link org.jamp.model.MediaPlayer.impl.BaseObjectImpl <em>Base Object</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.jamp.model.MediaPlayer.impl.BaseObjectImpl
+		 * @see org.jamp.model.MediaPlayer.impl.MediaPlayerPackageImpl#getBaseObject()
+		 * @generated
+		 */
+		EClass BASE_OBJECT = eINSTANCE.getBaseObject();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BASE_OBJECT__ID = eINSTANCE.getBaseObject_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Property Change Support</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BASE_OBJECT__PROPERTY_CHANGE_SUPPORT = eINSTANCE.getBaseObject_PropertyChangeSupport();
+
+		/**
 		 * The meta object literal for the '{@link org.jamp.model.MediaPlayer.State <em>State</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -699,6 +913,36 @@ public interface MediaPlayerPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum STATE = eINSTANCE.getState();
+
+		/**
+		 * The meta object literal for the '<em>Property Change Support</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.beans.PropertyChangeSupport
+		 * @see org.jamp.model.MediaPlayer.impl.MediaPlayerPackageImpl#getPropertyChangeSupport()
+		 * @generated
+		 */
+		EDataType PROPERTY_CHANGE_SUPPORT = eINSTANCE.getPropertyChangeSupport();
+
+		/**
+		 * The meta object literal for the '<em>Property Change Listener</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.beans.PropertyChangeListener
+		 * @see org.jamp.model.MediaPlayer.impl.MediaPlayerPackageImpl#getPropertyChangeListener()
+		 * @generated
+		 */
+		EDataType PROPERTY_CHANGE_LISTENER = eINSTANCE.getPropertyChangeListener();
+
+		/**
+		 * The meta object literal for the '<em>Property Change Event</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.beans.PropertyChangeEvent
+		 * @see org.jamp.model.MediaPlayer.impl.MediaPlayerPackageImpl#getPropertyChangeEvent()
+		 * @generated
+		 */
+		EDataType PROPERTY_CHANGE_EVENT = eINSTANCE.getPropertyChangeEvent();
 
 	}
 

@@ -3,14 +3,14 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="MediaPlayer"
     nsURI="http:///org/jamp/model/player/media.ecore" nsPrefix="org.jamp.model.player">
-  <eClassifiers xsi:type="ecore:EClass" name="Playlist">
+  <eClassifiers xsi:type="ecore:EClass" name="Playlist" eSuperTypes="#//BaseObject">
     <eOperations name="shuffle"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mediaList" upperBound="-1"
         eType="#//MediaObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="repeat" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MediaObject">
+  <eClassifiers xsi:type="ecore:EClass" name="MediaObject" eSuperTypes="#//BaseObject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="artist" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -57,8 +57,25 @@
         eType="#//MediaApi"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="myLibrary" eType="#//Library"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Library">
+  <eClassifiers xsi:type="ecore:EClass" name="Library" eSuperTypes="#//BaseObject">
     <eStructuralFeatures xsi:type="ecore:EReference" name="mediaLibrary" upperBound="-1"
         eType="#//MediaObject" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="PropertyChangeSupport" instanceClassName="java.beans.PropertyChangeSupport"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="PropertyChangeListener" instanceClassName="java.beans.PropertyChangeListener"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="PropertyChangeEvent" instanceClassName="java.beans.PropertyChangeEvent"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BaseObject">
+    <eOperations name="addPropertyChangeListener">
+      <eParameters name="listener" eType="#//PropertyChangeListener"/>
+    </eOperations>
+    <eOperations name="removePropertyChangeListener">
+      <eParameters name="listener" eType="#//PropertyChangeListener"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="propertyChangeSupport"
+        eType="#//PropertyChangeEvent" changeable="false" transient="true"/>
   </eClassifiers>
 </ecore:EPackage>

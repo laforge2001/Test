@@ -37,7 +37,7 @@ import org.jamp.model.MediaPlayer.MediaPlayerPackage;
  *
  * @generated
  */
-public class LibraryImpl extends EObjectImpl implements Library {
+public class LibraryImpl extends BaseObjectImpl implements Library {
 	/**
 	 * The cached value of the '{@link #getMediaLibrary() <em>Media Library</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

@@ -35,7 +35,7 @@ import org.jamp.model.MediaPlayer.State;
  *
  * @generated
  */
-public class MediaObjectImpl extends EObjectImpl implements MediaObject {
+public class MediaObjectImpl extends BaseObjectImpl implements MediaObject {
 	/**
 	 * The default value of the '{@link #getLocation() <em>Location</em>}' attribute.
 	 * <!-- begin-user-doc -->

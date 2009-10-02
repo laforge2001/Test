@@ -90,12 +90,14 @@ public class MediaPlayerSwitch<T> {
 			case MediaPlayerPackage.PLAYLIST: {
 				Playlist playlist = (Playlist)theEObject;
 				T result = casePlaylist(playlist);
+				if (result == null) result = caseBaseObject(playlist);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case MediaPlayerPackage.MEDIA_OBJECT: {
 				MediaObject mediaObject = (MediaObject)theEObject;
 				T result = caseMediaObject(mediaObject);
+				if (result == null) result = caseBaseObject(mediaObject);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -114,6 +116,13 @@ public class MediaPlayerSwitch<T> {
 			case MediaPlayerPackage.LIBRARY: {
 				Library library = (Library)theEObject;
 				T result = caseLibrary(library);
+				if (result == null) result = caseBaseObject(library);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MediaPlayerPackage.BASE_OBJECT: {
+				BaseObject baseObject = (BaseObject)theEObject;
+				T result = caseBaseObject(baseObject);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -193,6 +202,21 @@ public class MediaPlayerSwitch<T> {
 	 * @generated
 	 */
 	public T caseLibrary(Library object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Base Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Base Object</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBaseObject(BaseObject object) {
 		return null;
 	}
 

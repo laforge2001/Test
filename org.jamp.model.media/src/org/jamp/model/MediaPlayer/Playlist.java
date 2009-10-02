@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Playlist extends EObject {
+public interface Playlist extends BaseObject {
 	/**
 	 * Returns the value of the '<em><b>Media List</b></em>' reference list.
 	 * The list contents are of type {@link org.jamp.model.MediaPlayer.MediaObject}.

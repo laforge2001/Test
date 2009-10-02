@@ -65,6 +65,7 @@ public class MediaPlayerFactoryImpl extends EFactoryImpl implements MediaPlayerF
 			case MediaPlayerPackage.MEDIA_OBJECT: return createMediaObject();
 			case MediaPlayerPackage.PLAY_LAYER: return createPlayLayer();
 			case MediaPlayerPackage.LIBRARY: return createLibrary();
+			case MediaPlayerPackage.BASE_OBJECT: return createBaseObject();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -138,6 +139,16 @@ public class MediaPlayerFactoryImpl extends EFactoryImpl implements MediaPlayerF
 	public Library createLibrary() {
 		LibraryImpl library = new LibraryImpl();
 		return library;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BaseObject createBaseObject() {
+		BaseObjectImpl baseObject = new BaseObjectImpl();
+		return baseObject;
 	}
 
 	/**

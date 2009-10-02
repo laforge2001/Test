@@ -38,7 +38,7 @@ import org.jamp.model.MediaPlayer.Playlist;
  *
  * @generated
  */
-public class PlaylistImpl extends EObjectImpl implements Playlist {
+public class PlaylistImpl extends BaseObjectImpl implements Playlist {
 	/**
 	 * The cached value of the '{@link #getMediaList() <em>Media List</em>}' reference list.
 	 * <!-- begin-user-doc -->

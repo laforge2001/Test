@@ -62,6 +62,15 @@ public interface MediaPlayerFactory extends EFactory {
 	Library createLibrary();
 
 	/**
+	 * Returns a new object of class '<em>Base Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Base Object</em>'.
+	 * @generated
+	 */
+	BaseObject createBaseObject();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

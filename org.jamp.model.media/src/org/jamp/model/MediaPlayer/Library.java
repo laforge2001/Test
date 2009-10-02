@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Library extends EObject {
+public interface Library extends BaseObject {
 	/**
 	 * Returns the value of the '<em><b>Media Library</b></em>' containment reference list.
 	 * The list contents are of type {@link org.jamp.model.MediaPlayer.MediaObject}.

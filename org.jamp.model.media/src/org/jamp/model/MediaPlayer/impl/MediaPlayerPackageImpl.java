@@ -6,8 +6,12 @@
  */
 package org.jamp.model.MediaPlayer.impl;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -15,6 +19,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.jamp.model.MediaPlayer.BaseObject;
 import org.jamp.model.MediaPlayer.Library;
 import org.jamp.model.MediaPlayer.MediaApi;
 import org.jamp.model.MediaPlayer.MediaObject;
@@ -71,7 +76,35 @@ public class MediaPlayerPackageImpl extends EPackageImpl implements MediaPlayerP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass baseObjectEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum stateEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType propertyChangeSupportEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType propertyChangeListenerEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType propertyChangeEventEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -310,8 +343,62 @@ public class MediaPlayerPackageImpl extends EPackageImpl implements MediaPlayerP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getBaseObject() {
+		return baseObjectEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBaseObject_Id() {
+		return (EAttribute)baseObjectEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBaseObject_PropertyChangeSupport() {
+		return (EAttribute)baseObjectEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getState() {
 		return stateEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getPropertyChangeSupport() {
+		return propertyChangeSupportEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getPropertyChangeListener() {
+		return propertyChangeListenerEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getPropertyChangeEvent() {
+		return propertyChangeEventEDataType;
 	}
 
 	/**
@@ -366,8 +453,17 @@ public class MediaPlayerPackageImpl extends EPackageImpl implements MediaPlayerP
 		libraryEClass = createEClass(LIBRARY);
 		createEReference(libraryEClass, LIBRARY__MEDIA_LIBRARY);
 
+		baseObjectEClass = createEClass(BASE_OBJECT);
+		createEAttribute(baseObjectEClass, BASE_OBJECT__ID);
+		createEAttribute(baseObjectEClass, BASE_OBJECT__PROPERTY_CHANGE_SUPPORT);
+
 		// Create enums
 		stateEEnum = createEEnum(STATE);
+
+		// Create data types
+		propertyChangeSupportEDataType = createEDataType(PROPERTY_CHANGE_SUPPORT);
+		propertyChangeListenerEDataType = createEDataType(PROPERTY_CHANGE_LISTENER);
+		propertyChangeEventEDataType = createEDataType(PROPERTY_CHANGE_EVENT);
 	}
 
 	/**
@@ -398,6 +494,9 @@ public class MediaPlayerPackageImpl extends EPackageImpl implements MediaPlayerP
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		playlistEClass.getESuperTypes().add(this.getBaseObject());
+		mediaObjectEClass.getESuperTypes().add(this.getBaseObject());
+		libraryEClass.getESuperTypes().add(this.getBaseObject());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(playlistEClass, Playlist.class, "Playlist", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -451,11 +550,26 @@ public class MediaPlayerPackageImpl extends EPackageImpl implements MediaPlayerP
 		initEClass(libraryEClass, Library.class, "Library", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLibrary_MediaLibrary(), this.getMediaObject(), null, "mediaLibrary", null, 0, -1, Library.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(baseObjectEClass, BaseObject.class, "BaseObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBaseObject_Id(), ecorePackage.getEInt(), "id", null, 0, 1, BaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBaseObject_PropertyChangeSupport(), this.getPropertyChangeEvent(), "propertyChangeSupport", null, 0, 1, BaseObject.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(baseObjectEClass, null, "addPropertyChangeListener", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getPropertyChangeListener(), "listener", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(baseObjectEClass, null, "removePropertyChangeListener", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getPropertyChangeListener(), "listener", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(stateEEnum, State.class, "State");
 		addEEnumLiteral(stateEEnum, State.PLAYING);
 		addEEnumLiteral(stateEEnum, State.PAUSED);
 		addEEnumLiteral(stateEEnum, State.STOPPED);
+
+		// Initialize data types
+		initEDataType(propertyChangeSupportEDataType, PropertyChangeSupport.class, "PropertyChangeSupport", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(propertyChangeListenerEDataType, PropertyChangeListener.class, "PropertyChangeListener", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(propertyChangeEventEDataType, PropertyChangeEvent.class, "PropertyChangeEvent", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
