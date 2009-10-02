@@ -229,6 +229,15 @@ public class MediaPlayerPackageImpl extends EPackageImpl implements MediaPlayerP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getMediaObject_Album() {
+		return (EAttribute)mediaObjectEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMediaApi() {
 		return mediaApiEClass;
 	}
@@ -344,6 +353,7 @@ public class MediaPlayerPackageImpl extends EPackageImpl implements MediaPlayerP
 		createEAttribute(mediaObjectEClass, MEDIA_OBJECT__ARTIST);
 		createEAttribute(mediaObjectEClass, MEDIA_OBJECT__YEAR);
 		createEAttribute(mediaObjectEClass, MEDIA_OBJECT__STATE);
+		createEAttribute(mediaObjectEClass, MEDIA_OBJECT__ALBUM);
 
 		mediaApiEClass = createEClass(MEDIA_API);
 		createEReference(mediaApiEClass, MEDIA_API__CURRENTLY_PLAYING);
@@ -403,6 +413,7 @@ public class MediaPlayerPackageImpl extends EPackageImpl implements MediaPlayerP
 		initEAttribute(getMediaObject_Artist(), ecorePackage.getEString(), "artist", null, 0, 1, MediaObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMediaObject_Year(), ecorePackage.getEInt(), "year", null, 0, 1, MediaObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMediaObject_State(), this.getState(), "state", null, 0, 1, MediaObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMediaObject_Album(), ecorePackage.getEString(), "album", null, 0, 1, MediaObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mediaApiEClass, MediaApi.class, "MediaApi", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMediaApi_CurrentlyPlaying(), this.getMediaObject(), null, "currentlyPlaying", null, 0, -1, MediaApi.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -16,6 +16,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="artist" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="album" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MediaApi" abstract="true" interface="true">
     <eOperations name="init"/>

@@ -162,13 +162,22 @@ public interface MediaPlayerPackage extends EPackage {
 	int MEDIA_OBJECT__STATE = 4;
 
 	/**
+	 * The feature id for the '<em><b>Album</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDIA_OBJECT__ALBUM = 5;
+
+	/**
 	 * The number of structural features of the '<em>Media Object</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEDIA_OBJECT_FEATURE_COUNT = 5;
+	int MEDIA_OBJECT_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link org.jamp.model.MediaPlayer.MediaApi <em>Media Api</em>}' class.
@@ -392,6 +401,17 @@ public interface MediaPlayerPackage extends EPackage {
 	EAttribute getMediaObject_State();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.jamp.model.MediaPlayer.MediaObject#getAlbum <em>Album</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Album</em>'.
+	 * @see org.jamp.model.MediaPlayer.MediaObject#getAlbum()
+	 * @see #getMediaObject()
+	 * @generated
+	 */
+	EAttribute getMediaObject_Album();
+
+	/**
 	 * Returns the meta object for class '{@link org.jamp.model.MediaPlayer.MediaApi <em>Media Api</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -591,6 +611,14 @@ public interface MediaPlayerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MEDIA_OBJECT__STATE = eINSTANCE.getMediaObject_State();
+
+		/**
+		 * The meta object literal for the '<em><b>Album</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEDIA_OBJECT__ALBUM = eINSTANCE.getMediaObject_Album();
 
 		/**
 		 * The meta object literal for the '{@link org.jamp.model.MediaPlayer.MediaApi <em>Media Api</em>}' class.

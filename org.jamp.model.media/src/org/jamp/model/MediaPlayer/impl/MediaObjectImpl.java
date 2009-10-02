@@ -29,6 +29,7 @@ import org.jamp.model.MediaPlayer.State;
  *   <li>{@link org.jamp.model.MediaPlayer.impl.MediaObjectImpl#getArtist <em>Artist</em>}</li>
  *   <li>{@link org.jamp.model.MediaPlayer.impl.MediaObjectImpl#getYear <em>Year</em>}</li>
  *   <li>{@link org.jamp.model.MediaPlayer.impl.MediaObjectImpl#getState <em>State</em>}</li>
+ *   <li>{@link org.jamp.model.MediaPlayer.impl.MediaObjectImpl#getAlbum <em>Album</em>}</li>
  * </ul>
  * </p>
  *
@@ -134,6 +135,26 @@ public class MediaObjectImpl extends EObjectImpl implements MediaObject {
 	 * @ordered
 	 */
 	protected State state = STATE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getAlbum() <em>Album</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAlbum()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ALBUM_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAlbum() <em>Album</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAlbum()
+	 * @generated
+	 * @ordered
+	 */
+	protected String album = ALBUM_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -264,6 +285,27 @@ public class MediaObjectImpl extends EObjectImpl implements MediaObject {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getAlbum() {
+		return album;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAlbum(String newAlbum) {
+		String oldAlbum = album;
+		album = newAlbum;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MediaPlayerPackage.MEDIA_OBJECT__ALBUM, oldAlbum, album));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -277,6 +319,8 @@ public class MediaObjectImpl extends EObjectImpl implements MediaObject {
 				return getYear();
 			case MediaPlayerPackage.MEDIA_OBJECT__STATE:
 				return getState();
+			case MediaPlayerPackage.MEDIA_OBJECT__ALBUM:
+				return getAlbum();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -303,6 +347,9 @@ public class MediaObjectImpl extends EObjectImpl implements MediaObject {
 				return;
 			case MediaPlayerPackage.MEDIA_OBJECT__STATE:
 				setState((State)newValue);
+				return;
+			case MediaPlayerPackage.MEDIA_OBJECT__ALBUM:
+				setAlbum((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -331,6 +378,9 @@ public class MediaObjectImpl extends EObjectImpl implements MediaObject {
 			case MediaPlayerPackage.MEDIA_OBJECT__STATE:
 				setState(STATE_EDEFAULT);
 				return;
+			case MediaPlayerPackage.MEDIA_OBJECT__ALBUM:
+				setAlbum(ALBUM_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -353,6 +403,8 @@ public class MediaObjectImpl extends EObjectImpl implements MediaObject {
 				return year != YEAR_EDEFAULT;
 			case MediaPlayerPackage.MEDIA_OBJECT__STATE:
 				return state != STATE_EDEFAULT;
+			case MediaPlayerPackage.MEDIA_OBJECT__ALBUM:
+				return ALBUM_EDEFAULT == null ? album != null : !ALBUM_EDEFAULT.equals(album);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -377,6 +429,8 @@ public class MediaObjectImpl extends EObjectImpl implements MediaObject {
 		result.append(year);
 		result.append(", state: ");
 		result.append(state);
+		result.append(", album: ");
+		result.append(album);
 		result.append(')');
 		return result.toString();
 	}

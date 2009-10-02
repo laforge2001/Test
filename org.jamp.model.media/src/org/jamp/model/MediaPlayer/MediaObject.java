@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.jamp.model.MediaPlayer.MediaObject#getArtist <em>Artist</em>}</li>
  *   <li>{@link org.jamp.model.MediaPlayer.MediaObject#getYear <em>Year</em>}</li>
  *   <li>{@link org.jamp.model.MediaPlayer.MediaObject#getState <em>State</em>}</li>
+ *   <li>{@link org.jamp.model.MediaPlayer.MediaObject#getAlbum <em>Album</em>}</li>
  * </ul>
  * </p>
  *
@@ -161,5 +162,31 @@ public interface MediaObject extends EObject {
 	 * @generated
 	 */
 	void setState(State value);
+
+	/**
+	 * Returns the value of the '<em><b>Album</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Album</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Album</em>' attribute.
+	 * @see #setAlbum(String)
+	 * @see org.jamp.model.MediaPlayer.MediaPlayerPackage#getMediaObject_Album()
+	 * @model
+	 * @generated
+	 */
+	String getAlbum();
+
+	/**
+	 * Sets the value of the '{@link org.jamp.model.MediaPlayer.MediaObject#getAlbum <em>Album</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Album</em>' attribute.
+	 * @see #getAlbum()
+	 * @generated
+	 */
+	void setAlbum(String value);
 
 } // MediaObject
