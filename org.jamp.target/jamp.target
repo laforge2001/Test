@@ -12,8 +12,41 @@
 <repository location="http://download.eclipse.org/eclipse/updates/3.5"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="org.eclipse.emf.databinding.feature.group" version="1.1.0.v200906151043"/>
+<unit id="org.eclipse.emf.mapping.ui.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.all.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.edit.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.xsd.mapping.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.mapping.ecore.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.codegen.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.ecore.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.edit.ui.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.ecore.edit.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.common.ui.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.doc.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.common.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.xsd.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.xsd.source.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.codegen.ecore.ui.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.mapping.ecore.editor.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.xsd.ecore.converter.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.mapping.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.xsd.sdk.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.codegen.ui.feature.group" version="2.4.0.v200906151043"/>
 <unit id="org.eclipse.emf.sdk.feature.group" version="2.5.0.v200906151043"/>
-<unit id="org.eclipse.emf.compare.sdk.feature.group" version="1.0.0.v200906160908"/>
+<unit id="org.eclipse.xsd.edit.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.databinding.edit.feature.group" version="1.1.0.v200906151043"/>
+<unit id="org.eclipse.emf.source.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.examples.source.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.examples.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.codegen.ecore.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.xsd.editor.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.ecore.editor.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.emf.converter.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.xsd.mapping.editor.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.eclipse.xsd.doc.feature.group" version="2.5.0.v200906151043"/>
+<repository location="http://download.eclipse.org/modeling/emf/updates/"/>
 </location>
 </locations>
 <environment>
